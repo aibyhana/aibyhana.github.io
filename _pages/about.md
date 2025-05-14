@@ -29,7 +29,7 @@ latest_posts:
 
 Hello, I'm a Data Scientist and AI Researcher with an MSc in Data Science, specializing in Artificial Intelligence and Machine Learning, and a BSc in Business Informatics. During my master's studies, I gained hands-on experience as a working student Data Scientist at Siemens Healthineers and Fraunhofer Gesellschaft, and interned in Data Analytics & AI for Production at BMW Group.
 
-My work focuses on applied machine learning in industry, with a strong interest in trustworthy AI. I previously served as an AI Ethics Reviewer at NeurIPS and regularly participate in machine learning competitions to improve my expertise in multimodal machine learning.
+My work focuses on `applied machine learning in industry`, with a strong interest in `trustworthy AI`. I previously served as an AI Ethics Reviewer at NeurIPS and regularly participate in machine learning competitions to improve my expertise in `multimodal machine learning`.
 
 
 
