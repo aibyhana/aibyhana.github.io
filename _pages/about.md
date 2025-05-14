@@ -27,6 +27,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
+Hello, I'm a Data Scientist and AI Researcher with an MSc in Data Science, specializing in Artificial Intelligence and Machine Learning, and a BSc in Business Informatics. During my master's studies, I gained hands-on experience as a working student Data Scientist at Siemens Healthineers and Fraunhofer Gesellschaft, and interned in Data Analytics & AI for Production at BMW Group.
+
+My work focuses on applied machine learning in industry, with a strong interest in trustworthy AI. I previously served as an AI Ethics Reviewer at NeurIPS and regularly participate in machine learning competitions to improve my expertise in multimodal machine learning.
+
+
+
 Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
 Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
