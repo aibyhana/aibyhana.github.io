@@ -27,7 +27,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I hold an MSc in Data Science with a focus on Machine Learning and AI, along with a BSc in Business Informatics. My experience spans industry and research—from developing forecasting models at BMW Group to implementing ethical AI frameworks as a NeurIPS reviewer.
+I hold an MSc in Data Science with a focus on Machine Learning and AI, along with a BSc in Business Informatics. My experience spans industry and research, from developing data science models at BMW Group to implementing ethical AI frameworks as a NeurIPS reviewer.
 
 I specialize in applied ML solutions for real-world challenges, with a keen interest in `trustworthy AI` and `multimodal systems`. Whether optimizing supply chains or bridging the gap between data and decisions, I’m driven by impactful, scalable results.
 
