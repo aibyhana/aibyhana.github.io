@@ -432,7 +432,7 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-image-matching-challenge-2025",
           title: 'Image Matching Challenge 2025',
-          description: "Developed machine learning algorithms that can figure out which images belong together and use them to reconstruct accurate 3D scenes.",
+          description: "with background image",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
