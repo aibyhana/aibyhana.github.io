@@ -430,9 +430,9 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
+          section: "News",},{id: "projects-image-matching-challenge-2025",
+          title: 'Image Matching Challenge 2025',
+          description: "Developed machine learning algorithms that can figure out which images belong together and use them to reconstruct accurate 3D scenes.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
