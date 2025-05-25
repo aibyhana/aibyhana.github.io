@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Image Matching Challenge 2025
-description: Developed machine learning algorithms that can figure out which images belong together and use them to reconstruct accurate 3D scenes.
+title: 3D Scene Reconstruction from Images
+description: Developed machine learning algorithms for the Image Matching Challenge 2025 that can figure out which images belong together and use them to reconstruct accurate 3D scenes.
 img: assets/img/imagematching.jpg
 importance: 1
 category: work
