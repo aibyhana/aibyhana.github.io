@@ -1,8 +1,8 @@
 ---
 layout: about
-title: about
+title: home
 permalink: /
-subtitle: Data Scientist building trustworthy AI systems
+subtitle: Building Reliable AI
 
 profile:
   align: right
@@ -10,24 +10,22 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+selected_papers: false # includes a list of papers marked as "selected={true}"
+social: false # includes social icons at the bottom of the page
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  enabled: false # includes a list of news items
+  scrollable: false # adds a vertical scroll bar if there are more than 3 news items
+  limit: 1 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  enabled: false
+  scrollable: false # adds a vertical scroll bar if there are more than 3 new posts items
+  limit: 1 # leave blank to include all the blog posts
 ---
 
-I hold an MSc in Data Science with a focus on Machine Learning and AI, along with a BSc in Business Informatics. 
+My goal is to make AI systems more reliable, interpretable, and secure, both in research and real-world applications. I am interested in understanding exactly how AI models operate in order to make AI more reliable for everyone. 
 
-I have a keen interest in `trustworthy AI` and `multimodal systems` and understanding AI better.
-
-Let’s build something meaningful (and understand it!).
+I hold an MSc in Data Science with a specialization in Machine Learning and Artificial Intelligence, along with a BSc in Business Informatics. My recent research work spans mechanistic interpretability, red teaming, and multimodal AI, bridging theory with practical impact.
 
 
