@@ -2,30 +2,27 @@
 layout: about
 title: home
 permalink: /
-subtitle: Building Reliable AI
-
+subtitle: <b>Data Scientist</b> • <b>AI Safety Researcher<b> • <b>Constantly Learning</b>
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: false # includes social icons at the bottom of the page
+social: true # includes social icons at the bottom of the page
 
 announcements:
   enabled: false # includes a list of news items
   scrollable: false # adds a vertical scroll bar if there are more than 3 news items
-  limit: 1 # leave blank to include all the news in the `_news` folder
+  limit: 3 
 
 latest_posts:
-  enabled: false
+  enabled: true
   scrollable: false # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 1 # leave blank to include all the blog posts
+  limit: 3 # leave blank to include all the blog posts
 ---
 
-My goal is to make AI systems more reliable, interpretable, and secure, both in research and real-world applications. I am interested in understanding exactly how AI models operate in order to make AI more reliable for everyone. 
+I'm an AI researcher dedicated to making AI systems safer and more transparent. My work is driven by this question: how do AI models really work? By investigating their internal mechanics, I develop solutions that make them more interpretable and secure for everyone.
 
-I hold an MSc in Data Science with a specialization in Machine Learning and Artificial Intelligence, along with a BSc in Business Informatics. My recent research work spans mechanistic interpretability, red teaming, and multimodal AI, bridging theory with practical impact.
-
-
+I'm interested in mechanistic interpretability and adversarial red teaming. Previously, I graduated with an MSc in Data Science (specializing in ML/AI) and a BSc in Business Informatics.

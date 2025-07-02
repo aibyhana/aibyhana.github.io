@@ -86,7 +86,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Blog # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_description: where I discuss AI safety and other topics
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
