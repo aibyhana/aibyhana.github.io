@@ -7,41 +7,49 @@
       "previewPath": null,
       "fields": [
         {
-          "title": "Title",
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
+        },
+        {
+          "title": "title",
           "name": "title",
           "type": "string"
         },
         {
-          "title": "Description",
+          "title": "date",
+          "name": "date",
+          "type": "datetime"
+        },
+        {
+          "title": "description",
           "name": "description",
           "type": "string"
         },
         {
-          "title": "Publishing date",
-          "name": "date",
-          "type": "datetime",
-          "default": "{{now}}",
-          "isPublishDate": true
-        },
-        {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
-        },
-        {
-          "title": "Is in draft",
-          "name": "draft",
-          "type": "draft"
-        },
-        {
-          "title": "Tags",
+          "title": "tags",
           "name": "tags",
           "type": "tags"
         },
         {
-          "title": "Categories",
+          "title": "categories",
           "name": "categories",
           "type": "categories"
+        },
+        {
+          "title": "giscus_comments",
+          "name": "giscus_comments",
+          "type": "boolean"
+        },
+        {
+          "title": "related_posts",
+          "name": "related_posts",
+          "type": "boolean"
+        },
+        {
+          "title": "related_publications",
+          "name": "related_publications",
+          "type": "boolean"
         }
       ]
     }
