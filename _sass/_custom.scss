@@ -1,0 +1,309 @@
+/* Custom Header Banner */
+.header-banner {
+  width: 100%;
+  height: 220px;
+  background: var(--global-bg-color);
+  margin-bottom: 2.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: grayscale(10%);
+  }
+
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    .banner-content {
+      text-align: center;
+      max-width: 900px;
+
+      .banner-name {
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
+        color: var(--global-text-color);
+      }
+
+      .banner-title {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--global-text-color-light);
+        letter-spacing: 0.3px;
+        line-height: 1.5;
+
+        .separator {
+          margin: 0 0.6rem;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+/* Light mode overlay */
+:root .header-banner .banner-overlay {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.85) 100%);
+}
+
+/* Dark mode overlay */
+html[data-theme="dark"] .header-banner .banner-overlay {
+  background: linear-gradient(to bottom,
+    rgba(31, 41, 55, 0.75) 0%,
+    rgba(31, 41, 55, 0.85) 100%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header-banner {
+    height: 180px;
+    margin-bottom: 2rem;
+
+    .banner-overlay .banner-content {
+      .banner-name {
+        font-size: 1.8rem;
+      }
+
+      .banner-title {
+        font-size: 0.9rem;
+
+        .separator {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header-banner {
+    height: 160px;
+
+    .banner-overlay .banner-content {
+      .banner-name {
+        font-size: 1.5rem;
+      }
+
+      .banner-title {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+/* Profile Image - Square with subtle rounding */
+.profile {
+  img.rounded {
+    border-radius: 8px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+/* Hide the redundant post header when banner exists */
+.post:has(.header-banner) .post-header {
+  display: none;
+}
+
+/* Improve overall typography and spacing */
+.post-header {
+  margin-bottom: 2rem;
+
+  .post-title {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .desc {
+    color: var(--global-text-color-light);
+    font-size: 1rem;
+  }
+}
+
+/* Clean up the layout */
+article {
+  .clearfix {
+    line-height: 1.7;
+    font-size: 1rem;
+    color: var(--global-text-color);
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+  }
+}
+
+/* Improve section headings */
+.post h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+
+  a {
+    text-decoration: none;
+    color: var(--global-text-color);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+}
+
+/* Social icons styling */
+.social {
+  margin-top: 2.5rem;
+
+  .contact-icons {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+
+    a {
+      margin: 0 0.4rem;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .contact-note {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+  }
+}
+
+/* Blog posts styling */
+.post-list {
+  .post-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--global-divider-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .post-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+
+      a {
+        color: var(--global-text-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--global-theme-color);
+        }
+      }
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      color: var(--global-text-color-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .post-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--global-text-color);
+    }
+  }
+}
+
+/* Latest posts section */
+.latest-posts {
+  .post-preview {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+
+      a {
+        color: var(--global-text-color);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--global-theme-color);
+        }
+      }
+    }
+
+    .post-meta {
+      font-size: 0.85rem;
+      color: var(--global-text-color-light);
+    }
+  }
+}
+
+/* Books section improvements */
+.cover {
+  margin: 0.8rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  img {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Navigation improvements */
+.navbar {
+  font-size: 0.95rem;
+
+  .nav-link {
+    transition: color 0.2s ease;
+  }
+}
+
+/* Cards and containers */
+.card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}

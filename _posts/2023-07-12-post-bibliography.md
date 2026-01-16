@@ -1,22 +1,45 @@
 ---
-layout: post
-title: A review of reviews of mechanistic interpretability papers
+layout: distill
+title: Understanding RAG Hallucinations
 date: 2023-07-12 09:56:00-0400
-description: an example of a blog post with bibliography
-tags: formatting bib
-categories: sample-posts
+description: exploring why retrieval-augmented generation systems fail to stay faithful to context
+tags: rag llm interpretability
+categories: ai-safety
 giscus_comments: true
 related_posts: false
 related_publications: true
 ---
 
-This post shows how to add bibliography to simple blog posts. We support every citation style that [jekyll-scholar](https://github.com/inukshuk/jekyll-scholar) does. That means simple citation like {% cite einstein1950meaning %}, multiple citations like {% cite einstein1950meaning einstein1905movement %}, long references like {% reference einstein1905movement %} or also quotes:
+## Why RAG Systems Hallucinate
 
-{% quote einstein1905electrodynamics %}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-sed do eiusmod tempor.
+Retrieval-augmented generation (RAG) systems are supposed to ground LLM outputs in retrieved documents, but they still hallucinate. Understanding *why* requires looking at how these systems actually process retrieved context.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing.
-{% endquote %}
+### The Faithfulness Problem
 
-If you would like something more academic, check the [distill style post]({% post_url 2018-12-22-distill %}).
+When an LLM receives retrieved context, we assume it will:
+1. Read and comprehend the context
+2. Generate responses based only on that context
+3. Abstain when the context doesn't contain relevant information
+
+In practice, all three assumptions often fail. The model might:
+- Ignore parts of the retrieved context
+- Blend retrieved information with its parametric knowledge
+- Confidently generate claims not supported by the context
+
+### Distribution Shift
+
+RAG systems are particularly vulnerable during distribution shift. When:
+- Retrieved documents use unfamiliar terminology or formatting
+- The question type differs from training data
+- Context length exceeds what the model handles well
+
+...the model falls back on parametric knowledge rather than the provided context.
+
+### What We Need
+
+Better understanding of these failures requires:
+- Mechanistic interpretability of how models process retrieved context
+- Metrics that distinguish faithful vs. unfaithful generation
+- Architectures designed for reliable context grounding
+
+This remains an open research problem central to building trustworthy AI systems.

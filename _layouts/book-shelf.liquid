@@ -33,11 +33,7 @@ layout: page
             {% assign status = item.status | downcase | strip %}
             {% if statuses contains status %}
               <figcaption class="{{ status | downcase }}">{{ status | upcase }}</figcaption>
-            {% else %}
-              <figcaption class="uncategorized">UNCATEGORIZED</figcaption>
             {% endif %}
-          {% else %}
-            <figcaption class="uncategorized">UNCATEGORIZED</figcaption>
           {% endif %}
         </a>
       </figure>
