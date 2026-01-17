@@ -24,8 +24,8 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I work on scalable oversight and interpretability of retrieval-augmented systems at Capgemini's AWS Team in Munich. My current work customizing LLMs and RAG pipelines has made me acutely aware of how poorly we understand when and why these systems fail, particularly around faithfulness to retrieved context and hallucination under distribution shift.
+I work on <span class="keyword">scalable oversight</span> and <span class="keyword">interpretability</span> of retrieval-augmented systems at Capgemini's AWS Team in Munich. My current work customizing <span class="keyword">LLMs</span> and <span class="keyword">RAG pipelines</span> has made me acutely aware of how poorly we understand when and why these systems fail, particularly around faithfulness to retrieved context and <span class="keyword">hallucination</span> under distribution shift.
 
-I review AI safety papers for NeurIPS, focusing on dual-use concerns, privacy risks, and misuse potential in agentic systems. Previously, I completed my master's thesis at University Hospital Erlangen building diagnostic libraries for clinical CV failure modes.
+I review AI safety papers for <span class="keyword">NeurIPS</span>, focusing on dual-use concerns, privacy risks, and misuse potential in <span class="keyword">agentic systems</span>. Previously, I completed my master's thesis at University Hospital Erlangen building diagnostic libraries for clinical <span class="keyword">CV failure modes</span>.
 
-I'm looking to move from applied work into technical alignment research, focusing on mechanistic interpretability and scalable oversight of AI systems.
+I'm looking to move from applied work into <span class="keyword">technical alignment research</span>, focusing on <span class="keyword">mechanistic interpretability</span> and scalable oversight of AI systems.

@@ -1,51 +1,73 @@
-/* Futuristic Academic Design - Dark Mode */
+/* Dark Academia / Technical Design */
 
-/* Typography - Clean modern sans, bigger fonts */
+/* Import Monospace Font */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+
+/* Typography */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   line-height: 1.8;
   letter-spacing: 0.01em;
   font-size: 1.1rem;
 }
 
-/* Navigation - Clean, minimal, no heavy background */
+/* Monospace for headers - signals technical competence */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+}
+
+/* Navigation - Solid dark background */
 .navbar {
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: transparent !important;
+  background: var(--global-bg-color) !important;
   border-bottom: 1px solid var(--global-divider-color);
   padding: 0.75rem 1rem;
+  backdrop-filter: none;
 
   .navbar-brand {
     font-weight: 500;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--global-text-color);
   }
 
   .nav-link {
-    transition: all 0.2s ease;
-    padding: 0.4rem 0.6rem !important;
-    opacity: 0.7;
+    transition: color 0.2s ease;
+    padding: 0.4rem 0.75rem !important;
+    color: var(--global-text-color-light);
 
-    &:hover,
+    &:hover {
+      color: var(--global-theme-color);
+    }
+
     &.active {
-      opacity: 1;
+      color: var(--global-theme-color);
     }
   }
 }
 
-/* Header Banner - Homepage - Futuristic with visible image */
+/* Header Banner - Homepage */
 .header-banner {
   width: 100%;
   position: relative;
   height: 260px;
   margin-bottom: 2.5rem;
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 0 60px rgba(59, 130, 246, 0.12);
+  border-radius: 12px;
 
   img {
     position: absolute;
@@ -54,8 +76,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.5;
-    filter: saturate(1.3) brightness(0.9);
+    opacity: 0.4;
   }
 
   .banner-overlay {
@@ -64,48 +85,35 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 15, 30, 0.8) 0%, rgba(20, 40, 70, 0.65) 50%, rgba(10, 15, 30, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 95, 0.75) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.2) 0%, transparent 60%);
-    }
-
     .banner-content {
       text-align: center;
       padding: 2rem;
-      position: relative;
-      z-index: 1;
 
       .banner-name {
+        font-family: "JetBrains Mono", monospace;
         font-size: 1.8rem;
-        font-weight: 400;
-        letter-spacing: 0.2em;
+        font-weight: 500;
+        letter-spacing: 0.15em;
         color: #fff;
         margin-bottom: 0.75rem;
         text-transform: uppercase;
-        text-shadow: 0 2px 30px rgba(59, 130, 246, 0.4);
       }
 
       .banner-title {
-        font-size: 0.75rem;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.75);
-        letter-spacing: 0.18em;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #94a3b8;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
 
         .separator {
-          margin: 0 1rem;
-          opacity: 0.4;
-          color: #3b82f6;
+          margin: 0 0.75rem;
+          color: var(--global-theme-color);
         }
       }
     }
@@ -116,13 +124,10 @@ body {
 .page-header-banner {
   width: 100%;
   position: relative;
-  height: 180px;
+  height: 160px;
   margin-bottom: 2rem;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow:
-    0 6px 24px rgba(0, 0, 0, 0.25),
-    0 0 40px rgba(59, 130, 246, 0.08);
+  border-radius: 10px;
 
   img {
     position: absolute;
@@ -131,8 +136,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.45;
-    filter: saturate(1.2);
+    opacity: 0.35;
   }
 
   .page-header-overlay {
@@ -141,16 +145,17 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 15, 30, 0.85) 0%, rgba(20, 40, 70, 0.7) 100%);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 58, 95, 0.8) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     .page-header-title {
-      font-size: 1.6rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       color: #fff;
       margin-bottom: 0.4rem;
       text-transform: uppercase;
@@ -158,21 +163,25 @@ body {
 
     .page-header-subtitle {
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.1em;
+      color: #94a3b8;
+      letter-spacing: 0.08em;
       margin: 0;
     }
   }
 }
 
-/* Profile section */
+/* Profile section - Grayscale photo with hover to color */
 .profile {
   margin-bottom: 1.5rem;
 
   img.rounded {
-    border-radius: 10px !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(59, 130, 246, 0.25);
+    border-radius: 8px !important;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
   }
 
   .more-info {
@@ -198,14 +207,14 @@ article {
 /* Section headings */
 .post h2,
 h2 {
-  font-size: 1.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.3rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(90deg, #3b82f6 0%, transparent 80%) 1;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--global-divider-color);
   color: var(--global-text-color);
 
   a {
@@ -213,58 +222,51 @@ h2 {
     text-decoration: none;
 
     &:hover {
-      color: #3b82f6;
+      color: var(--global-theme-color);
     }
   }
 }
 
-/* Latest posts on homepage - CARD STYLE */
+/* Latest posts on homepage - Simple list style */
 .news {
   .table-responsive {
     overflow: visible;
   }
 
   table.table {
-    border-collapse: separate;
-    border-spacing: 0 0.75rem;
+    border-collapse: collapse;
 
     tr {
-      background: rgba(59, 130, 246, 0.05);
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem 1.25rem;
-      margin-bottom: 0.5rem;
-      border: 1px solid var(--global-divider-color);
+      border-bottom: 1px solid var(--global-divider-color);
 
-      &:hover {
-        background: rgba(59, 130, 246, 0.1);
-        border-color: rgba(59, 130, 246, 0.3);
-        transform: translateX(4px);
+      &:last-child {
+        border-bottom: none;
       }
 
       th {
-        font-size: 0.85rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
         font-weight: 400;
         color: var(--global-text-color-light);
-        padding: 0 0 0.25rem 0;
+        padding: 0.75rem 1rem 0.75rem 0;
         border: none;
-        width: auto !important;
+        vertical-align: top;
+        white-space: nowrap;
       }
 
       td {
-        padding: 0;
+        padding: 0.75rem 0;
         border: none;
 
         .news-title {
-          font-size: 1.15rem;
+          font-size: 1.05rem;
           font-weight: 500;
           color: var(--global-text-color);
           text-decoration: none;
+          transition: color 0.2s ease;
 
           &:hover {
-            color: #3b82f6;
+            color: var(--global-theme-color);
           }
         }
       }
@@ -274,33 +276,32 @@ h2 {
 
 /* Social icons */
 .social {
-  margin-top: 3rem;
-  padding-top: 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--global-divider-color);
 
   .contact-icons {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
 
     a {
       color: var(--global-text-color-light);
-      margin: 0 0.6rem;
-      transition: all 0.3s ease;
+      margin: 0 0.5rem;
+      transition: color 0.2s ease;
 
       &:hover {
-        color: #3b82f6;
-        transform: translateY(-3px);
+        color: var(--global-theme-color);
       }
     }
   }
 
   .contact-note {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--global-text-color-light);
   }
 }
 
-/* Blog post list - BIGGER FONTS */
+/* Blog post list - Clean, no cards */
 .post h2 a,
 h2 a {
   text-decoration: none;
@@ -312,133 +313,143 @@ ul.post-list {
 
   li {
     margin-bottom: 1.5rem;
-    padding: 1.5rem;
-    border-radius: 12px;
-    background: rgba(59, 130, 246, 0.04);
-    border: 1px solid var(--global-divider-color);
-    transition: all 0.3s ease;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--global-divider-color);
 
-    &:hover {
-      background: rgba(59, 130, 246, 0.08);
-      border-color: rgba(59, 130, 246, 0.3);
-      transform: translateX(4px);
+    &:last-child {
+      border-bottom: none;
     }
 
     h3 {
-      font-size: 1.35rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.2rem;
       font-weight: 500;
       margin-bottom: 0.5rem;
 
       a {
         color: var(--global-text-color);
         text-decoration: none;
+        transition: color 0.2s ease;
 
         &:hover {
-          color: #3b82f6;
+          color: var(--global-theme-color);
         }
       }
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--global-text-color-light);
       margin-bottom: 0.5rem;
       line-height: 1.6;
     }
 
     .post-meta {
-      font-size: 0.95rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
       color: var(--global-text-color-light);
     }
 
     .post-tags {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-top: 0.5rem;
 
       a {
         color: var(--global-text-color-light);
         text-decoration: none;
+        transition: color 0.2s ease;
 
         &:hover {
-          color: #3b82f6;
+          color: var(--global-theme-color);
         }
       }
     }
   }
 }
 
-/* Books section */
+/* Books section - Bigger covers */
 .cover {
-  margin: 0.5rem;
-  transition: all 0.3s ease;
+  margin: 0.75rem;
+  transition: transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
 
   img {
-    border-radius: 6px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    max-width: 180px;
+    height: auto;
   }
 
   figcaption {
-    font-size: 0.8rem;
-    letter-spacing: 0.03em;
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
     margin-top: 0.5rem;
+    max-width: 180px;
   }
 }
 
-/* Cards */
+/* Make book grid show larger covers */
+.book-shelf .covers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+
+  .cover {
+    flex: 0 0 auto;
+  }
+}
+
+/* Cards - Minimal styling */
 .card {
   border: 1px solid var(--global-divider-color);
-  border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  background: var(--global-card-bg-color);
+  transition: border-color 0.2s ease;
 
   &:hover {
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: var(--global-theme-color);
   }
 }
 
-/* Links */
+/* Links - Consistent color */
 a {
-  color: #3b82f6;
+  color: var(--global-theme-color);
   text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
-    color: #60a5fa;
+    color: var(--global-hover-color);
   }
 }
 
 /* Blockquotes */
 blockquote {
-  border-left: 3px solid #3b82f6;
+  border-left: 3px solid var(--global-theme-color);
   margin: 1.5rem 0;
   font-style: italic;
   color: var(--global-text-color-light);
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.08) 0%, transparent 100%);
-  padding: 1.25rem 1.5rem;
-  border-radius: 0 10px 10px 0;
-  font-size: 1.05rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
 }
 
 /* Code */
 code {
-  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
-  font-size: 0.9em;
-  background: rgba(59, 130, 246, 0.12);
-  padding: 0.2em 0.5em;
-  border-radius: 4px;
+  font-family: "JetBrains Mono", "SF Mono", Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--global-code-bg-color);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
 }
 
 /* Footer */
 footer {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--global-text-color-light);
   border-top: 1px solid var(--global-divider-color);
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   margin-top: 3rem;
 }
 
@@ -449,12 +460,13 @@ footer {
   }
 
   .header-banner {
-    height: 200px;
+    height: 180px;
     border-radius: 0;
 
     .banner-overlay .banner-content {
       .banner-name {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        letter-spacing: 0.1em;
       }
 
       .banner-title {
@@ -463,7 +475,7 @@ footer {
         .separator {
           display: block;
           height: 0;
-          margin: 0.3rem 0;
+          margin: 0.2rem 0;
           visibility: hidden;
         }
       }
@@ -471,12 +483,12 @@ footer {
   }
 
   .page-header-banner {
-    height: 140px;
+    height: 120px;
     border-radius: 0;
 
     .page-header-overlay {
       .page-header-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
 
       .page-header-subtitle {
@@ -487,23 +499,31 @@ footer {
 
   ul.post-list li {
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     p {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
+  }
+
+  .cover img {
+    max-width: 140px;
+  }
+
+  .cover figcaption {
+    max-width: 140px;
   }
 }
 
 @media (max-width: 480px) {
   .header-banner .banner-overlay .banner-content {
     .banner-name {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     .banner-title {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
   }
 }
@@ -525,13 +545,15 @@ footer {
     list-style: none;
 
     li {
-      margin-bottom: 1.5rem;
-      padding: 1.25rem;
-      background: rgba(59, 130, 246, 0.04);
-      border-radius: 10px;
-      border: 1px solid var(--global-divider-color);
-      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--global-divider-color);
+      font-size: 1rem;
       line-height: 1.7;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 }
@@ -539,9 +561,16 @@ footer {
 /* CV page styling */
 .cv {
   h2 {
-    font-size: 1.3rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.2rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     font-weight: 500;
   }
+}
+
+/* Bold keywords class for bio */
+.keyword {
+  font-weight: 600;
+  color: var(--global-text-color);
 }
