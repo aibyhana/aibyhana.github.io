@@ -59,16 +59,12 @@
 
 /* Light mode overlay */
 :root .header-banner .banner-overlay {
-  background: linear-gradient(to bottom,
-    rgba(255, 255, 255, 0.75) 0%,
-    rgba(255, 255, 255, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.85) 100%);
 }
 
 /* Dark mode overlay */
 html[data-theme="dark"] .header-banner .banner-overlay {
-  background: linear-gradient(to bottom,
-    rgba(31, 41, 55, 0.75) 0%,
-    rgba(31, 41, 55, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(31, 41, 55, 0.75) 0%, rgba(31, 41, 55, 0.85) 100%);
 }
 
 /* Responsive design */

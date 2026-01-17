@@ -4,23 +4,24 @@ layout: default
 <div class="post">
   <!-- Header Banner -->
   {% if page.header_image %}
-  <div class="header-banner">
-    <img src="{{ page.header_image | prepend: 'assets/img/' | relative_url }}" alt="Header">
-    <div class="banner-overlay">
-      <div class="banner-content">
-        <h1 class="banner-name">
-          {% if site.title == 'blank' %}
-            <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} {{ site.last_name }}
-          {% else %}
-            {{ site.title }}
-          {% endif %}
-        </h1>
-        <div class="banner-title">
-          Data and AI Engineer<span class="separator">•</span>AI Safety Researcher<span class="separator">•</span>NeurIPS Ethics Reviewer
+    <div class="header-banner">
+      <img src="{{ page.header_image | prepend: 'assets/img/' | relative_url }}" alt="Header">
+      <div class="banner-overlay">
+        <div class="banner-content">
+          <h1 class="banner-name">
+            {% if site.title == 'blank' %}
+              <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+              {{ site.last_name }}
+            {% else %}
+              {{ site.title }}
+            {% endif %}
+          </h1>
+          <div class="banner-title">
+            Data and AI Engineer<span class="separator">•</span>AI Safety Researcher<span class="separator">•</span>NeurIPS Ethics Reviewer
+          </div>
         </div>
       </div>
     </div>
-  </div>
   {% endif %}
 
   <article>

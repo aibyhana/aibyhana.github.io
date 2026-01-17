@@ -26,6 +26,7 @@ Studying the COMPAS recidivism prediction algorithm revealed a crucial truth: yo
 ### 2. The Automation vs. Augmentation Choice
 
 Drawing on economist Daron Acemoglu's framework, I identified two AI development paths:
+
 - **Full Automation:** AI replaces human workers, leading to inequality
 - **Augmentation:** AI enhances human decision-making and creates new capabilities
 
@@ -48,6 +49,7 @@ Additionally, an MIT study found 25% of highest-quality training data has been r
 ## The Broader Stakes
 
 We have a 5-10 year window before AI's trajectory solidifies. I call for:
+
 - Building with workers, not just tech leadership
 - Measuring capability enhancement over headcount reduction
 - Demanding transparency about training data and deployment impacts
@@ -62,4 +64,4 @@ I share this publicly because individual intentions prove insufficient. I invite
 
 ---
 
-*Disclosure: I used AI writing tools for grammatical refinement while developing this piece.*
+_Disclosure: I used AI writing tools for grammatical refinement while developing this piece._
