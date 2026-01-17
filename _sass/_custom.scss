@@ -32,11 +32,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(240, 244, 248, 0.95) 0%,
-      rgba(230, 236, 242, 0.9) 100%
-    );
+    background: linear-gradient(135deg, rgba(240, 244, 248, 0.95) 0%, rgba(230, 236, 242, 0.9) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,11 +69,7 @@ body {
 /* Dark mode header adjustment */
 :root[data-theme="dark"] .header-banner {
   .banner-overlay {
-    background: linear-gradient(
-      135deg,
-      rgba(30, 35, 45, 0.95) 0%,
-      rgba(25, 30, 40, 0.9) 100%
-    );
+    background: linear-gradient(135deg, rgba(30, 35, 45, 0.95) 0%, rgba(25, 30, 40, 0.9) 100%);
   }
 
   img {
