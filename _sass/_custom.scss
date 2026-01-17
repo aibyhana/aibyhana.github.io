@@ -539,13 +539,36 @@ footer {
 }
 
 /* Hide redundant elements */
-.post:has(.header-banner) .post-header {
+.post:has(.header-banner) .post-header,
+.post:has(.page-header-banner) .post-header {
   display: none;
 }
 
 /* Hide default header bar on blog page */
 .header-bar {
   display: none;
+}
+
+/* Light mode fixes for header banners */
+:root {
+  .header-banner,
+  .page-header-banner {
+    .banner-overlay,
+    .page-header-overlay {
+      /* Keep dark overlay in light mode too */
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+    }
+
+    .banner-name,
+    .page-header-title {
+      color: #fff;
+    }
+
+    .banner-title,
+    .page-header-subtitle {
+      color: #cbd5e1;
+    }
+  }
 }
 
 /* Publication/Bibliography styling */
