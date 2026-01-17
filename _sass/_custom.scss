@@ -601,7 +601,7 @@ footer {
 
     .banner-overlay,
     .page-header-overlay {
-      background: linear-gradient(135deg, rgba(239, 246, 255, 0.75) 0%, rgba(219, 234, 254, 0.7) 35%, rgba(191, 219, 254, 0.68) 70%, rgba(147, 197, 253, 0.65) 100%);
+      background: linear-gradient(135deg, rgba(224, 242, 254, 0.78) 0%, rgba(186, 230, 253, 0.72) 35%, rgba(125, 211, 252, 0.68) 70%, rgba(56, 189, 248, 0.62) 100%);
     }
 
     .banner-name,
@@ -609,7 +609,9 @@ footer {
     .banner-title,
     .page-header-subtitle,
     .banner-content .banner-name,
-    .banner-content .banner-title {
+    .banner-content .banner-title,
+    .banner-name span,
+    .banner-name .font-weight-bold {
       color: #1e3a5f !important;
       text-shadow: none !important;
     }
