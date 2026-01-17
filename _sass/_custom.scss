@@ -377,9 +377,9 @@ ul.post-list {
   }
 }
 
-/* Books section - Bigger covers */
+/* Books section - Larger covers */
 .cover {
-  margin: 0.75rem;
+  margin: 1rem;
   transition: transform 0.3s ease;
 
   &:hover {
@@ -387,16 +387,18 @@ ul.post-list {
   }
 
   img {
-    border-radius: 4px;
-    max-width: 180px;
+    border-radius: 6px;
+    max-width: 220px;
     height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   figcaption {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--global-text-color-light);
-    margin-top: 0.5rem;
-    max-width: 180px;
+    margin-top: 0.75rem;
+    max-width: 220px;
+    line-height: 1.4;
   }
 }
 
@@ -404,7 +406,7 @@ ul.post-list {
 .book-shelf .covers {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
   justify-content: flex-start;
 
   .cover {
@@ -518,11 +520,11 @@ footer {
   }
 
   .cover img {
-    max-width: 140px;
+    max-width: 160px;
   }
 
   .cover figcaption {
-    max-width: 140px;
+    max-width: 160px;
   }
 }
 
@@ -549,14 +551,46 @@ footer {
   display: none;
 }
 
-/* Light mode fixes for header banners */
+/* Light mode header banners - light blue/slate theme */
 :root {
   .header-banner,
   .page-header-banner {
+    img {
+      opacity: 0.25;
+    }
+
     .banner-overlay,
     .page-header-overlay {
-      /* Keep dark overlay in light mode too */
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 58, 95, 0.85) 100%);
+      background: linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 0.9) 50%, rgba(203, 213, 225, 0.85) 100%);
+    }
+
+    .banner-name,
+    .page-header-title {
+      color: #1e293b;
+    }
+
+    .banner-title,
+    .page-header-subtitle {
+      color: #475569;
+    }
+
+    .separator {
+      color: #2563eb !important;
+    }
+  }
+}
+
+/* Dark mode header banners - keep original dark theme */
+html[data-theme="dark"] {
+  .header-banner,
+  .page-header-banner {
+    img {
+      opacity: 0.4;
+    }
+
+    .banner-overlay,
+    .page-header-overlay {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 95, 0.75) 100%);
     }
 
     .banner-name,
@@ -566,7 +600,7 @@ footer {
 
     .banner-title,
     .page-header-subtitle {
-      color: #cbd5e1;
+      color: #94a3b8;
     }
   }
 }
