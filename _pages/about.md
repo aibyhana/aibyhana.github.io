@@ -24,7 +24,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I work on <span class="keyword">scalable oversight</span> and <span class="keyword">interpretability</span> of retrieval-augmented systems at Capgemini's AWS Team in Munich. My current work customizing <span class="keyword">LLMs</span> and <span class="keyword">RAG pipelines</span> has made me acutely aware of how poorly we understand when and why these systems fail, particularly around faithfulness to retrieved context and <span class="keyword">hallucination</span> under distribution shift.
+Throughout my work on <span class="keyword">scalable oversight</span> and <span class="keyword">interpretability</span> of AI systems, I've become acutely aware of how poorly we understand when and why these systems fail, particularly around <span class="keyword">hallucination</span> under distribution shift and the challenges of maintaining reliable behavior at scale.
 
 I review AI safety papers for <span class="keyword">NeurIPS</span>, focusing on dual-use concerns, privacy risks, and misuse potential in <span class="keyword">agentic systems</span>. Previously, I completed my master's thesis at University Hospital Erlangen building diagnostic libraries for clinical <span class="keyword">CV failure modes</span>.
 
