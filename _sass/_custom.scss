@@ -808,8 +808,8 @@ html[data-theme="dark"] {
       perspective: 1000px;
 
       img {
-        width: 200px;
-        height: 150px;
+        width: 280px;
+        height: 200px;
         object-fit: cover;
         border-radius: 8px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -829,8 +829,8 @@ html[data-theme="dark"] {
 
       /* For single image posts - make it larger */
       &.single-image img {
-        width: 320px;
-        height: 220px;
+        width: 400px;
+        height: 280px;
       }
     }
   }
