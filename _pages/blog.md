@@ -18,16 +18,17 @@ pagination:
 
 <div class="post">
 
+<!-- Page Header Banner -->
+<div class="page-header-banner">
+  <img src="{{ 'assets/img/header-banner.jpg' | relative_url }}" alt="Header">
+  <div class="page-header-overlay">
+    <h1 class="page-header-title">Blog</h1>
+    <p class="page-header-subtitle">Thoughts on AI Safety, Research & Technology</p>
+  </div>
+</div>
+
 {% assign blog_name_size = site.blog_name | size %}
 {% assign blog_description_size = site.blog_description | size %}
-
-{% if blog_name_size > 0 or blog_description_size > 0 %}
-
-  <div class="header-bar">
-    <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
-  </div>
-  {% endif %}
 
 {% if site.display_tags and site.display_tags.size > 0 or site.display_categories and site.display_categories.size > 0 %}
 

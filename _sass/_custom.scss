@@ -1,19 +1,57 @@
-/* Clean Academic Design */
+/* Futuristic Academic Design */
 
-/* Typography - Elegant serif for headings, clean sans for body */
+/* Typography - Clean modern sans */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
   letter-spacing: 0.01em;
+  font-size: 1.05rem;
 }
 
-/* Header Banner - With background image */
+/* Navigation - Compact with background */
+.navbar {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 1rem;
+
+  .navbar-brand {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.75) !important;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 4px;
+
+    &:hover,
+    &.active {
+      color: rgba(255, 255, 255, 1) !important;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Header Banner - Homepage - Futuristic with visible image */
 .header-banner {
   width: 100%;
   position: relative;
-  height: 220px;
-  margin-bottom: 2rem;
+  height: 280px;
+  margin-bottom: 2.5rem;
   overflow: hidden;
+  border-radius: 0 0 20px 20px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 80px rgba(59, 130, 246, 0.1);
 
   img {
     position: absolute;
@@ -22,8 +60,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.15;
-    filter: grayscale(30%);
+    opacity: 0.4;
+    filter: saturate(1.2) contrast(1.1);
   }
 
   .banner-overlay {
@@ -32,63 +70,119 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(240, 244, 248, 0.95) 0%, rgba(230, 236, 242, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 58, 95, 0.75) 50%, rgba(15, 23, 42, 0.85) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
 
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    }
+
     .banner-content {
       text-align: center;
       padding: 2rem;
+      position: relative;
+      z-index: 1;
 
       .banner-name {
-        font-size: 2.8rem;
-        font-weight: 300;
-        letter-spacing: 0.08em;
-        color: var(--global-text-color);
+        font-size: 2rem;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        color: #fff;
         margin-bottom: 0.75rem;
-        font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+        text-transform: uppercase;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
       }
 
       .banner-title {
-        font-size: 0.9rem;
-        font-weight: 400;
-        color: var(--global-text-color-light);
-        letter-spacing: 0.12em;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.15em;
         text-transform: uppercase;
 
         .separator {
           margin: 0 1rem;
-          opacity: 0.4;
+          opacity: 0.5;
+          color: #3b82f6;
         }
       }
     }
   }
 }
 
-/* Dark mode header adjustment */
-:root[data-theme="dark"] .header-banner {
-  .banner-overlay {
-    background: linear-gradient(135deg, rgba(30, 35, 45, 0.95) 0%, rgba(25, 30, 40, 0.9) 100%);
-  }
+/* Page Header Banner - For blog, bookshelf, etc */
+.page-header-banner {
+  width: 100%;
+  position: relative;
+  height: 200px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.15),
+    0 0 60px rgba(59, 130, 246, 0.08);
 
   img {
-    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: saturate(1.1);
+  }
+
+  .page-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 58, 95, 0.78) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .page-header-title {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .page-header-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
   }
 }
 
-/* Profile section - Clean and professional */
+/* Profile section */
 .profile {
   margin-bottom: 1.5rem;
 
   img.rounded {
-    border-radius: 4px !important;
-    box-shadow: none;
-    border: 1px solid var(--global-divider-color);
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(59, 130, 246, 0.2);
   }
 
   .more-info {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--global-text-color-light);
     margin-top: 1rem;
   }
@@ -97,29 +191,27 @@ body {
 /* Main content typography */
 article {
   .clearfix {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.85;
     color: var(--global-text-color);
 
     p {
       margin-bottom: 1.5rem;
-      text-align: justify;
-      hyphens: auto;
     }
   }
 }
 
-/* Section headings - Academic style */
+/* Section headings */
 .post h2,
 h2 {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--global-divider-color);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #3b82f6 0%, transparent 100%) 1;
   color: var(--global-text-color);
 
   a {
@@ -127,53 +219,36 @@ h2 {
     text-decoration: none;
 
     &:hover {
-      color: var(--global-theme-color);
+      color: #3b82f6;
     }
   }
 }
 
-/* Navigation - Minimal */
-.navbar {
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-
-  .nav-link {
-    color: var(--global-text-color-light);
-    transition: color 0.2s ease;
-
-    &:hover,
-    &.active {
-      color: var(--global-text-color);
-    }
-  }
-}
-
-/* Social icons - Subtle */
+/* Social icons */
 .social {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--global-divider-color);
 
   .contact-icons {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 0.75rem;
 
     a {
       color: var(--global-text-color-light);
-      margin: 0 0.5rem;
-      transition: color 0.2s ease;
+      margin: 0 0.6rem;
+      transition: all 0.3s ease;
 
       &:hover {
-        color: var(--global-text-color);
+        color: #3b82f6;
+        transform: translateY(-2px);
       }
     }
   }
 
   .contact-note {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--global-text-color-light);
-    font-style: italic;
   }
 }
 
@@ -189,118 +264,128 @@ ul.post-list {
 
   li {
     margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--global-divider-color);
+    padding: 1.25rem;
+    border-radius: 10px;
+    background: var(--global-bg-color);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--global-divider-color);
+    transition: all 0.3s ease;
 
-    &:last-child {
-      border-bottom: none;
+    &:hover {
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+      border-color: rgba(59, 130, 246, 0.3);
     }
 
     h3 {
-      font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
 
       a {
         color: var(--global-text-color);
         text-decoration: none;
 
         &:hover {
-          color: var(--global-theme-color);
+          color: #3b82f6;
         }
       }
     }
 
     p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--global-text-color-light);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
 
     .post-meta {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--global-text-color-light);
     }
 
     .post-tags {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
 
       a {
         color: var(--global-text-color-light);
         text-decoration: none;
 
         &:hover {
-          color: var(--global-theme-color);
+          color: #3b82f6;
         }
       }
     }
   }
 }
 
-/* Books section - Academic shelf */
+/* Books section */
 .cover {
   margin: 0.5rem;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
 
   img {
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   }
 
   figcaption {
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    margin-top: 0.4rem;
   }
 }
 
-/* Cards - Minimal */
+/* Cards */
 .card {
   border: 1px solid var(--global-divider-color);
-  border-radius: 4px;
-  box-shadow: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
   }
 }
 
-/* Links - Subtle underline */
+/* Links */
 a {
-  color: var(--global-theme-color);
+  color: #3b82f6;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
+    color: #2563eb;
   }
 }
 
-/* Blockquotes - Academic style */
+/* Blockquotes */
 blockquote {
-  border-left: 2px solid var(--global-divider-color);
+  border-left: 3px solid #3b82f6;
   padding-left: 1.5rem;
   margin: 1.5rem 0;
   font-style: italic;
   color: var(--global-text-color-light);
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
 }
 
-/* Code - Clean monospace */
+/* Code */
 code {
   font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
   font-size: 0.9em;
-  background: rgba(0, 0, 0, 0.04);
-  padding: 0.15em 0.4em;
-  border-radius: 3px;
+  background: rgba(59, 130, 246, 0.08);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
 }
 
-/* Footer - Minimal */
+/* Footer */
 footer {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--global-text-color-light);
   border-top: 1px solid var(--global-divider-color);
   padding-top: 2rem;
@@ -310,15 +395,16 @@ footer {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .header-banner {
-    padding: 2rem 1rem;
+    height: 220px;
+    border-radius: 0;
 
     .banner-overlay .banner-content {
       .banner-name {
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
 
       .banner-title {
-        font-size: 0.85rem;
+        font-size: 0.7rem;
 
         .separator {
           display: block;
@@ -330,25 +416,45 @@ footer {
     }
   }
 
-  article .clearfix p {
-    text-align: left;
+  .page-header-banner {
+    height: 160px;
+    border-radius: 0;
+
+    .page-header-overlay {
+      .page-header-title {
+        font-size: 1.4rem;
+      }
+
+      .page-header-subtitle {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .navbar {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .header-banner .banner-overlay .banner-content {
     .banner-name {
-      font-size: 1.75rem;
+      font-size: 1.4rem;
     }
 
     .banner-title {
-      font-size: 0.8rem;
+      font-size: 0.65rem;
     }
   }
 }
 
 /* Hide redundant elements */
 .post:has(.header-banner) .post-header {
+  display: none;
+}
+
+/* Hide default header bar on blog page */
+.header-bar {
   display: none;
 }
 
@@ -360,10 +466,12 @@ footer {
 
     li {
       margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-      text-indent: -1.5rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      padding: 1rem;
+      background: var(--global-bg-color);
+      border-radius: 8px;
+      border: 1px solid var(--global-divider-color);
+      font-size: 1rem;
+      line-height: 1.7;
     }
   }
 }
@@ -371,10 +479,48 @@ footer {
 /* CV page styling */
 .cv {
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-family: inherit;
+    letter-spacing: 0.08em;
     font-weight: 500;
+  }
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] {
+  .header-banner {
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.4),
+      0 0 80px rgba(59, 130, 246, 0.15);
+
+    img {
+      opacity: 0.3;
+    }
+  }
+
+  .page-header-banner {
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(59, 130, 246, 0.1);
+
+    img {
+      opacity: 0.25;
+    }
+  }
+
+  ul.post-list li {
+    background: rgba(30, 41, 59, 0.5);
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.7);
+    }
+  }
+
+  blockquote {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  }
+
+  code {
+    background: rgba(59, 130, 246, 0.15);
   }
 }
