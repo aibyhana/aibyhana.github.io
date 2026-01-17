@@ -1,168 +1,103 @@
-/* Custom Header Banner */
+/* Clean Academic Design */
+
+/* Typography - Elegant serif for headings, clean sans for body */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+/* Header Banner - Minimal academic style */
 .header-banner {
   width: 100%;
-  height: 220px;
+  padding: 3rem 2rem;
   background: var(--global-bg-color);
-  margin-bottom: 2.5rem;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  text-align: center;
 
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.35;
-    filter: grayscale(10%);
+    display: none; /* Hide image for clean academic look */
   }
 
   .banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    position: relative;
+    background: transparent !important;
 
     .banner-content {
-      text-align: center;
-      max-width: 900px;
-
       .banner-name {
-        font-size: 2.2rem;
-        font-weight: 600;
-        margin-bottom: 0.6rem;
-        letter-spacing: -0.3px;
-        line-height: 1.2;
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 0.05em;
         color: var(--global-text-color);
+        margin-bottom: 0.75rem;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
       }
 
       .banner-title {
-        font-size: 1rem;
+        font-size: 0.95rem;
         font-weight: 400;
         color: var(--global-text-color-light);
-        letter-spacing: 0.3px;
-        line-height: 1.5;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
 
         .separator {
-          margin: 0 0.6rem;
-          opacity: 0.5;
+          margin: 0 1rem;
+          opacity: 0.4;
         }
       }
     }
   }
 }
 
-/* Light mode overlay */
-:root .header-banner .banner-overlay {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.85) 100%);
-}
-
-/* Dark mode overlay */
-html[data-theme="dark"] .header-banner .banner-overlay {
-  background: linear-gradient(to bottom, rgba(31, 41, 55, 0.75) 0%, rgba(31, 41, 55, 0.85) 100%);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .header-banner {
-    height: 180px;
-    margin-bottom: 2rem;
-
-    .banner-overlay .banner-content {
-      .banner-name {
-        font-size: 1.8rem;
-      }
-
-      .banner-title {
-        font-size: 0.9rem;
-
-        .separator {
-          display: none;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .header-banner {
-    height: 160px;
-
-    .banner-overlay .banner-content {
-      .banner-name {
-        font-size: 1.5rem;
-      }
-
-      .banner-title {
-        font-size: 0.85rem;
-      }
-    }
-  }
-}
-
-/* Profile Image - Square with subtle rounding */
+/* Profile section - Clean and professional */
 .profile {
+  margin-bottom: 1.5rem;
+
   img.rounded {
-    border-radius: 8px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease;
-
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-  }
-}
-
-/* Hide the redundant post header when banner exists */
-.post:has(.header-banner) .post-header {
-  display: none;
-}
-
-/* Improve overall typography and spacing */
-.post-header {
-  margin-bottom: 2rem;
-
-  .post-title {
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    font-weight: 600;
+    border-radius: 4px !important;
+    box-shadow: none;
+    border: 1px solid var(--global-divider-color);
   }
 
-  .desc {
+  .more-info {
+    font-size: 0.9rem;
     color: var(--global-text-color-light);
-    font-size: 1rem;
+    margin-top: 1rem;
   }
 }
 
-/* Clean up the layout */
+/* Main content typography */
 article {
   .clearfix {
-    line-height: 1.7;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
     color: var(--global-text-color);
 
     p {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+      hyphens: auto;
     }
   }
 }
 
-/* Improve section headings */
-.post h2 {
+/* Section headings - Academic style */
+.post h2,
+h2 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   margin-top: 2.5rem;
-  margin-bottom: 1.2rem;
-  font-weight: 600;
-  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  color: var(--global-text-color);
 
   a {
+    color: inherit;
     text-decoration: none;
-    color: var(--global-text-color);
-    transition: color 0.2s ease;
 
     &:hover {
       color: var(--global-theme-color);
@@ -170,87 +105,75 @@ article {
   }
 }
 
-/* Social icons styling */
+/* Navigation - Minimal */
+.navbar {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+
+  .nav-link {
+    color: var(--global-text-color-light);
+    transition: color 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: var(--global-text-color);
+    }
+  }
+}
+
+/* Social icons - Subtle */
 .social {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--global-divider-color);
 
   .contact-icons {
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
 
     a {
-      margin: 0 0.4rem;
-      transition: transform 0.2s ease;
+      color: var(--global-text-color-light);
+      margin: 0 0.5rem;
+      transition: color 0.2s ease;
 
       &:hover {
-        transform: translateY(-2px);
+        color: var(--global-text-color);
       }
     }
   }
 
   .contact-note {
+    font-size: 0.85rem;
     color: var(--global-text-color-light);
-    font-size: 0.9rem;
+    font-style: italic;
   }
 }
 
-/* Blog posts styling */
-.post-list {
-  .post-item {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+/* Latest posts - Clean list style */
+.post h2 a,
+h2 a {
+  text-decoration: none;
+}
+
+ul.post-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--global-divider-color);
 
     &:last-child {
       border-bottom: none;
     }
 
-    .post-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-
-      a {
-        color: var(--global-text-color);
-        text-decoration: none;
-        transition: color 0.2s ease;
-
-        &:hover {
-          color: var(--global-theme-color);
-        }
-      }
-    }
-
-    .post-meta {
-      font-size: 0.9rem;
-      color: var(--global-text-color-light);
-      margin-bottom: 0.5rem;
-    }
-
-    .post-description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--global-text-color);
-    }
-  }
-}
-
-/* Latest posts section */
-.latest-posts {
-  .post-preview {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.02);
-    }
-
     h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
 
       a {
         color: var(--global-text-color);
@@ -260,46 +183,171 @@ article {
           color: var(--global-theme-color);
         }
       }
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--global-text-color-light);
+      margin-bottom: 0.3rem;
     }
 
     .post-meta {
       font-size: 0.85rem;
       color: var(--global-text-color-light);
     }
+
+    .post-tags {
+      font-size: 0.8rem;
+
+      a {
+        color: var(--global-text-color-light);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--global-theme-color);
+        }
+      }
+    }
   }
 }
 
-/* Books section improvements */
+/* Books section - Academic shelf */
 .cover {
-  margin: 0.8rem;
+  margin: 0.5rem;
   transition: transform 0.2s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
   }
 
   img {
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  figcaption {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
   }
 }
 
-/* Navigation improvements */
-.navbar {
-  font-size: 0.95rem;
-
-  .nav-link {
-    transition: color 0.2s ease;
-  }
-}
-
-/* Cards and containers */
+/* Cards - Minimal */
 .card {
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  box-shadow: none;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Links - Subtle underline */
+a {
+  color: var(--global-theme-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Blockquotes - Academic style */
+blockquote {
+  border-left: 2px solid var(--global-divider-color);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+/* Code - Clean monospace */
+code {
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+/* Footer - Minimal */
+footer {
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+  border-top: 1px solid var(--global-divider-color);
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-banner {
+    padding: 2rem 1rem;
+
+    .banner-overlay .banner-content {
+      .banner-name {
+        font-size: 2rem;
+      }
+
+      .banner-title {
+        font-size: 0.85rem;
+
+        .separator {
+          display: block;
+          height: 0;
+          margin: 0.3rem 0;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  article .clearfix p {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-banner .banner-overlay .banner-content {
+    .banner-name {
+      font-size: 1.75rem;
+    }
+
+    .banner-title {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+/* Hide redundant elements */
+.post:has(.header-banner) .post-header {
+  display: none;
+}
+
+/* Publication/Bibliography styling */
+.bibliography {
+  ol {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      text-indent: -1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+/* CV page styling */
+.cv {
+  h2 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: inherit;
+    font-weight: 500;
   }
 }
