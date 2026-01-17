@@ -590,7 +590,7 @@ footer {
   display: none;
 }
 
-/* Light mode header banners - more visible image with unified text color */
+/* Light mode header banners - muted light teal with unified text color */
 :root {
   .header-banner,
   .page-header-banner {
@@ -601,7 +601,7 @@ footer {
 
     .banner-overlay,
     .page-header-overlay {
-      background: linear-gradient(135deg, rgba(224, 242, 254, 0.78) 0%, rgba(186, 230, 253, 0.72) 35%, rgba(125, 211, 252, 0.68) 70%, rgba(56, 189, 248, 0.62) 100%);
+      background: linear-gradient(135deg, rgba(204, 236, 235, 0.8) 0%, rgba(178, 223, 219, 0.75) 35%, rgba(153, 212, 206, 0.7) 70%, rgba(128, 200, 192, 0.65) 100%);
     }
 
     .banner-name,
