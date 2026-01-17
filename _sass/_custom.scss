@@ -30,11 +30,12 @@ h6 {
 /* Navigation - Solid dark background */
 .navbar {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: var(--global-bg-color) !important;
-  border-bottom: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid #e5e7eb;
   padding: 0.75rem 1rem;
   backdrop-filter: none;
 
@@ -67,7 +68,7 @@ h6 {
   height: 260px;
   margin-bottom: 2.5rem;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 0;
 
   img {
     position: absolute;
@@ -99,7 +100,6 @@ h6 {
         font-size: 1.8rem;
         font-weight: 500;
         letter-spacing: 0.15em;
-        color: #fff;
         margin-bottom: 0.75rem;
         text-transform: uppercase;
       }
@@ -107,13 +107,11 @@ h6 {
       .banner-title {
         font-size: 0.8rem;
         font-weight: 400;
-        color: #94a3b8;
         letter-spacing: 0.12em;
         text-transform: uppercase;
 
         .separator {
           margin: 0 0.75rem;
-          color: var(--global-theme-color);
         }
       }
     }
@@ -127,7 +125,7 @@ h6 {
   height: 160px;
   margin-bottom: 2rem;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 0;
 
   img {
     position: absolute;
@@ -156,32 +154,73 @@ h6 {
       font-size: 1.5rem;
       font-weight: 500;
       letter-spacing: 0.12em;
-      color: #fff;
       margin-bottom: 0.4rem;
       text-transform: uppercase;
     }
 
     .page-header-subtitle {
       font-size: 0.8rem;
-      color: #94a3b8;
       letter-spacing: 0.08em;
       margin: 0;
     }
   }
 }
 
-/* Profile section - Grayscale photo with hover to color */
+/* Profile section - CRT retro screen effect */
 .profile {
   margin-bottom: 1.5rem;
 
+  .profile-img-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
   img.rounded {
     border-radius: 8px !important;
-    filter: grayscale(100%);
+    filter: contrast(1.05) saturate(1.1);
     transition: filter 0.4s ease;
+    display: block;
 
     &:hover {
-      filter: grayscale(0%);
+      filter: contrast(1.1) saturate(1.2) brightness(1.05);
     }
+  }
+
+  /* CRT scanline overlay effect - more visible */
+  .profile-img-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12) 0px,
+      rgba(0, 0, 0, 0.12) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    border-radius: 8px;
+    opacity: 1;
+  }
+
+  /* Subtle cyan/blue tint like old monitors */
+  .profile-img-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(6, 182, 212, 0.06) 100%);
+    pointer-events: none;
+    border-radius: 8px;
+    z-index: 1;
+    mix-blend-mode: color;
   }
 
   .more-info {
@@ -551,39 +590,44 @@ footer {
   display: none;
 }
 
-/* Light mode header banners - lighter blue gradient with visible image */
+/* Light mode header banners - very light blue gradient with dark grey text */
 :root {
   .header-banner,
   .page-header-banner {
     img {
-      opacity: 0.5;
-      filter: saturate(1.1);
+      opacity: 0.2;
+      filter: saturate(0.6) brightness(1.3);
     }
 
     .banner-overlay,
     .page-header-overlay {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.82) 0%, rgba(59, 130, 246, 0.72) 50%, rgba(96, 165, 250, 0.78) 100%);
+      background: linear-gradient(135deg, rgba(239, 246, 255, 0.94) 0%, rgba(219, 234, 254, 0.9) 35%, rgba(191, 219, 254, 0.88) 70%, rgba(147, 197, 253, 0.85) 100%);
     }
 
     .banner-name,
-    .page-header-title {
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    }
-
+    .page-header-title,
     .banner-title,
-    .page-header-subtitle {
-      color: #dbeafe;
+    .page-header-subtitle,
+    .banner-content .banner-name,
+    .banner-content .banner-title {
+      color: #1e3a5f !important;
+      text-shadow: none !important;
     }
 
     .separator {
-      color: #bfdbfe !important;
+      color: #1e3a5f !important;
     }
   }
 }
 
-/* Dark mode header banners - deep blue theme */
+/* Dark mode styles */
 html[data-theme="dark"] {
+  /* Dark mode navbar border */
+  .navbar {
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  /* Dark mode header banners - deep blue theme */
   .header-banner,
   .page-header-banner {
     img {
@@ -597,14 +641,16 @@ html[data-theme="dark"] {
     }
 
     .banner-name,
-    .page-header-title {
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    .page-header-title,
+    .banner-content .banner-name {
+      color: #fff !important;
+      text-shadow: 0 2px 12px rgba(59, 130, 246, 0.3) !important;
     }
 
     .banner-title,
-    .page-header-subtitle {
-      color: #93c5fd;
+    .page-header-subtitle,
+    .banner-content .banner-title {
+      color: #93c5fd !important;
     }
 
     .separator {
@@ -752,6 +798,131 @@ html[data-theme="dark"] {
         background: rgba(168, 85, 247, 0.15);
         color: #a855f7;
       }
+    }
+
+    .update-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      perspective: 1000px;
+
+      img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        position: relative;
+        border: 2px solid transparent;
+
+        &:hover {
+          transform: scale(1.08) rotateY(-5deg) rotateX(3deg);
+          box-shadow:
+            0 15px 35px rgba(59, 130, 246, 0.25),
+            0 5px 15px rgba(0, 0, 0, 0.2);
+          border-color: rgba(59, 130, 246, 0.4);
+        }
+      }
+
+      /* For single image posts - make it larger */
+      &.single-image img {
+        width: 320px;
+        height: 220px;
+      }
+    }
+  }
+}
+
+/* Responsive updates images */
+@media (max-width: 768px) {
+  .updates-list .update-item .update-images {
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+    }
+
+    &.single-image img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+    }
+  }
+}
+
+/* Custom Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: pointer;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+
+    img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
     }
   }
 }
