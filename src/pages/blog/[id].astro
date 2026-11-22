@@ -1,0 +1,16 @@
+---
+// One post, alone on its page. The posts are the .md files in public/content/posts.
+import Layout from "../../layouts/Layout.astro";
+import { loadSite } from "../../lib/load.js";
+import { prepare, postPage } from "../../lib/pages.js";
+
+export function getStaticPaths() {
+  return loadSite().published.map((p) => ({ params: { id: p.id } }));
+}
+
+const SITE = loadSite();
+prepare(SITE);
+const post = SITE.published.find((p) => p.id === Astro.params.id);
+const page = postPage(SITE, post);
+---
+<Layout page={page} />

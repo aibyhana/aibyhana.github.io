@@ -1,0 +1,11 @@
+---
+// The home page: the latest three projects, posts and books.
+import Layout from "../layouts/Layout.astro";
+import { loadSite } from "../lib/load.js";
+import { prepare, homePage } from "../lib/pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = homePage(SITE);
+---
+<Layout page={page} />

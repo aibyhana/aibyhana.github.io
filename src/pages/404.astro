@@ -1,0 +1,9 @@
+---
+// What a visitor sees at an address that does not exist.
+import Layout from "../layouts/Layout.astro";
+import { loadSite } from "../lib/load.js";
+import { missingPage } from "../lib/pages.js";
+
+const page = missingPage(loadSite());
+---
+<Layout page={page} />

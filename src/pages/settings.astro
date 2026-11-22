@@ -1,0 +1,12 @@
+---
+// Settings: the page where the site is edited. It is an empty box here.
+// The editor (src/scripts/settings-app.js) fills it in the browser, after a sign-in with a GitHub token.
+import Layout from "../layouts/Layout.astro";
+import { loadSite } from "../lib/load.js";
+import { prepare, settingsPage } from "../lib/pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = settingsPage(SITE);
+---
+<Layout page={page} />

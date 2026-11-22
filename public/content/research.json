@@ -1,0 +1,178 @@
+[
+  {
+    "id": "lorem-ipsum",
+    "fig": "flip",
+    "title": "Lorem ipsum",
+    "where": "Irure tempor et occaecat ea laboris eget luctus anim",
+    "short": "Laboris blandit fugiat tellus cubilia vulputate minim vitae.",
+    "caption": "Varius proident cursus vitae elit aliquip est velit integer sed mauris culpa tellus culpa risus. Dolor id ea cillum ea mollit dolor ullamco pulvinar sapien. Ex bibendum aliquet non primis luctus posuere.",
+    "text": [
+      "Occaecat primis lacus primis magna ultrices. Sit sit blandit reprehenderit adipiscing adipiscing sunt incididunt elit exercitation arcu in lorem esse duis id. Ullamco lorem placerat nostrud lacus mollit faucibus fugiat diam lorem placerat anim occaecat. Sapien elit dictum.",
+      "Vulputate mollit in leo est ad consectetur est aliquip id ante. Arcu est aliquip occaecat posuere lorem laborum eu ullamco ut consectetur massa laboris blandit. Incididunt irure scelerisque velit feugiat.",
+      "> [!NOTE] Sagittis Velit\n> Irure reprehenderit integer risus velit mauris non esse cubilia pretium duis cursus laborum. Excepteur et ipsum eu culpa risus nisi. Pulvinar do ante faucibus.",
+      "## Tempor luctus enim",
+      "Sunt bibendum laboris sapien feugiat nisi deserunt placerat massa tincidunt vitae commodo dolor integer. Anim vitae consectetur risus bibendum dolor labore. Labore ea fugiat elit nostrud ullamco velit. Est consequat deserunt sapien aliqua in veniam diam leo exercitation dolor eget non dictum do. Sagittis mollit sit.",
+      "- Pretium risus aliquip ipsum sunt dolore magna.\n- Sapien integer feugiat lacus tincidunt vestibulum sapien sint ultricies sagittis primis.\n  - Reprehenderit cupidatat aute morbi vitae dolor.\n- Curabitur consectetur veniam ea et mollit officia velit.",
+      "Aute lacus quis ultrices ullamco laborum mollit diam ex adipiscing vestibulum cillum lorem duis fugiat. Reprehenderit irure aliqua minim magna laboris blandit aliqua donec aliquip qui anim commodo.[^1]",
+      "## Pretium in",
+      "Sapien lacus aute lorem nostrud pretium eget nulla non posuere varius veniam eiusmod. Tellus magna mauris do curabitur in laborum placerat culpa donec. Sunt aliquip sed blandit eiusmod magna primis officia veniam anim massa nulla integer culpa. Ad fugiat exercitation.",
+      "| Morbi | Fugiat | Ad | Cupidatat |\n| --- | ---: | ---: | ---: |\n| Pretium | 0.88 | 0.36 | 0.43 |\n| Sapien | 0.27 | 0.73 | 0.25 |\n| Aliquip | 0.09 | 0.90 | 0.89 |\n| Anim | 0.58 | 0.01 | 0.10 |\n: Nulla semper tempor feugiat amet morbi anim viverra eu.",
+      "Enim nunc laborum laborum sit ea placerat id eget vestibulum deserunt semper amet scelerisque. Labore labore id excepteur cupidatat pulvinar ea sapien feugiat tempor reprehenderit consectetur lorem. Cillum exercitation cupidatat vulputate pariatur cubilia massa.",
+      "```python lorem/ipsum.py\ndef lorem(ipsum, dolor=3):\n    amet = [ipsum] * dolor\n    return \" \".join(amet)\n\nprint(lorem(\"lorem\"))\n```",
+      "### Sed blandit enim",
+      "Et quis ipsum eiusmod dolor bibendum reprehenderit deserunt dictum nostrud amet semper vulputate. Ultricies vulputate cubilia aliquip aliqua veniam posuere dolore labore sed ullamco arcu minim massa. Quis semper commodo.",
+      "> Est laboris adipiscing sed officia diam arcu bibendum placerat leo. Sapien dolor velit ante ullamco tincidunt nunc veniam.",
+      "## Luctus qui",
+      "Leo duis anim dolore leo pulvinar posuere ante. Vulputate do semper in primis dictum cupidatat. Ultrices aliqua commodo elit eiusmod dolor consectetur fugiat excepteur semper. Ut elit vestibulum curabitur in commodo eget ad officia id dolore.",
+      "1. Diam dolor tempor voluptate diam semper est quis.\n2. Sapien vestibulum ultrices laborum varius cillum nulla donec in.\n3. Consequat est primis dolor feugiat vulputate proident.",
+      "> [!TIP] Blandit\n> Dolore aliquet ipsum purus cursus pariatur consequat. Ad tincidunt ea irure pretium ex luctus dictum tempor.",
+      "Pariatur est mollit excepteur viverra $p_i \\le 1$. Quis officia exercitation viverra duis minim mollit reprehenderit feugiat. Faucibus nisi sint deserunt cillum id leo arcu. Sed sit eget.",
+      "::: details Mollit officia consectetur\nVelit donec bibendum anim velit cubilia minim. Pariatur varius cupidatat est voluptate cupidatat luctus eget. Sagittis duis nisi ad ad non ea lorem. Nunc diam arcu.\n:::",
+      "## Tellus",
+      "Ullamco sit pretium magna ut primis donec nunc magna enim id ultricies eiusmod fugiat bibendum posuere. Consectetur integer do ea voluptate lorem tempor. Eu posuere ea aliqua tempor consectetur. Velit non labore.",
+      "[^1]: Cubilia mauris faucibus ullamco feugiat laborum amet esse duis."
+    ],
+    "facts": [
+      [
+        "Exercitation",
+        "Elit enim labore voluptate dictum cursus eget ultrices scelerisque irure blandit feugiat cursus id. Cillum dolor excepteur tellus id."
+      ],
+      [
+        "Id",
+        "Ultricies quis massa integer"
+      ],
+      [
+        "Excepteur",
+        "Nunc tincidunt scelerisque exercitation ultrices minim blandit in scelerisque"
+      ],
+      [
+        "Nunc",
+        "Adipiscing"
+      ],
+      [
+        "Posuere",
+        "Varius nunc diam mauris"
+      ]
+    ]
+  },
+  {
+    "id": "dolor-sit-amet",
+    "fig": "leak",
+    "title": "Dolor sit amet",
+    "where": "Eiusmod commodo labore sagittis nostrud mollit integer",
+    "short": "Pulvinar viverra curabitur in dictum donec ultrices incididunt reprehenderit.",
+    "caption": "Laboris veniam est morbi ad ex ultricies arcu. Nisi pulvinar lacus qui enim eiusmod velit.",
+    "text": [
+      "Cursus minim pretium ad donec tincidunt velit culpa in. Elit eiusmod donec nulla pariatur est quis non orci magna pulvinar.",
+      "Irure nostrud aliquet feugiat vulputate veniam anim nunc exercitation aliqua aute. Sapien fugiat tincidunt ante ullamco dictum aliqua mollit varius deserunt deserunt incididunt. Blandit aliquet commodo do tincidunt diam officia voluptate curabitur reprehenderit nisi placerat ut tempor ex ex."
+    ],
+    "facts": [
+      [
+        "Et",
+        "Elit dolore pariatur mauris dictum aliqua commodo."
+      ],
+      [
+        "Lorem",
+        "Luctus nisi tempor cursus"
+      ],
+      [
+        "Scelerisque",
+        "Ex irure diam in vestibulum qui diam eu tellus"
+      ]
+    ]
+  },
+  {
+    "id": "consectetur-adipiscing",
+    "fig": "ablate",
+    "title": "Consectetur adipiscing",
+    "where": "Posuere veniam",
+    "short": "Labore leo ea bibendum in ipsum consectetur bibendum donec.",
+    "caption": "Ea orci labore donec vestibulum in viverra scelerisque sed sagittis sapien.",
+    "text": [
+      "Cillum nisi donec integer nunc quis ad varius eiusmod mauris. Sint nunc proident id massa morbi integer consequat mollit lacus tellus. Laboris semper deserunt.",
+      "Dictum ultricies nunc culpa faucibus risus reprehenderit vulputate cillum. Est occaecat exercitation sint sagittis curabitur nulla laborum labore aute mollit. Incididunt blandit luctus tincidunt eget esse eget fugiat cillum dictum et. Est ex duis tempor dolor ultrices ut labore ex incididunt."
+    ],
+    "facts": [
+      [
+        "Quis",
+        "Donec curabitur pretium adipiscing veniam cursus aliqua"
+      ],
+      [
+        "Incididunt",
+        "Magna viverra"
+      ],
+      [
+        "Curabitur",
+        "Incididunt cupidatat arcu tincidunt excepteur aute"
+      ]
+    ]
+  },
+  {
+    "id": "sed-do-eiusmod",
+    "fig": "probe",
+    "title": "Sed do eiusmod",
+    "where": "Curabitur placerat",
+    "short": "Varius pulvinar mollit risus posuere sint fugiat et pulvinar.",
+    "caption": "Est est commodo cupidatat vulputate tellus occaecat aliquet aliquip. Adipiscing sagittis mauris officia laboris.",
+    "text": [
+      "Orci occaecat tempor posuere aliquet curabitur leo in proident. Massa ipsum eiusmod occaecat feugiat incididunt ultrices purus semper nisi nisi eget dolore lacus magna.",
+      "Aliqua minim cubilia commodo lacus sunt ultricies orci ad purus bibendum enim ante risus sit. Enim culpa eiusmod sagittis in eiusmod."
+    ],
+    "facts": [
+      [
+        "Pulvinar",
+        "Pretium"
+      ],
+      [
+        "Morbi",
+        "Aliquet vulputate sint arcu"
+      ],
+      [
+        "Id",
+        "Nostrud tincidunt incididunt feugiat varius"
+      ]
+    ]
+  },
+  {
+    "id": "tempor-incididunt",
+    "fig": "ioi",
+    "title": "Tempor incididunt",
+    "where": "Consectetur sed vulputate leo",
+    "short": "Qui officia varius morbi aliquip cursus dolor ut enim.",
+    "caption": "Cubilia cubilia anim velit primis incididunt ullamco. Faucibus aliquip nulla aute posuere vestibulum non veniam vulputate aliquip cupidatat. Vulputate ea massa elit morbi donec labore reprehenderit primis officia sit.",
+    "text": [
+      "Placerat sagittis est ipsum faucibus minim sint cursus nulla dolor ex reprehenderit lacus dolore aliquip sint. Cursus tincidunt posuere est veniam laboris exercitation enim sit tincidunt. Mauris mauris."
+    ],
+    "facts": [
+      [
+        "Sed",
+        "Aliquip viverra ante id"
+      ],
+      [
+        "Tincidunt",
+        "Occaecat blandit blandit"
+      ]
+    ]
+  },
+  {
+    "id": "ut-labore",
+    "fig": "steer",
+    "title": "Ut labore",
+    "where": "Occaecat",
+    "short": "Pulvinar consectetur aliquip lacus adipiscing ad mauris tempor eiusmod.",
+    "caption": "Mauris aliquip tempor mollit sint cubilia irure eiusmod magna ut leo veniam.",
+    "text": [
+      "Vulputate feugiat ultricies velit ultrices faucibus cursus tempor viverra scelerisque. Ultrices adipiscing ad pulvinar pretium eget occaecat."
+    ],
+    "facts": [
+      [
+        "Nisi",
+        "Cupidatat"
+      ],
+      [
+        "Risus",
+        "Blandit aute placerat incididunt vestibulum"
+      ]
+    ]
+  }
+]

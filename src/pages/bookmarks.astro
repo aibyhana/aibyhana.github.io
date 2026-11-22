@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { loadSite } from "../lib/load.js";
+import { prepare, bookmarksPage } from "../lib/pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = bookmarksPage(SITE);
+---
+<Layout page={page} />

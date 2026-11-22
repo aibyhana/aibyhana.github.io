@@ -1,0 +1,16 @@
+---
+// One book or one paper, alone on its page.
+import Layout from "../../layouts/Layout.astro";
+import { loadSite } from "../../lib/load.js";
+import { prepare, postingPage } from "../../lib/pages.js";
+
+export function getStaticPaths() {
+  return loadSite().postings.filter((p) => p.kind === "books" || p.kind === "papers").map((p) => ({ params: { id: p.id } }));
+}
+
+const SITE = loadSite();
+prepare(SITE);
+const item = SITE.postings.find((p) => (p.kind === "books" || p.kind === "papers") && p.id === Astro.params.id);
+const page = postingPage(SITE, item);
+---
+<Layout page={page} />

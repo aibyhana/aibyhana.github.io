@@ -1,0 +1,244 @@
+{
+  "url": "https://aibyhana.github.io/",
+  "repo": "aibyhana/aibyhana.github.io",
+  "title": "Lorem ipsum",
+  "what": "Pretium ex viverra occaecat feugiat cubilia amet elit viverra.",
+  "name": "Lorem Ipsum",
+  "intro": [
+    "Purus dolor minim qui curabitur risus curabitur aliquip viverra pariatur reprehenderit non. Consequat morbi cursus semper lacus id irure eu magna cupidatat placerat lacus.",
+    "Posuere morbi qui ultrices nisi eget diam vestibulum aute orci nisi. Laboris eget posuere non consequat feugiat elit incididunt deserunt placerat fugiat mollit.",
+    "Quis vestibulum reprehenderit vulputate scelerisque cupidatat consequat quis. Primis dolore leo culpa faucibus laboris deserunt eiusmod faucibus eu esse proident magna blandit. Ultrices primis pariatur risus."
+  ],
+  "blueLine": {
+    "name": "Blue",
+    "plain": "Lorem ipsum dolor.",
+    "same": "Lorem ipsum dolor.",
+    "other": "Lorem ipsum dolor."
+  },
+  "hello": "Sunt dolor non laboris qui varius ad magna aute sunt incididunt. Eget diam et sint quis laborum irure ullamco.",
+  "links": [
+    {
+      "label": "Lorem",
+      "href": "https://example.com/"
+    },
+    {
+      "label": "Ipsum",
+      "href": "https://example.org/"
+    }
+  ],
+  "contactTo": "",
+  "sections": {
+    "research": "",
+    "books": "",
+    "programs": "",
+    "blog": ""
+  },
+  "robot": {
+    "off": "lorem.",
+    "on": "ipsum"
+  },
+  "clock": {
+    "place": "Lorem",
+    "zone": "UTC",
+    "line": "It's {time} in {place}.",
+    "asleep": "",
+    "run": "",
+    "weekend": "",
+    "work": "",
+    "evening": "",
+    "morning": ""
+  },
+  "words": {
+    "research": "Research",
+    "programs": "Programs",
+    "now": "Now",
+    "books": "Reading",
+    "blog": "Blog",
+    "cv": "CV",
+    "hello": "Contact me",
+    "researchTitle": "Research",
+    "booksTitle": "Reading",
+    "programsTitle": "Courses and programs",
+    "blogTitle": "Blog",
+    "cvTitle": "CV",
+    "papers": "Papers",
+    "rightNow": "Right now",
+    "updated": "Updated {month}.",
+    "fig": "Fig.",
+    "project": "Project:",
+    "read": "Read.",
+    "reading": "Reading now.",
+    "next": "Up next.",
+    "latest": "Latest",
+    "kindBlog": "Blog",
+    "kindResearch": "Research",
+    "kindBook": "Book",
+    "kindPaper": "Paper",
+    "backTo": "Back to {kind}",
+    "readPaper": "Read the paper",
+    "prevPost": "Previous:",
+    "nextPost": "Next:",
+    "attn": "attention",
+    "abstract": "Abstract",
+    "all": "See all",
+    "contents": "Contents",
+    "minutes": "{n} min read",
+    "copy": "Copy",
+    "copied": "Copied",
+    "back": "Back to all posts",
+    "older": "Older:",
+    "newer": "Newer:",
+    "halfWritten": "Half written",
+    "nothingYet": "Nothing here yet.",
+    "experience": "Experience",
+    "education": "Education",
+    "cvResearch": "Research",
+    "service": "Service",
+    "training": "Training",
+    "skills": "Skills",
+    "languages": "Languages",
+    "flip": "Flip",
+    "write": "Settings",
+    "skip": "Skip to the page",
+    "copyright": "© {year} {name}.",
+    "portrait": "A pixel portrait of {name}",
+    "photo": "A photo of {name}",
+    "about": "About",
+    "aboutTitle": "About me",
+    "bookmarks": "Bookmarks",
+    "bookmarksTitle": "Bookmarks",
+    "allKinds": "All",
+    "videoKind": "Video",
+    "play": "Play here",
+    "brand": "Lorem ipsum",
+    "smaller": "Smaller text",
+    "larger": "Larger text",
+    "contact": "Contact",
+    "contactName": "Your name",
+    "contactEmail": "Your email",
+    "contactText": "Your message",
+    "contactSend": "Send",
+    "contactSending": "Sending.",
+    "contactSent": "Sent. Thank you.",
+    "contactMail": "Your mail app has opened with the message. Send it from there.",
+    "contactFail": "That did not go through. Please try again in a while.",
+    "contactNeed": "Please fill in your name, your email and a message.",
+    "contactDemo": "This is the preview. Nothing was sent.",
+    "contactSubject": "A message from {name}",
+    "booksHead": "Books",
+    "contactTitle": "Contact me"
+  },
+  "look": {
+    "paper": "#ffffff",
+    "pop": "#a9dcf8",
+    "font": "lora",
+    "flipped": false,
+    "nav": true,
+    "side": "photo",
+    "feed": "tiles",
+    "photoAs": "dots",
+    "robot": true,
+    "plants": false,
+    "inkPicker": true
+  },
+  "inks": [
+    {
+      "name": "Black",
+      "ink": "#1d1c1a"
+    },
+    {
+      "name": "Blue",
+      "ink": "#1b72e0"
+    },
+    {
+      "name": "Forest",
+      "ink": "#0e6137"
+    },
+    {
+      "name": "Tomato",
+      "ink": "#b8291b"
+    },
+    {
+      "name": "Raspberry",
+      "ink": "#b5165a"
+    },
+    {
+      "name": "Plum",
+      "ink": "#5f2378"
+    },
+    {
+      "name": "Navy",
+      "ink": "#0a2fa8"
+    },
+    {
+      "name": "Dark navy",
+      "ink": "#0b1640",
+      "dark": true,
+      "stars": true
+    }
+  ],
+  "home": [
+    {
+      "key": "research",
+      "col": "left",
+      "show": true
+    },
+    {
+      "key": "books",
+      "col": "right",
+      "show": true
+    },
+    {
+      "key": "blog",
+      "col": "right",
+      "show": true
+    },
+    {
+      "key": "bookmarks",
+      "col": "right",
+      "show": true
+    },
+    {
+      "key": "about",
+      "col": "left",
+      "show": true
+    },
+    {
+      "key": "now",
+      "col": "right",
+      "show": true
+    },
+    {
+      "key": "cv",
+      "col": "right",
+      "show": true
+    },
+    {
+      "key": "programs",
+      "col": "left",
+      "show": true
+    },
+    {
+      "key": "hello",
+      "col": "right",
+      "show": true
+    }
+  ],
+  "keepOut": {
+    "training": true,
+    "search": true,
+    "google": true,
+    "bing": true
+  },
+  "photo": "content/img/photo.jpg",
+  "photoSize": [
+    600,
+    750
+  ],
+  "topics": [
+    "Lorem",
+    "Ipsum",
+    "Dolor",
+    "Amet"
+  ]
+}

@@ -1,0 +1,42 @@
+---
+// The frame of every page: the head, the name and the links, the footer, the script.
+// The page itself comes in as ready HTML from src/lib/pages.js.
+import { FONTS } from "../lib/defaults.js";
+import { loadSite } from "../lib/load.js";
+import { navHtml, footHtml } from "../lib/pages.js";
+import { headHtml, tabTitle, rootClass, rootStyle, earlyScript, pageData } from "../lib/head.js";
+
+const { page } = Astro.props;
+const SITE = loadSite();
+// most pages stand inside the column of the site. A post, the CV and Settings stand beside it.
+const inside = page.view ? "" : page.html;
+const beside = page.view ? page.html : "";
+// Settings has no links and no footer of its own
+const top = page.desk ? "" : navHtml(SITE, page.section);
+const foot = page.desk ? "" : footHtml(SITE, new Date().getFullYear());
+---
+<!doctype html>
+<html lang="en" class={rootClass(SITE, page)} style={rootStyle(SITE, FONTS)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tabTitle(SITE, page)}</title>
+    <Fragment set:html={headHtml(SITE, page, FONTS)} />
+    <script is:inline set:html={earlyScript(SITE)}></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{SITE.words.skip}</a>
+    <main id="main" tabindex="-1">
+      <div id="z">
+        <header id="z-top" set:html={top}></header>
+        <Fragment set:html={inside} />
+      </div>
+      <Fragment set:html={beside} />
+      <footer set:html={foot}></footer>
+    </main>
+    <script is:inline type="application/json" id="site-data" set:html={pageData(SITE, page)}></script>
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>
