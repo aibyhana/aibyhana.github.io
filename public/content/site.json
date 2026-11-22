@@ -143,20 +143,6 @@
   },
   "inks": [
     {
-      "name": "Blue",
-      "ink": "#1b72e0"
-    },
-    {
-      "name": "Navy",
-      "ink": "#0a2fa8"
-    },
-    {
-      "name": "Dark navy",
-      "ink": "#0b1640",
-      "dark": true,
-      "stars": true
-    },
-    {
       "name": "Black",
       "ink": "#1d1c1a"
     }
