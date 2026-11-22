@@ -1,26 +1,3 @@
 {
-  "bookmarks": [
-    {
-      "title": "Lorem ipsum dolor sit amet",
-      "href": "https://example.com/",
-      "kind": "Lorem",
-      "by": "Dolor Sit",
-      "date": "2026-01-12",
-      "why": "Laborum qui sint cillum eiusmod nulla aliquet minim labore do arcu."
-    },
-    {
-      "title": "Consectetur adipiscing elit",
-      "href": "https://example.org/",
-      "kind": "Ipsum",
-      "by": "Amet Elit",
-      "date": "2026-01-08",
-      "why": "Faucibus integer luctus fugiat proident adipiscing lacus integer id."
-    },
-    {
-      "title": "Sed do eiusmod tempor incididunt",
-      "href": "https://example.net/",
-      "kind": "Lorem",
-      "date": "2026-01-03"
-    }
-  ]
+  "bookmarks": []
 }
