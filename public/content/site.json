@@ -132,7 +132,7 @@
     "font": "lora",
     "flipped": false,
     "nav": true,
-    "side": "photo",
+    "side": "none",
     "feed": "tiles",
     "pop": "#dea5f8",
     "robot": false,
