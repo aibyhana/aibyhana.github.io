@@ -130,16 +130,16 @@
   },
   "look": {
     "paper": "#ffffff",
-    "pop": "#a9dcf8",
     "font": "lora",
     "flipped": false,
     "nav": true,
     "side": "photo",
     "feed": "tiles",
-    "photoAs": "dots",
-    "robot": true,
+    "pop": "#a9dcf8",
+    "robot": false,
     "plants": false,
-    "inkPicker": true
+    "inkPicker": false,
+    "photoAs": "dots"
   },
   "inks": [
     {
