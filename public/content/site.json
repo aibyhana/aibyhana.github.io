@@ -1,9 +1,9 @@
 {
   "url": "https://aibyhana.github.io/",
   "repo": "aibyhana/aibyhana.github.io",
-  "title": "Lorem ipsum",
+  "title": "Hana's Notes",
   "what": "Pretium ex viverra occaecat feugiat cubilia amet elit viverra.",
-  "name": "Lorem Ipsum",
+  "name": "Hana's Notes",
   "intro": [
     "Purus dolor minim qui curabitur risus curabitur aliquip viverra pariatur reprehenderit non. Consequat morbi cursus semper lacus id irure eu magna cupidatat placerat lacus.",
     "Posuere morbi qui ultrices nisi eget diam vestibulum aute orci nisi. Laboris eget posuere non consequat feugiat elit incididunt deserunt placerat fugiat mollit.",
@@ -26,7 +26,6 @@
       "href": "https://example.org/"
     }
   ],
-  "contactTo": "",
   "sections": {
     "research": "",
     "books": "",
