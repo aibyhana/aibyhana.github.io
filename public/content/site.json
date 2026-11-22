@@ -165,17 +165,17 @@
     {
       "key": "bookmarks",
       "col": "right",
-      "show": true
+      "show": false
     },
     {
       "key": "about",
       "col": "left",
-      "show": true
+      "show": false
     },
     {
       "key": "now",
       "col": "right",
-      "show": true
+      "show": false
     },
     {
       "key": "cv",
@@ -185,12 +185,12 @@
     {
       "key": "programs",
       "col": "left",
-      "show": true
+      "show": false
     },
     {
       "key": "hello",
       "col": "right",
-      "show": true
+      "show": false
     }
   ],
   "keepOut": {
