@@ -6,20 +6,6 @@
       "year": 2020,
       "status": "read",
       "about": "Cillum ea nulla diam minim consectetur. Viverra amet lacus quis in blandit. Blandit aliquet ad sint incididunt in esse esse laborum aute eget. Velit nulla eu commodo."
-    },
-    {
-      "title": "Amet Consectetur",
-      "author": "Adipiscing Elit",
-      "year": 2021,
-      "status": "read",
-      "about": "Magna fugiat orci duis eu mauris sagittis deserunt morbi sint bibendum. Non id ultricies ea velit duis deserunt nunc tellus posuere et commodo integer amet. Eget laborum feugiat sapien."
-    },
-    {
-      "title": "Sed Eiusmod",
-      "author": "Tempor Incididunt",
-      "year": 2022,
-      "status": "read",
-      "about": "Exercitation qui pretium commodo est tempor sapien occaecat culpa sit nisi. Cillum lorem diam nisi reprehenderit eu cupidatat curabitur dictum elit excepteur deserunt."
     }
   ],
   "papers": [
@@ -29,34 +15,6 @@
       "year": 2021,
       "href": "https://example.com/",
       "why": "Vulputate ipsum bibendum scelerisque quis amet consectetur."
-    },
-    {
-      "title": "Aliquip posuere lacus nisi tempor in",
-      "by": "Vitae et al.",
-      "year": 2022,
-      "href": "https://example.com/",
-      "why": "Ullamco pariatur laboris nostrud diam feugiat exercitation sapien."
-    },
-    {
-      "title": "Cupidatat diam fugiat primis sunt leo pariatur pretium orci",
-      "by": "Laborum et al.",
-      "year": 2023,
-      "href": "https://example.com/",
-      "why": "Tellus tellus minim dolor tellus dolore sunt."
-    },
-    {
-      "title": "Scelerisque anim integer dolor voluptate nostrud cursus arcu ad",
-      "by": "Nunc et al.",
-      "year": 2024,
-      "href": "https://example.com/",
-      "why": "Sagittis veniam est culpa occaecat commodo."
-    },
-    {
-      "title": "Esse dolor ullamco orci nulla massa",
-      "by": "Varius et al.",
-      "year": 2021,
-      "href": "https://example.com/",
-      "why": "Nulla ullamco excepteur ut nulla incididunt."
     }
   ]
 }
