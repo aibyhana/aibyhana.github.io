@@ -195,7 +195,7 @@
     {
       "key": "cv",
       "col": "right",
-      "show": true
+      "show": false
     },
     {
       "key": "programs",
