@@ -143,28 +143,8 @@
   },
   "inks": [
     {
-      "name": "Black",
-      "ink": "#1d1c1a"
-    },
-    {
       "name": "Blue",
       "ink": "#1b72e0"
-    },
-    {
-      "name": "Forest",
-      "ink": "#0e6137"
-    },
-    {
-      "name": "Tomato",
-      "ink": "#b8291b"
-    },
-    {
-      "name": "Raspberry",
-      "ink": "#b5165a"
-    },
-    {
-      "name": "Plum",
-      "ink": "#5f2378"
     },
     {
       "name": "Navy",
@@ -175,6 +155,10 @@
       "ink": "#0b1640",
       "dark": true,
       "stars": true
+    },
+    {
+      "name": "Black",
+      "ink": "#1d1c1a"
     }
   ],
   "home": [
