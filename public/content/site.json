@@ -138,7 +138,7 @@
     "pop": "#a9dcf8",
     "robot": false,
     "plants": false,
-    "inkPicker": false,
+    "inkPicker": true,
     "photoAs": "dots"
   },
   "inks": [
