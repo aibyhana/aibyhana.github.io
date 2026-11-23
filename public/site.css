@@ -825,8 +825,8 @@ footer a{text-decoration:underline;text-decoration-thickness:1px;text-underline-
   #me{--pw:200px !important}
   .s-sheet img{width:calc(var(--u)*12.5)}
   #z-top{padding:calc(var(--u)*1.125) 0 calc(var(--u)*0.875)}
-  #z-top nav{gap:calc(var(--u)*0.125) 0;margin:0 calc(var(--u)*-0.5);font-size:calc(var(--u)*1.125)}
-  #z-top nav a{padding:calc(var(--u)*0.1875) calc(var(--u)*0.5) calc(var(--u)*0.3125)}
+  #z-top nav{gap:calc(var(--u)*0.125) 0;margin:0 calc(var(--u)*-0.6875);font-size:calc(var(--u)*1.125)}
+  #z-top nav a{padding:calc(var(--u)*0.1875) calc(var(--u)*0.6875) calc(var(--u)*0.3125)}
   .s-hero{grid-template-columns:minmax(0,1fr);padding:calc(var(--u)*2) 0 0}
   .s-photo{order:-1;margin-top:0;text-align:left}
   .s-photo figcaption{margin-top:calc(var(--u)*1.375)}
@@ -1139,10 +1139,10 @@ html.in-desk main{max-width:calc(var(--u)*90)}
 #z-top{padding:calc(var(--u)*1.25) 0 calc(var(--u)*0.875)}
 .s-name{font-size:calc(var(--u)*1.3125)}
 #z-top nav{align-items:baseline;font-size:calc(var(--u)*1.0625)}
-#z-top nav a{position:relative}
+#z-top nav a{border-radius:999px}
 #z-top nav a.on{background:var(--s-mark)}
-#z-top nav a:hover{background:none;color:var(--link)}
-#z-top nav a:not(.on):hover{text-decoration:underline;text-decoration-color:var(--uline);text-decoration-thickness:1px;text-underline-offset:.3em}
+#z-top nav a:hover{color:var(--link)}
+#z-top nav a:not(.on):hover{background:var(--panel)}
 #z-top nav .s-gap{align-self:center;width:1px;height:calc(var(--u)*0.9375);margin:0 calc(var(--u)*0.5625) 0 calc(var(--u)*0.4375);background:color-mix(in srgb,var(--ink) 28%,transparent)}
 #z-top nav a.s2{font-size:calc(var(--u)*0.9688);color:var(--dim)}
 #z-top nav a.s2.on{color:var(--ink)}
@@ -1204,11 +1204,11 @@ footer{margin-top:calc(var(--u)*6)}
 /* ================= the links in a column on the left ================= */
 @media (min-width:1100px){
   html:not(.in-desk) main{max-width:calc(var(--u)*83.125);padding-top:calc(var(--u)*1);padding-left:calc(clamp(20px,4vw,48px) + calc(var(--u)*14.5))}
-  #z-top{position:fixed;z-index:6;top:0;bottom:0;width:calc(var(--u)*11.25);margin-left:calc(var(--u)*-14.5);display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:flex-start;gap:0;padding:calc(var(--u)*2.75) 0 calc(var(--u)*1.75);border-bottom:0;overflow-y:auto;scrollbar-width:none}
+  #z-top{position:fixed;z-index:6;top:0;bottom:0;width:calc(var(--u)*12.0625);margin-left:calc(var(--u)*-15.3125);display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:flex-start;gap:0;padding:calc(var(--u)*2.75) 0 calc(var(--u)*1.75) calc(var(--u)*0.8125);border-bottom:0;overflow-y:auto;scrollbar-width:none}
   #z-top::-webkit-scrollbar{display:none}
   #z-top .s-name{margin-bottom:calc(var(--u)*2.25)}
-  #z-top nav{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:calc(var(--u)*0.6875);margin:0;font-size:calc(var(--u)*1.0938)}
-  #z-top nav a{padding:calc(var(--u)*0.0625) calc(var(--u)*0.4375) calc(var(--u)*0.1875);margin-left:calc(var(--u)*-0.4375)}
+  #z-top nav{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:calc(var(--u)*0.3125);margin:0;font-size:calc(var(--u)*1.0938)}
+  #z-top nav a{padding:calc(var(--u)*0.25) calc(var(--u)*0.8125) calc(var(--u)*0.375);margin-left:calc(var(--u)*-0.8125)}
   #z-top nav .s-gap{align-self:flex-start;width:calc(var(--u)*1.5);height:1px;margin:calc(var(--u)*0.75) 0 calc(var(--u)*0.625)}
   #z-top nav a.s2{font-size:calc(var(--u)*1)}
   /* the first heading of the home page stands on the line of the name */
