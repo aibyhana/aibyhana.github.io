@@ -1,0 +1,13 @@
+---
+// About the second brain, written in brain/about.md.
+import Layout from "../../layouts/Layout.astro";
+import { loadSite } from "../../lib/load.js";
+import { prepare } from "../../lib/pages.js";
+import { loadBrain } from "../../lib/brain.js";
+import { brainAbout } from "../../lib/brain-pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = brainAbout(SITE, loadBrain());
+---
+<Layout page={page} />

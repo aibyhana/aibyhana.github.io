@@ -12,7 +12,7 @@ const SITE = loadSite();
 const inside = page.view ? "" : page.html;
 const beside = page.view ? page.html : "";
 // Settings has no links and no footer of its own
-const top = page.desk ? "" : navHtml(SITE, page.section);
+const top = page.desk ? "" : navHtml(SITE, page.section, page.sub);
 const foot = page.desk ? "" : footHtml(SITE, new Date().getFullYear());
 ---
 <!doctype html>

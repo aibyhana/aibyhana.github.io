@@ -292,7 +292,7 @@ export function install(B) {
   }
   /* ---------- forms for everything that is not the diary ---------- */
   const SIMPLE = { text: 1, area: 1, paras: 1, blocks: 1, lines: 1, select: 1, project: 1, color: 1, date: 1 };
-  const PARTS = { research: "Research", books: "Reading", blog: "Blog", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
+  const PARTS = { research: "Research", books: "Reading", blog: "Blog", brain: "Second brain", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
   function area(value) { const t = el("textarea"); t.rows = 1; t.value = value || ""; t.addEventListener("input", () => grow(t)); return t; }
   function mini(labels, handler) {
     const box = el("span", "mini");
@@ -476,7 +476,7 @@ export function install(B) {
     pages: { label: "Pages", file: "content/site.json", note: "",
       fill: d => { if (!(d.home && d.home.length)) d.home = B.defaults.home; },
       schema: { type: "object", fields: [
-        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest three of Research, Blog and Reading. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
+        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest three of Research, Blog and Reading. Second brain is the part with your notes: they are files in the folder brain/notes, not written here. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
         T("home", "", { type: "home" }),
         H("The line under each page title"),
         T("sections", "", { type: "object", fields: [T("research", "Research"), T("books", "Reading"), T("blog", "Blog"), T("bookmarks", "Bookmarks", { opt: true }), T("about", "About me", { opt: true }), T("contact", "Contact", { opt: true })] }),

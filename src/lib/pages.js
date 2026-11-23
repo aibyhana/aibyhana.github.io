@@ -13,7 +13,7 @@ const rich = s => esc(s).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, words, href) 
 const linkHtml = l => '<a href="' + attr(link(l.href)) + '">' + esc(l.label) + "</a>";
 const shown = (SITE, k) => SITE.home.some(h => h.key === k && h.show !== false);
 const of = (SITE, k) => SITE.postings.filter(p => p.kind === k);
-const PATH = { research: "/research/", books: "/reading/", blog: "/blog/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
+const PATH = { research: "/research/", books: "/reading/", blog: "/blog/", brain: "/brain/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
 
 // the formatter needs to know where pictures and links lead, and the word on the copy button
 export function prepare(SITE) { setup({ img: imgSrc, link: link, copy: SITE.words.copy || "Copy" }); }
@@ -38,15 +38,16 @@ const lede = (SITE, key) => SITE.sections[key] ? '<p class="z-lede">' + esc(nice
 const chips = (SITE, kinds) => '<p class="b-kinds">' + [""].concat(kinds).map((k, i) => '<button type="button" data-zdo="kind" data-kind="' + attr(k) + '" aria-pressed="' + (i ? "false" : "true") + '"' + (i ? "" : ' class="on"') + ">" + esc(k || SITE.words.allKinds || "All") + "</button>").join("") + "</p>";
 
 /* ---------- the name, the links, the footer ---------- */
-export function navHtml(SITE, section) {
+// sub is what a part of the site adds under the links while you are in it. The second brain puts its search box and its topics there.
+export function navHtml(SITE, section, sub) {
   const W = SITE.words;
-  const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
+  const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "brain", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
   const one = (key, href, label, small) => "<a" + (small || key === section ? ' class="' + [small ? "s2" : "", key === section ? "on" : ""].filter(Boolean).join(" ") + '"' : "") + ' href="' + href + '" data-z="' + key + '"' + (key === section ? ' aria-current="page"' : "") + ">" + esc(label || "") + "</a>";
   // her work first, then the pages about her. The small line between the two only stands when there is something on both sides.
   const work = pages.filter(h => ["about", "cv"].indexOf(h.key) < 0).map(h => one(h.key, PATH[h.key], W[h.key])).join("");
   const her = pages.filter(h => ["about", "cv"].indexOf(h.key) >= 0).map(h => one(h.key, PATH[h.key], W[h.key], true)).join("") +
     (shown(SITE, "hello") && W.contact ? one("contact", PATH.contact, W.contact, true) : "");
-  return '<a class="s-name" href="/">' + esc(W.brand || SITE.name) + "</a><nav>" + work + (work && her ? '<i class="s-gap"></i>' : "") + her + "</nav>";
+  return '<a class="s-name" href="/">' + esc(W.brand || SITE.name) + "</a><nav>" + work + (work && her ? '<i class="s-gap"></i>' : "") + her + "</nav>" + (sub || "");
 }
 export function footHtml(SITE, year) {
   const W = SITE.words;

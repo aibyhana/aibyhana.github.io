@@ -1,0 +1,13 @@
+---
+// Every note of the second brain, from A to Z.
+import Layout from "../../../layouts/Layout.astro";
+import { loadSite } from "../../../lib/load.js";
+import { prepare } from "../../../lib/pages.js";
+import { loadBrain } from "../../../lib/brain.js";
+import { brainNotes } from "../../../lib/brain-pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = brainNotes(SITE, loadBrain());
+---
+<Layout page={page} />

@@ -12,7 +12,7 @@ export const WORDS = {
   contactMail: "Your mail app has opened with the message. Send it from there.", contactFail: "That did not go through. Please try again in a while.", contactNeed: "Please fill in your name, your email and a message.",
   contactDemo: "This is the preview. Nothing was sent.", contactSubject: "A message from {name}",
   about: "About", aboutTitle: "About me", contactTitle: "Contact me", booksHead: "Books", bookmarks: "Bookmarks", bookmarksTitle: "Bookmarks", allKinds: "All", videoKind: "Video", play: "Play here",
-  flip: "Flip", write: "Settings", skip: "Skip to the page", copyright: "© {year} {name}.", portrait: "A pixel portrait of {name}", photo: "A photo of {name}"
+  brain: "Second brain", flip: "Flip", write: "Settings", skip: "Skip to the page", copyright: "© {year} {name}.", portrait: "A pixel portrait of {name}", photo: "A photo of {name}"
 };
 export const CLOCK = { place: "", zone: "UTC", line: "It's {time} in {place}.", asleep: "", run: "", weekend: "", work: "", evening: "", morning: "" };
 export const LOOK = { paper: "#fdfcf8", font: "karla", flipped: false, nav: true, side: "none", feed: "tiles", pop: "#ffe45c", robot: true, plants: false, inkPicker: true };

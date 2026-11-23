@@ -1,0 +1,18 @@
+---
+// The notes of one topic.
+import Layout from "../../../layouts/Layout.astro";
+import { loadSite } from "../../../lib/load.js";
+import { prepare } from "../../../lib/pages.js";
+import { loadBrain } from "../../../lib/brain.js";
+import { brainTopic } from "../../../lib/brain-pages.js";
+
+export function getStaticPaths() {
+  return loadBrain().topics.map((t) => ({ params: { id: t.id } }));
+}
+
+const SITE = loadSite();
+prepare(SITE);
+const brain = loadBrain();
+const page = brainTopic(SITE, brain, brain.topicById.get(Astro.params.id));
+---
+<Layout page={page} />

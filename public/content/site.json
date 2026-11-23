@@ -163,6 +163,11 @@
       "show": true
     },
     {
+      "key": "brain",
+      "col": "right",
+      "show": true
+    },
+    {
       "key": "bookmarks",
       "col": "right",
       "show": false

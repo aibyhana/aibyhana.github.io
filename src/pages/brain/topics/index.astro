@@ -1,0 +1,13 @@
+---
+// Every topic of the second brain with the notes under it.
+import Layout from "../../../layouts/Layout.astro";
+import { loadSite } from "../../../lib/load.js";
+import { prepare } from "../../../lib/pages.js";
+import { loadBrain } from "../../../lib/brain.js";
+import { brainTopics } from "../../../lib/brain-pages.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = brainTopics(SITE, loadBrain());
+---
+<Layout page={page} />

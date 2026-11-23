@@ -204,6 +204,8 @@ function page() {
   // the Settings page: its editor is a large script, so it is only fetched there
   const desk = document.getElementById("write-root");
   if (desk && !desk.dataset.ready) import("./settings-host.js").then(m => m.start(SITE, preview));
+  // the second brain: its map, its search and its list of topics are fetched only on its pages
+  if (document.querySelector("[data-brain]")) import("./brain.js").then(m => m.start());
 }
 if (SITE) {
   useSite(SITE); readInk();

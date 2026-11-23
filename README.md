@@ -86,6 +86,17 @@ Both take the same marks. Settings lists them under "Formatting help", next to t
 
 A new post starts with "New post" in Posts. A new project, book or program group starts with the button beside the title of its part.
 
+## The second brain
+
+The part of the site at `/brain/` is for notes on what you learn. It is not written in Settings. Every note is a Markdown file in the folder `brain/notes`, and the name of the file is the title of the note. You can open that folder as a vault in Obsidian.
+
+- A few lines at the top of a file are optional, between two rows of `---`: `date`, `tags` (the topics), `status` (`seed`, `growing` or `settled`), `summary` (the line in lists), `draft: true` (keeps the note off the site).
+- `[[Spaced repetition]]` links to the note with that name. `[[Spaced repetition|other words]]` shows other words. `[[Spaced repetition#In practice]]` leads to a heading. `![[plot.png]]` shows the picture `public/brain/attachments/plot.png`.
+- A link to a note that does not exist yet is allowed. It shows with a dashed line, and the page with all notes lists what is waiting to be written.
+- Every note shows the notes that link to it, the notes it links to, and a small map of both. The rest is the same Markdown as in a post: boxes, tables, code, footnotes.
+- `brain/about.md` is the About page of the second brain. The line `intro:` at its top is the line under the title of the overview.
+- The link "Second brain" beside the pages can be switched off in Settings, under Pages.
+
 ## The contact form
 
 The form needs one thing from you: where it sends. Settings, Profile, "Where the contact form sends". Until that box is filled in, the form does not show on the site. In a preview and on your own computer it shows, and nothing is sent.

@@ -1,0 +1,18 @@
+---
+// One note of the second brain, alone on its page.
+import Layout from "../../../layouts/Layout.astro";
+import { loadSite } from "../../../lib/load.js";
+import { prepare } from "../../../lib/pages.js";
+import { loadBrain } from "../../../lib/brain.js";
+import { brainNote } from "../../../lib/brain-pages.js";
+
+export function getStaticPaths() {
+  return loadBrain().notes.map((n) => ({ params: { id: n.id } }));
+}
+
+const SITE = loadSite();
+prepare(SITE);
+const brain = loadBrain();
+const page = brainNote(SITE, brain, brain.byId.get(Astro.params.id));
+---
+<Layout page={page} />

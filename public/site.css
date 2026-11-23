@@ -1291,3 +1291,123 @@ html.reading main{padding-top:0}
 /* the CV: a line of text under a program */
 .cv-sec .job .led{margin:calc(var(--u)*0.125) 0 0}
 @media (max-width:1279px){ .s-two{grid-template-columns:minmax(0,1fr)} .s-shelf{max-width:calc(var(--u)*30)} }
+
+/* ================= the second brain: notes that link to each other, at /brain/ =================
+   Its pages use the frame, the lists and the text styles of the rest of the site. Only what is its own is set here:
+   the search box and the topics under the links, the map of notes, the index from A to Z, and what stands beside a note. */
+/* under the links, while you are in the second brain */
+.sb-nav{flex:0 0 100%;width:100%;font-size:calc(var(--u)*0.9688);line-height:1.3}
+.sb-find{display:flex;gap:calc(var(--u)*0.5);margin:0}
+.sb-find input{flex:1;min-width:0;padding:calc(var(--u)*0.3125) calc(var(--u)*0.8125) calc(var(--u)*0.375);border:1px solid var(--hair);border-radius:999px;background:var(--paper);color:var(--ink);font:400 calc(var(--u)*0.9688)/1.4 var(--font)}
+.sb-find input::placeholder{color:var(--dim)}
+.sb-find input::-webkit-search-cancel-button{display:none}
+.sb-find input:focus{outline:none;border-color:var(--ink)}
+.sb-menu{padding:calc(var(--u)*0.3125) calc(var(--u)*0.875) calc(var(--u)*0.375);border:1px solid var(--hair);border-radius:999px;background:none;font:400 calc(var(--u)*0.9688)/1.4 var(--font);cursor:pointer}
+.sb-menu:hover{background:var(--panel)}
+.sb-links,.sb-found{margin-top:calc(var(--u)*0.75)}
+.sb-links.away{display:none}
+.sb-links a,.sb-found li a{display:flex;align-items:baseline;justify-content:space-between;gap:calc(var(--u)*0.5);padding:calc(var(--u)*0.2188) calc(var(--u)*0.8125) calc(var(--u)*0.3125);margin-left:calc(var(--u)*-0.8125);border-radius:calc(var(--u)*0.9);text-decoration:none}
+.sb-links a:hover,.sb-found li a:hover{background:var(--panel);text-decoration:none}
+.sb-links a.on{background:var(--panel);font-weight:600}
+.sb-links a span,.sb-links summary span{font:400 calc(var(--u)*0.75)/1 var(--s-mono);color:var(--dim)}
+.sb-links details{margin-top:calc(var(--u)*0.5625)}
+.sb-links > ul{padding-bottom:calc(var(--u)*0.5625);border-bottom:1px solid var(--hair)}
+.sb-links summary{display:flex;align-items:baseline;gap:calc(var(--u)*0.4375);padding:calc(var(--u)*0.1875) 0;font-size:calc(var(--u)*0.8438);font-weight:600;color:var(--dim);cursor:pointer;list-style:none}
+.sb-links summary::-webkit-details-marker{display:none}
+.sb-links summary::before{content:"";align-self:center;width:calc(var(--u)*0.3125);height:calc(var(--u)*0.3125);border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;rotate:-45deg}
+.sb-links details[open] > summary::before{rotate:45deg;translate:0 calc(var(--u)*-0.0625)}
+.sb-links summary span{margin-left:auto}
+.sb-links summary:hover{color:var(--ink)}
+.sb-found p{margin:calc(var(--u)*0.5) 0 0;font-size:calc(var(--u)*0.875);color:var(--dim)}
+.sb-found p a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--uline)}
+/* a wide screen: the block stands in the column, under the links of the site */
+@media (min-width:1100px){
+  .sb-nav{margin-top:calc(var(--u)*1.25);padding-top:calc(var(--u)*1.125);border-top:1px solid var(--hair)}
+  .sb-menu{display:none}
+}
+/* a narrower one: the search box runs across under the bar, and the topics fold away behind a button */
+@media (max-width:1099px){
+  .sb-find{max-width:calc(var(--u)*26)}
+  .sb-nav:has(.sb-menu:not([hidden])):not(.open) .sb-links{display:none}
+  .sb-links a,.sb-found li a{margin-left:0;padding-left:0;padding-right:0;border-radius:0}
+  .sb-links a.on{background:none}
+  .sb-links a:hover,.sb-found li a:hover{background:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .sb-links{columns:2 calc(var(--u)*12);column-gap:calc(var(--u)*2)}
+  .sb-links > ul,.sb-links details{break-inside:avoid}
+}
+
+/* the pages */
+#z-list.sb:has(> .z-art){padding-top:calc(var(--u)*1.875)}
+.sb .s-dot{display:inline-block;margin-right:calc(var(--u)*0.5);vertical-align:.02em}
+.sb .s-l mark{padding:0 .1em;background:var(--s-mark);color:inherit}
+.sb-note-line{max-width:36em;margin:0 0 calc(var(--u)*1);font-size:calc(var(--u)*1.0625);line-height:1.5;color:var(--dim)}
+.sb-note-line a{text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--uline)}
+.sb-missing{color:var(--dim);border-bottom:1px dashed var(--dim);cursor:help}
+.sb-up a::before{content:"\2039";display:inline-block;margin-right:calc(var(--u)*0.4375);text-decoration:none}
+/* the map of notes. A dot is a note, a line a link. The large ones stand on the gradient of the site, which is light on any page. */
+.sb-graph{position:relative;margin:0;border-radius:var(--r);background:var(--panel);overflow:hidden}
+.sb-graph.wide,.sb-graph.full{--ink:var(--a);background:var(--glow)}
+.sb-graph.wide{height:calc(var(--u)*18)}
+.sb-graph.full{height:min(calc(var(--u)*36),68vh);margin-bottom:calc(var(--u)*1.25)}
+.sb-graph.local{height:calc(var(--u)*13)}
+.sb-g{display:block}
+.sb-g line{stroke:var(--ink);stroke-opacity:.24;stroke-width:1}
+.sb-g circle{fill:var(--ink)}
+.sb-g .me circle{fill:var(--s-mark);stroke:var(--ink);stroke-width:1.5}
+.sb-g text{font:400 12px var(--font);fill:var(--ink);opacity:0;pointer-events:none}
+.sb-g .named text,.sb-g .on text{opacity:.9}
+.sb-g a{cursor:pointer;text-decoration:none}
+.sb-g a:focus{outline:none}
+.sb-g a:focus-visible circle{stroke:var(--ink);stroke-width:3}
+.sb-g.hot .n:not(.on){opacity:.22}
+.sb-g.hot line{stroke-opacity:.08}
+.sb-g.hot line.on{stroke-opacity:.6}
+/* topics as round links, and the page that lists them with their notes */
+.sb-topics{display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.5);margin:0}
+.sb-topics a{display:inline-flex;align-items:baseline;gap:calc(var(--u)*0.5);padding:calc(var(--u)*0.25) calc(var(--u)*0.9375) calc(var(--u)*0.3438);border:1px solid var(--hair);border-radius:999px;font-size:calc(var(--u)*1.0625);text-decoration:none}
+.sb-topics a span,.sb-by dt span{font:400 calc(var(--u)*0.75)/1 var(--s-mono);color:var(--dim)}
+.sb-topics a:hover{background:var(--hov);border-color:var(--hov);text-decoration:none}
+.sb-by{max-width:calc(var(--u)*56.25);margin:0;border-top:1px solid var(--hair)}
+.sb-by div{display:grid;grid-template-columns:calc(var(--u)*12.5) minmax(0,1fr);gap:calc(var(--u)*0.2) calc(var(--u)*1.5);padding:calc(var(--u)*0.8125) 0 calc(var(--u)*0.875);border-bottom:1px solid var(--hair)}
+.sb-by dt{font-size:calc(var(--u)*1.2188)}
+.sb-by dt span{margin-left:calc(var(--u)*0.5)}
+.sb-by dd{font-size:calc(var(--u)*1.0312);line-height:1.5}
+.sb-by a,.sb-index a,.sb-wanted a,.sb-art .z-meta a{text-decoration:none}
+.sb-by a:hover,.sb-index a:hover,.sb-wanted a:hover,.sb-art .z-meta a:hover{text-decoration:underline;text-decoration-color:var(--uline);text-decoration-thickness:2px;text-underline-offset:.22em}
+.sb-dot{color:var(--dim)}
+/* all notes from A to Z, like the index at the back of a book */
+.sb-index{max-width:calc(var(--u)*56.25);columns:3 calc(var(--u)*13);column-gap:calc(var(--u)*3)}
+.sb-index section{break-inside:avoid;margin:0 0 calc(var(--u)*1.375)}
+.sb-index h2{margin:0;font:500 calc(var(--u)*0.8125)/1.5 var(--s-mono);color:var(--dim)}
+.sb-index li{margin-top:calc(var(--u)*0.3125);font-size:calc(var(--u)*1.125);line-height:1.35}
+.sb-key{display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.3) calc(var(--u)*1.5);max-width:calc(var(--u)*56.25);margin:calc(var(--u)*0.5) 0 0;padding-top:calc(var(--u)*0.875);border-top:1px solid var(--hair);font-size:calc(var(--u)*0.9375);color:var(--dim)}
+.sb-wanted{margin:0;font-size:calc(var(--u)*1.0625)}
+.sb-wanted li{display:flex;flex-wrap:wrap;align-items:baseline;gap:calc(var(--u)*0.2) calc(var(--u)*0.875);padding:calc(var(--u)*0.375) 0}
+.sb-wanted li > span + span{font-size:calc(var(--u)*0.9375);color:var(--dim)}
+/* search */
+.sb-search{margin:0 0 calc(var(--u)*0.5)}
+.sb-search input{display:block;width:100%;max-width:calc(var(--u)*36);padding:calc(var(--u)*0.5) 0 calc(var(--u)*0.5625);border:0;border-bottom:1.5px solid var(--ink);border-radius:0;background:none;color:var(--ink);font:400 calc(var(--u)*1.5)/1.3 var(--font)}
+.sb-search input::placeholder{color:var(--dim)}
+.sb-search input::-webkit-search-cancel-button{display:none}
+.sb-search input:focus{outline:none}
+#sb-count{min-height:calc(var(--u)*1.6)}
+/* one note. Beside it, or under it on a narrower screen: its headings, the notes that link here, the notes it links to, a small map. */
+.sb-art .sb-end{margin:calc(var(--u)*3) 0 0;padding-top:calc(var(--u)*0.875);border-top:1px solid var(--hair);font-size:calc(var(--u)*0.9375);color:var(--dim)}
+.sb-end a{text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--uline)}
+.sb-side{margin-top:calc(var(--u)*3);font-size:calc(var(--u)*0.9688);line-height:1.4}
+.sb-side .s-toc{display:none}
+.sb-side section{margin:0 0 calc(var(--u)*1.75)}
+.sb-side h2{margin:0;padding-bottom:calc(var(--u)*0.4375);border-bottom:1px solid var(--ink);font:600 calc(var(--u)*0.875)/1.3 var(--font)}
+.sb-side section li{padding:calc(var(--u)*0.5625) 0 calc(var(--u)*0.625);border-bottom:1px solid var(--hair)}
+.sb-side section li a{font-weight:600;text-decoration:none}
+.sb-side section li a:hover{text-decoration:underline;text-decoration-color:var(--uline);text-decoration-thickness:2px;text-underline-offset:.22em}
+.sb-side section li span{display:block;margin-top:calc(var(--u)*0.125);font-size:calc(var(--u)*0.875);color:var(--dim)}
+@media (min-width:1300px){
+  .sb-art > .sb-side{position:absolute;top:calc(var(--u)*0.375);bottom:0;left:calc(100% + calc(var(--u)*3.25));width:calc(var(--u)*14.5);margin-top:0}
+  .sb-side > div{position:sticky;top:calc(var(--u)*1.75);max-height:calc(100vh - calc(var(--u)*3.5));overflow-y:auto;scrollbar-width:thin}
+  .sb-side .s-toc{display:block;position:static;max-height:none;overflow:visible;margin:0 0 calc(var(--u)*1.5) calc(var(--u)*-0.5)}
+}
+@media (max-width:760px){
+  .sb-by div{grid-template-columns:minmax(0,1fr)}
+  .sb-graph.wide{height:calc(var(--u)*14)}
+}
