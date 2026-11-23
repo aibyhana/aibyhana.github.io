@@ -132,7 +132,7 @@ export function install(B) {
     ["**bold**   *italic*   ==marked==   ~~struck~~", "Marks inside a sentence. Marked text gets the highlighter."],
     ["[words](https://address)", "A link."],
     ["- one\n- two\n  - inside two", "A list. Start the lines with 1. 2. 3. for a numbered one. Two spaces in front put a line inside the one above."],
-    ["- [x] done\n- [ ] not yet", "A list with squares, full or empty."],
+    ["- [x] done\n- [ ] not yet", "A list with dots, full or empty."],
     ["> a quote", "A quote."],
     ["> [!NOTE] A title\n> The note.", "A boxed note. NOTE, TIP, IMPORTANT and WARNING work. The title is optional."],
     ["```python lorem/run.py\nprint(1)\n```", "Code with a Copy button. The first word is the language, the rest is a title. Both are optional."],
@@ -520,7 +520,7 @@ export function install(B) {
       fill: d => { const old = d.look || {}; d.look = Object.assign({}, B.defaults.look, d.paper ? { paper: d.paper } : {}, old.side ? {} : { side: old.portrait === false ? "none" : "portrait" }, old); delete d.look.portrait; if (d.look.side !== "portrait" && d.look.side !== "photo") d.look.side = "none"; d.look.photoAs = old.photoAs === "plain" || (!old.photoAs && old.photoDots === false) ? "plain" : "dots"; delete d.look.photoDots; if (!(d.home && d.home.length)) d.home = B.defaults.home; },
       saved: () => { try { localStorage.removeItem("ink"); } catch (e) { /* storage is optional */ } B.resetInk(); },      // so you see the site as a new visitor does
       schema: { type: "object", fields: [
-        H("Colours"), N("The first one is what visitors see first. The second one is the colour of the site: its links, lines and patterns. The others are for the colour list in the footer."),
+        H("Colours"), N("The first one is what visitors see first. The second one is the colour of the thin lines: the line under a link, and the marks here in Settings. With only one colour here, they are black. The others are for the colour list in the footer."),
         T("inks", "", { type: "list", name: "colour", title: k => k.name, dot: k => k.ink, of: [T("name", "Name"), T("ink", "Colour", { type: "color" }),
           T("dark", "A dark page: this colour is the page and the text is light", { type: "check", opt: true }), T("stars", "Pixel stars on the dark page", { type: "check", opt: true })] }),
         T("look", "", { type: "object", fields: [

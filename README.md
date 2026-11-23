@@ -71,7 +71,7 @@ Both take the same marks. Settings lists them under "Formatting help", next to t
 | `**bold**` `*italic*` `==marked==` `~~struck~~` | Marks inside a sentence. Marked text gets the highlighter. |
 | `[words](https://address)` | A link |
 | `- item` or `1. item` | A list. Two spaces in front put a line inside the one above. |
-| `- [x] done` and `- [ ] not yet` | A list with full and empty squares |
+| `- [x] done` and `- [ ] not yet` | A list with full and empty dots |
 | `> text` | A quote |
 | `> [!NOTE] Title` then `> text` | A boxed note. NOTE, TIP, IMPORTANT and WARNING work. |
 | three backticks, a language and a title, the code, three backticks | Code with a Copy button, in the colours of the Dracula theme. A long line folds under itself. |

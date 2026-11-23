@@ -30,10 +30,9 @@ const sLog = list => '<ol class="s-index s-log">' + list.map(p => '<li data-kind
 const sRead = list => '<ul class="s-index s-read">' + list.map(p => { const b = p.item || {}; return '<li><a href="' + attr(p.href) + '"><i class="s-dot ' + attr(b.status || "") + '"></i><span>' + sTitle(p.title) + '<span class="s-l">' + esc(String(p.line || "").replace(/\.$/, "")) + '</span></span><span class="s-m">' + esc(String(p.meta || "").replace(/\.$/, "")) + "</span></a></li>"; }).join("") + "</ul>";
 const sPapers = list => '<ul class="s-index s-papers">' + list.map(p => '<li><a href="' + attr(p.href) + '"><span>' + sTitle(p.title) + (p.line ? '<span class="s-l">' + esc(String(p.line).replace(/\.$/, "")) + "</span>" : "") + '</span><span class="s-m">' + esc(p.meta || "") + "</span></a></li>").join("") + "</ul>";
 // the home page: a book is a small cover with its title on it
-const sShelf = list => '<ul class="s-index s-shelf">' + list.map(p => { const b = p.item || {}; return '<li><a href="' + attr(p.href) + '"><span class="s-cover"><b>' + esc(p.title) + "</b>" + (b.author ? "<i>" + esc(b.author) + "</i>" : "") + "</span>" + (p.meta ? '<span class="s-m">' + esc(String(p.meta).replace(/\.$/, "")) + "</span>" : "") + "</a></li>"; }).join("") + "</ul>";
+const sShelf = list => '<ul class="s-index s-shelf">' + list.map(p => { const b = p.item || {}; return '<li><a href="' + attr(p.href) + '"><span class="s-cover' + (b.status === "reading" ? " reading" : "") + '"><b>' + esc(p.title) + "</b>" + (b.author ? "<i>" + esc(b.author) + "</i>" : "") + "</span>" + (p.meta ? '<span class="s-m">' + esc(String(p.meta).replace(/\.$/, "")) + "</span>" : "") + "</a></li>"; }).join("") + "</ul>";
 // the line that stays on top of a text: back to its list on the left, home on the right
 const backStrip = (SITE, to, text) => '<p class="z-crumb back-to"><a href="' + attr(to) + '">' + esc(text) + '</a><a class="s-home" href="/">' + esc(SITE.words.brand || SITE.name) + "</a></p>";
-const crumb = (SITE, label) => '<p class="z-crumb"><a href="/">' + esc(SITE.words.brand || SITE.name) + "</a><span>" + esc(label) + "</span></p>";
 const lede = (SITE, key) => SITE.sections[key] ? '<p class="z-lede">' + esc(nice(SITE.sections[key])) + "</p>" : "";
 // a row of buttons that filters the list right after it
 const chips = (SITE, kinds) => '<p class="b-kinds">' + [""].concat(kinds).map((k, i) => '<button type="button" data-zdo="kind" data-kind="' + attr(k) + '" aria-pressed="' + (i ? "false" : "true") + '"' + (i ? "" : ' class="on"') + ">" + esc(k || SITE.words.allKinds || "All") + "</button>").join("") + "</p>";
@@ -43,10 +42,11 @@ export function navHtml(SITE, section) {
   const W = SITE.words;
   const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
   const one = (key, href, label, small) => "<a" + (small || key === section ? ' class="' + [small ? "s2" : "", key === section ? "on" : ""].filter(Boolean).join(" ") + '"' : "") + ' href="' + href + '" data-z="' + key + '"' + (key === section ? ' aria-current="page"' : "") + ">" + esc(label || "") + "</a>";
-  return '<a class="s-name" href="/"><i></i>' + esc(W.brand || SITE.name) + "</a><nav>" +
-    pages.filter(h => ["about", "cv"].indexOf(h.key) < 0).map(h => one(h.key, PATH[h.key], W[h.key])).join("") + '<i class="s-gap"></i>' +
-    pages.filter(h => ["about", "cv"].indexOf(h.key) >= 0).map(h => one(h.key, PATH[h.key], W[h.key], true)).join("") +
-    (shown(SITE, "hello") && W.contact ? one("contact", PATH.contact, W.contact, true) : "") + "</nav>";
+  // her work first, then the pages about her. The small line between the two only stands when there is something on both sides.
+  const work = pages.filter(h => ["about", "cv"].indexOf(h.key) < 0).map(h => one(h.key, PATH[h.key], W[h.key])).join("");
+  const her = pages.filter(h => ["about", "cv"].indexOf(h.key) >= 0).map(h => one(h.key, PATH[h.key], W[h.key], true)).join("") +
+    (shown(SITE, "hello") && W.contact ? one("contact", PATH.contact, W.contact, true) : "");
+  return '<a class="s-name" href="/">' + esc(W.brand || SITE.name) + "</a><nav>" + work + (work && her ? '<i class="s-gap"></i>' : "") + her + "</nav>";
 }
 export function footHtml(SITE, year) {
   const W = SITE.words;
@@ -55,7 +55,7 @@ export function footHtml(SITE, year) {
     '<p id="colophon">' + esc(String(W.copyright || "").replace("{year}", year).replace("{name}", SITE.name)) + "</p>" +
     '<p id="desk-link" hidden><a href="/settings/">' + esc(W.write || "Settings") + "</a></p>" +
     '<div class="inks" id="inks" role="group" aria-label="Ink colour"></div>' +
-    '<div id="z-foot">' + (SITE.look.inkPicker === false ? "" : "<label>" + esc(W.colour || "Colour") + ' <select id="z-ink">' + SITE.inks.map((k, i) => '<option value="' + i + '">' + esc(k.name) + "</option>").join("") + '</select></label><button type="button" data-zdo="flip">' + esc(W.flip || "Flip") + "</button>") + "</div>";
+    '<div id="z-foot">' + (SITE.look.inkPicker === false ? "" : (SITE.inks.length > 1 ? "<label>" + esc(W.colour || "Colour") + ' <select id="z-ink">' + SITE.inks.map((k, i) => '<option value="' + i + '">' + esc(k.name) + "</option>").join("") + "</select></label>" : "") + '<button type="button" data-zdo="flip">' + esc(W.flip || "Flip") + "</button>") + "</div>";
 }
 /* ---------- the pages ---------- */
 // the home page: the latest three projects, the latest three posts, the latest three books. Nothing else.
@@ -86,7 +86,7 @@ export function listPage(SITE, kind) {
       (SITE.drafts.length ? "<h2>" + esc(W.halfWritten) + '</h2><ul class="z-drafts">' + SITE.drafts.map(p => "<li><strong>" + esc(stop(p.title)) + "</strong> " + esc(p.teaser) + "</li>").join("") + "</ul>" : "");
   }
   return { path: PATH[kind], title: W[kind + "Title"] || W[kind], section: kind,
-    html: '<section id="z-list">' + crumb(SITE, W[kind]) + '<h1 tabindex="-1">' + esc(W[kind + "Title"]) + "</h1>" + lede(SITE, kind) + body + "</section>" };
+    html: '<section id="z-list"><h1 tabindex="-1">' + esc(W[kind + "Title"]) + "</h1>" + lede(SITE, kind) + body + "</section>" };
 }
 
 // one project, book or paper, alone on its page
@@ -114,7 +114,7 @@ export function postPage(SITE, post) {
 
 // about me: her description, her photo and her links, and what she is doing these days
 export function aboutPage(SITE) {
-  const W = SITE.words, top = crumb(SITE, W.about) + '<h1 tabindex="-1">' + esc(W.aboutTitle || W.about || "") + "</h1>" + lede(SITE, "about");
+  const W = SITE.words, top = '<h1 tabindex="-1">' + esc(W.aboutTitle || W.about || "") + "</h1>" + lede(SITE, "about");
   const src = SITE.photo && (SITE.look || {}).side !== "none" ? imgSrc(safeUrl(SITE.photo)) : "", nick = SITE.blueLine && SITE.blueLine.plain ? String(SITE.blueLine.plain) : "";
   const bio = SITE.intro.map(t => String(t || "").replace(/\s*\{blue\}/, "")).filter(Boolean);
   const links = SITE.links.map(linkHtml).join("") + (shown(SITE, "cv") ? '<a href="/cv/">' + esc(W.cv) + "</a>" : "") + (shown(SITE, "hello") && W.contact ? '<a href="/contact/">' + esc(W.contact) + "</a>" : "");
@@ -136,7 +136,7 @@ export function bookmarksPage(SITE) {
   const list = SITE.bookmarks.map((v, i) => [v, i]).sort((a, b) => String(b[0].date || "").localeCompare(String(a[0].date || "")) || a[1] - b[1]).map(x => x[0]), kinds = [];
   list.forEach(v => { const k = kindOf(v); if (k && kinds.indexOf(k) < 0) kinds.push(k); });
   return { path: "/bookmarks/", title: W.bookmarksTitle || W.bookmarks, section: "bookmarks",
-    html: '<section id="z-list">' + crumb(SITE, W.bookmarks) + '<h1 tabindex="-1">' + esc(W.bookmarksTitle || W.bookmarks || "") + "</h1>" + lede(SITE, "bookmarks") + (kinds.length > 1 ? chips(SITE, kinds) : "") +
+    html: '<section id="z-list"><h1 tabindex="-1">' + esc(W.bookmarksTitle || W.bookmarks || "") + "</h1>" + lede(SITE, "bookmarks") + (kinds.length > 1 ? chips(SITE, kinds) : "") +
       '<ol class="s-index b-list">' + list.map(v => {
         const play = playerOf(v.href), where = hostOf(v.href), meta = [kindOf(v), v.by, v.length].filter(Boolean).join(", ");
         return '<li class="b-card" data-kind="' + attr(kindOf(v)) + '"><div class="b-main"><a class="b-t" href="' + attr(bLink(v)) + '" target="_blank" rel="noopener">' + sTitle(v.title || "") + "</a>" + (meta ? '<p class="b-by">' + esc(meta) + "</p>" : "") + (v.why ? '<p class="b-why">' + rich(nice(v.why)) + "</p>" : "") + "</div>" +
@@ -150,7 +150,7 @@ export function contactPage(SITE, preview) {
   const W = SITE.words, to = String(SITE.contactTo || "").trim(), form = MAILTO.test(to) || /^https:\/\/\S+$/i.test(to) || !!preview;
   const box = (k, more) => "<label" + (k === "Text" ? ' class="s-wide"' : "") + "><span>" + esc(W["contact" + k] || "") + "</span>" + more + "</label>";
   return { path: "/contact/", title: W.contactTitle || W.contact, section: "contact",
-    html: '<section id="z-list">' + crumb(SITE, W.contact) + '<h1 tabindex="-1">' + esc(W.contactTitle || W.contact || "") + "</h1>" + lede(SITE, "contact") +
+    html: '<section id="z-list"><h1 tabindex="-1">' + esc(W.contactTitle || W.contact || "") + "</h1>" + lede(SITE, "contact") +
       '<section class="s-hi"><div class="s-hi-top' + (form ? "" : " solo") + '"><div>' + (SITE.hello ? "<p>" + esc(nice(SITE.hello)) + "</p>" : "") + (SITE.links.length ? '<p class="s-links">' + SITE.links.map(linkHtml).join("") + "</p>" : "") + "</div>" +
       (form ? '<form class="s-form" novalidate>' + box("Name", '<input name="name" autocomplete="name">') + box("Email", '<input name="email" type="email" autocomplete="email">') + box("Text", '<textarea name="message" rows="3"></textarea>') +
         '<input class="s-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><p class="s-send"><button type="submit">' + esc(W.contactSend || "Send") + '</button><span class="s-form-msg" role="status"></span></p></form>' : "") + "</div></section></section>" };
@@ -181,7 +181,7 @@ export function cvPage(SITE) {
 // a page that is not there
 export function missingPage(SITE) {
   const W = SITE.words;
-  return { path: "/404.html", title: "Not found", section: "", html: '<section id="z-list">' + crumb(SITE, "404") + '<h1 tabindex="-1">This page is not here.</h1><p class="z-lede"><a href="/">' + esc(W.brand || SITE.name) + "</a></p></section>" };
+  return { path: "/404.html", title: "Not found", section: "", html: '<section id="z-list"><h1 tabindex="-1">This page is not here.</h1><p class="z-lede"><a href="/">' + esc(W.brand || SITE.name) + "</a></p></section>" };
 }
 
 // Two kinds of page: most stand inside the frame with the links (#z). A post and the CV stand beside it (view: true),

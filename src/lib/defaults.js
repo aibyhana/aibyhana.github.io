@@ -23,7 +23,7 @@ export const FONTS = {
   karla: { name: "Karla", css: "Karla:ital,wght@0,400;0,600;0,800;1,400", stack: '"Karla","Helvetica Neue",Helvetica,Arial,sans-serif', size: ".96" },
   plex: { name: "IBM Plex Sans", css: "IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600", stack: '"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif', size: ".89" },
   mono: { name: "IBM Plex Mono", css: "IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,400", stack: '"IBM Plex Mono",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace', size: ".84" },
-  lora: { name: "Lora, like a paper", css: "Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@500;600;700", stack: '"Lora",Georgia,"Times New Roman",serif', size: ".97" },
+  lora: { name: "Lora, like a paper", css: "Lora:ital,wght@0,400;0,600;0,700;1,400;1,600", stack: '"Lora",Georgia,"Times New Roman",serif', size: ".97" },
   dmsans: { name: "DM Sans with Crimson headings", css: "DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Crimson+Text:ital,wght@0,600;0,700;1,600", stack: '"DM Sans","Helvetica Neue",Helvetica,Arial,sans-serif', size: ".94" },
   cardo: { name: "Cardo", css: "Cardo:ital,wght@0,400;0,700;1,400", stack: '"Cardo",Georgia,"Times New Roman",serif', size: "1" },
   plain: { name: "Helvetica or Arial", css: "", stack: '"Helvetica Neue",Helvetica,Arial,sans-serif', size: ".89" }
