@@ -125,7 +125,7 @@
     "side": "none",
     "feed": "tiles",
     "pop": "#a9c4a4",
-    "robot": true,
+    "robot": false,
     "plants": false,
     "inkPicker": true,
     "photoAs": "dots"
