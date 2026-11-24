@@ -63,7 +63,7 @@ export function homePage(SITE, brain) {
   let html = '<h1 class="s-sr">' + esc(SITE.name) + "</h1>" + (SITE.what ? '<p class="h-what">' + esc(nice(SITE.what)) + "</p>" : "");
   if (shown(SITE, "research") && of(SITE, "research").length) html += '<section class="s-sec">' + head("research", PATH.research) + sCards(of(SITE, "research").slice(0, 3)) + "</section>";
   let left = "", right = "";
-  if (shown(SITE, "blog")) left = '<section class="s-sec">' + head("blog", PATH.blog) + (of(SITE, "blog").length ? sLog(of(SITE, "blog").slice(0, 4)) : "<p>" + esc(W.nothingYet) + "</p>") + "</section>";
+  if (shown(SITE, "blog") && of(SITE, "blog").length) left = '<section class="s-sec">' + head("blog", PATH.blog) + sLog(of(SITE, "blog").slice(0, 4)) + "</section>";
   // the notes she changed last: the day, the mark that says how far along the note is, its title, its topics
   if (shown(SITE, "brain") && brain && brain.notes.length) right = '<section class="s-sec sb">' + head("brain", PATH.brain) + '<ol class="s-index s-log sb-rows sb-stack">' + brain.byDate.slice(0, 5).map(n =>
     '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + (n.date ? niceDate(n.date) : "") + '</time></span><span><b class="s-t">' + (n.status in MARK ? '<i class="s-dot' + MARK[n.status] + '"></i>' : "") + "<span>" + esc(n.title) + "</span></b></span></a>" + tagPills(n) + "</li>").join("") + "</ol></section>";

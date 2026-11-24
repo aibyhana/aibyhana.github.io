@@ -15,7 +15,7 @@ Nothing here is finished. I come back to notes and change them when I understand
 - Beside every note is a list of the notes that link to it. Following those is often more useful than the note itself.
 - The search box looks through all the text. Press `/` to jump to it.
 
-The way of working comes from the [[Zettelkasten]].
+The way of working comes from the Zettelkasten.
 
 ## How it is made
 
