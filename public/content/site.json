@@ -184,7 +184,7 @@
     {
       "key": "hello",
       "col": "right",
-      "show": false
+      "show": true
     }
   ],
   "keepOut": {
