@@ -168,6 +168,11 @@
       "show": true
     },
     {
+      "key": "garden",
+      "col": "right",
+      "show": true
+    },
+    {
       "key": "bookmarks",
       "col": "right",
       "show": false

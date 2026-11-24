@@ -292,7 +292,7 @@ export function install(B) {
   }
   /* ---------- forms for everything that is not the diary ---------- */
   const SIMPLE = { text: 1, area: 1, paras: 1, blocks: 1, lines: 1, select: 1, project: 1, color: 1, date: 1 };
-  const PARTS = { research: "Research", books: "Reading", blog: "Blog", brain: "Second brain", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
+  const PARTS = { research: "Research", books: "Reading", blog: "Blog", brain: "Second brain", garden: "Garden", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
   function area(value) { const t = el("textarea"); t.rows = 1; t.value = value || ""; t.addEventListener("input", () => grow(t)); return t; }
   function mini(labels, handler) {
     const box = el("span", "mini");
@@ -476,7 +476,7 @@ export function install(B) {
     pages: { label: "Pages", file: "content/site.json", note: "",
       fill: d => { if (!(d.home && d.home.length)) d.home = B.defaults.home; },
       schema: { type: "object", fields: [
-        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest three of Research, Blog and Reading. Second brain is the part with your notes: they are files in the folder brain/notes, not written here. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
+        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest three of Research, Blog and Reading. Second brain is the part with your notes. They are written under Second brain, on the left. Garden draws every note, post and project as a plant. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
         T("home", "", { type: "home" }),
         H("The line under each page title"),
         T("sections", "", { type: "object", fields: [T("research", "Research"), T("books", "Reading"), T("blog", "Blog"), T("bookmarks", "Bookmarks", { opt: true }), T("about", "About me", { opt: true }), T("contact", "Contact", { opt: true })] }),
@@ -534,53 +534,50 @@ export function install(B) {
 
   /* ---------- how the write page looks ---------- */
   const CSS = `
-/* ================= Settings: a workspace of its own =================
-   A grey panel on the left lists the parts. The open part stands beside it on the paper of the site.
-   Forms are set in a plain sans-serif so they read as tools. What you write and how it will look stay in the type of the site.
-   The colours are the site's own: its ink, its paper, its highlighter for the box you are typing in. */
-html.in-desk main{max-width:none;padding:0}
-.desk,.slash{--ui:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--edge:color-mix(in srgb,var(--ink) 20%,var(--paper));--soft:color-mix(in srgb,var(--ink) 72%,var(--paper));--rad:calc(var(--u)*0.625)}
-.desk{
-  display:grid;grid-template-columns:calc(var(--u)*16.5) minmax(0,1fr);align-items:start;min-height:100vh;font:400 calc(var(--u)*0.9375)/1.5 var(--ui);color:var(--ink)}
+/* ================= Settings: a page of the site, for its owner =================
+   It is set like the rest of the site: the same type, the same column of links on the left with the highlighter on the open one,
+   the same paper, lines and round buttons. The column stands where the links of the site stand, so coming here from the site nothing jumps. */
+html.in-desk main{max-width:calc(var(--u)*83.125);padding:0 clamp(20px,5vw,48px) 0 clamp(20px,4vw,48px)}
+.desk,.slash{--ui:var(--font);--edge:color-mix(in srgb,var(--ink) 20%,var(--paper));--soft:color-mix(in srgb,var(--ink) 72%,var(--paper));--rad:calc(var(--u)*0.625)}
+.desk{display:grid;grid-template-columns:calc(var(--u)*14.5) minmax(0,1fr);align-items:start;min-height:100vh;font:400 calc(var(--u)*1.0312)/1.5 var(--ui);color:var(--ink)}
 .desk .reader{font-family:var(--font)}
-.desk h1,.desk h2,.desk h3{font-family:var(--ui)}
 
-/* the panel on the left */
-.set-side{position:sticky;top:0;display:flex;flex-direction:column;height:100vh;padding:calc(var(--u)*1.5) calc(var(--u)*0.875) calc(var(--u)*1.125);background:var(--panel)}
-.set-brand{margin:0;padding:0 calc(var(--u)*0.75)}
-.set-brand a{color:var(--ink);font:600 calc(var(--u)*1.0625)/1.25 var(--ui);letter-spacing:-.01em;text-decoration:none}
-.set-brand a:hover{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
-.set-title{margin:calc(var(--u)*0.125) 0 calc(var(--u)*1.375);padding:0 calc(var(--u)*0.75);font-size:calc(var(--u)*0.8438);color:var(--dim)}
-.desk-tabs{display:flex;flex-direction:column;gap:calc(var(--u)*0.125);min-height:0;margin:0;overflow:auto;scrollbar-width:thin}
-.set-group{margin:calc(var(--u)*1.125) 0 calc(var(--u)*0.25);padding:0 calc(var(--u)*0.75);font-size:calc(var(--u)*0.7812);font-weight:600;color:var(--dim)}
+/* the column on the left: the name of the site, then the parts */
+.set-side{position:sticky;top:0;display:flex;flex-direction:column;height:100vh;padding:calc(var(--u)*2.75) calc(var(--u)*2.25) calc(var(--u)*1.5) 0}
+.set-brand{margin:0}
+.set-brand a{color:var(--ink);font:700 calc(var(--u)*1.3125)/1.1 var(--font);letter-spacing:-.01em;text-decoration:none}
+.set-brand a:hover{color:var(--ink);text-decoration:none}
+.set-title{margin:calc(var(--u)*0.375) 0 calc(var(--u)*1.75);font-size:calc(var(--u)*0.9688);color:var(--dim)}
+.desk-tabs{display:flex;flex-direction:column;gap:calc(var(--u)*0.25);min-height:0;margin:0 0 0 calc(var(--u)*-0.8125);padding-left:0;overflow:auto;scrollbar-width:none}
+.set-group{margin:calc(var(--u)*1.125) 0 calc(var(--u)*0.125);padding:0 calc(var(--u)*0.8125);font-size:calc(var(--u)*0.875);color:var(--dim)}
 .set-group:first-child{margin-top:0}
-.desk-tabs button{display:flex;align-items:center;width:100%;margin:0;padding:calc(var(--u)*0.4062) calc(var(--u)*0.75) calc(var(--u)*0.4375);border:0;border-radius:var(--rad);background:none;color:var(--soft);font:500 calc(var(--u)*0.9375)/1.3 var(--ui);text-align:left;cursor:pointer}
+.desk-tabs button{display:block;width:auto;align-self:flex-start;margin:0;padding:calc(var(--u)*0.1875) calc(var(--u)*0.8125) calc(var(--u)*0.3125);border:0;border-radius:999px;background:none;color:var(--ink);font:400 calc(var(--u)*1.0938)/1.2 var(--font);text-align:left;cursor:pointer}
 .desk-tabs button[hidden]{display:none}
-.desk-tabs button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink)}
-.desk-tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--hair),0 1px 2px color-mix(in srgb,var(--ink) 8%,transparent)}
-.set-foot{margin-top:auto;padding:calc(var(--u)*1) calc(var(--u)*0.75) 0;font-size:calc(var(--u)*0.8125);line-height:1.45;color:var(--dim)}
-.desk-status{margin:0 0 calc(var(--u)*0.75)}
-.set-back{display:block;padding:calc(var(--u)*0.4062) calc(var(--u)*0.75) calc(var(--u)*0.4375);margin:0 calc(var(--u)*-0.75);border-radius:var(--rad);color:var(--soft);font-weight:500;font-size:calc(var(--u)*0.9375);text-decoration:none}
-.set-back::before{content:"\\2039";display:inline-block;margin-right:calc(var(--u)*0.5)}
-.set-back:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);text-decoration:none}
+.desk-tabs button:hover{background:var(--panel)}
+.desk-tabs button[aria-selected="true"]{background:var(--s-mark)}
+.set-foot{margin-top:auto;padding-top:calc(var(--u)*1);font-size:calc(var(--u)*0.9062);line-height:1.45;color:var(--dim)}
+.desk-status{margin:0 0 calc(var(--u)*0.625)}
+.set-back{display:inline-block;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--uline)}
+.set-back::before{content:"\\2039";display:inline-block;margin-right:calc(var(--u)*0.4375);text-decoration:none}
+.set-back:hover{color:var(--ink);text-decoration-thickness:2px}
 
 /* the open part: its name, one line about it, and what can be done at once */
-.set-main{min-width:0;max-width:calc(var(--u)*72);padding:calc(var(--u)*2.25) clamp(calc(var(--u)*1.25),4vw,calc(var(--u)*3.5)) 0}
+.set-main{min-width:0;padding:calc(var(--u)*2.875) 0 0}
 .set-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:calc(var(--u)*0.875) calc(var(--u)*1.5);margin:0 0 calc(var(--u)*1.75)}
 .set-head[hidden],.desk-panel[hidden],.set-act:empty{display:none}
-.set-head h1{margin:0;font:600 calc(var(--u)*1.75)/1.15 var(--ui);letter-spacing:-.022em !important}
+.set-head h1{margin:0;font:400 clamp(calc(var(--u)*1.625),3vw,calc(var(--u)*2.125))/1.05 var(--font);letter-spacing:-.026em !important}
 .set-head h1:focus{outline:none}
-.set-head p{max-width:calc(var(--u)*38);margin:calc(var(--u)*0.375) 0 0;font-size:calc(var(--u)*0.9375);color:var(--dim)}
+.set-head p{max-width:calc(var(--u)*36);margin:calc(var(--u)*0.5) 0 0;font-size:calc(var(--u)*1.125);line-height:1.4;color:var(--dim)}
 .desk-panel{padding-bottom:calc(var(--u)*1.5)}
 
 /* buttons, messages, and the bar at the bottom that saves */
 .desk .linkish{color:var(--soft);font:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--edge)}
 .desk .linkish:hover{background:none;color:var(--ink);text-decoration-color:var(--ink)}
-.primary{padding:calc(var(--u)*0.4688) calc(var(--u)*1.125) calc(var(--u)*0.5);border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper);font:600 calc(var(--u)*0.9062)/1.3 var(--ui);cursor:pointer}
+.primary{padding:calc(var(--u)*0.4688) calc(var(--u)*1.125) calc(var(--u)*0.5);border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper);font:600 calc(var(--u)*0.9968)/1.3 var(--ui);cursor:pointer}
 .primary:hover{background:color-mix(in srgb,var(--ink) 84%,var(--paper));border-color:color-mix(in srgb,var(--ink) 84%,var(--paper))}
 .desk button[disabled]{opacity:.5;cursor:default}
 .c-actions{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*0.75)}
-.c-msg{display:flex;align-items:center;gap:calc(var(--u)*0.5);min-height:1.5em;margin:0;font-size:calc(var(--u)*0.875);color:var(--dim)}
+.c-msg{display:flex;align-items:center;gap:calc(var(--u)*0.5);min-height:1.5em;margin:0;font-size:calc(var(--u)*0.9625);color:var(--dim)}
 .c-msg .ani .f1{animation:none;visibility:visible}
 .c-msg .ani .f2{animation:none;visibility:hidden}
 .c-foot{position:sticky;bottom:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*0.75);margin-top:calc(var(--u)*2);padding:calc(var(--u)*0.8125) 0 calc(var(--u)*0.9375);border-top:1px solid var(--hair);background:var(--paper)}
@@ -588,11 +585,11 @@ html.in-desk main{max-width:none;padding:0}
 .c-foot.due .c-msg:not(:empty)::before{content:"";width:calc(var(--u)*0.5);height:calc(var(--u)*0.5);border-radius:50%;background:var(--ink)}
 .c-foot #c-delete{margin-left:auto}
 /* the second choices beside a main button are quiet round buttons */
-.desk .c-foot .linkish,.desk .c-actions .linkish,.desk .set-act .linkish{padding:calc(var(--u)*0.4688) calc(var(--u)*1) calc(var(--u)*0.5);border:1px solid var(--edge);border-radius:999px;color:var(--ink);font:500 calc(var(--u)*0.9062)/1.3 var(--ui);text-decoration:none}
+.desk .c-foot .linkish,.desk .c-actions .linkish,.desk .set-act .linkish{padding:calc(var(--u)*0.4688) calc(var(--u)*1) calc(var(--u)*0.5);border:1px solid var(--edge);border-radius:999px;color:var(--ink);font:500 calc(var(--u)*0.9968)/1.3 var(--ui);text-decoration:none}
 .desk .c-foot .linkish:hover,.desk .c-actions .linkish:hover,.desk .set-act .linkish:hover{background:var(--panel);border-color:var(--soft)}
 
 /* boxes to fill in */
-.desk input[type=text],.desk input[type=password],.desk input[type=date],.desk input[type=search],.desk textarea,.desk select{box-sizing:border-box;width:100%;min-width:0;margin:0;padding:calc(var(--u)*0.5) calc(var(--u)*0.75) calc(var(--u)*0.5312);border:1px solid var(--edge);border-radius:var(--rad);background:var(--paper);box-shadow:none;color:var(--ink);font:400 calc(var(--u)*0.9375)/1.45 var(--ui);-webkit-appearance:none;appearance:none}
+.desk input[type=text],.desk input[type=password],.desk input[type=date],.desk input[type=search],.desk textarea,.desk select{box-sizing:border-box;width:100%;min-width:0;margin:0;padding:calc(var(--u)*0.5) calc(var(--u)*0.75) calc(var(--u)*0.5312);border:1px solid var(--edge);border-radius:var(--rad);background:var(--paper);box-shadow:none;color:var(--ink);font:400 calc(var(--u)*1.0312)/1.45 var(--ui);-webkit-appearance:none;appearance:none}
 .desk select{width:auto;max-width:100%;padding-right:calc(var(--u)*2.25);background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - calc(var(--u)*1.0625)) 55%,calc(100% - calc(var(--u)*0.75)) 55%;background-size:calc(var(--u)*0.3125) calc(var(--u)*0.3125),calc(var(--u)*0.3125) calc(var(--u)*0.3125);background-repeat:no-repeat;cursor:pointer}
 .desk textarea{display:block;resize:none;overflow:hidden}
 .desk input:hover,.desk textarea:hover,.desk select:hover{border-color:var(--soft)}
@@ -600,16 +597,16 @@ html.in-desk main{max-width:none;padding:0}
 .desk ::placeholder{color:inherit;opacity:.4}
 :root.neg .desk input,:root.neg .desk select{color-scheme:dark}
 .desk label{display:block}
-.desk .lab{display:block;margin:calc(var(--u)*1.125) 0 calc(var(--u)*0.375);font-size:calc(var(--u)*0.8438);font-weight:500;line-height:1.4;color:var(--soft)}
+.desk .lab{display:block;margin:calc(var(--u)*1.125) 0 calc(var(--u)*0.375);font-size:calc(var(--u)*0.9282);font-weight:500;line-height:1.4;color:var(--soft)}
 .desk label.check{display:flex;align-items:center;gap:calc(var(--u)*0.625);margin:calc(var(--u)*0.625) 0;cursor:pointer}
 .desk input[type=checkbox]{flex:none;width:calc(var(--u)*1.0625);height:calc(var(--u)*1.0625);margin:0;accent-color:var(--ink);cursor:pointer}
 .desk input[type=range]{width:100%;accent-color:var(--ink)}
 .desk .color{display:flex;align-items:center;gap:calc(var(--u)*0.5)}
 .desk .color input[type=color]{flex:none;width:calc(var(--u)*2.5);height:calc(var(--u)*2.4375);padding:calc(var(--u)*0.1875);border:1px solid var(--edge);border-radius:var(--rad);background:var(--paper);cursor:pointer}
-.desk .color input[type=text]{width:8.5em;font-family:var(--s-mono);font-size:calc(var(--u)*0.875)}
+.desk .color input[type=text]{width:8.5em;font-family:var(--s-mono);font-size:calc(var(--u)*0.9625)}
 .form{max-width:calc(var(--u)*44)}
-.desk-note{max-width:calc(var(--u)*40);margin:0 0 calc(var(--u)*0.875);font-size:calc(var(--u)*0.9062);color:var(--dim)}
-.group-h{margin:calc(var(--u)*2.25) 0 calc(var(--u)*0.125);padding-top:calc(var(--u)*1.75);border-top:1px solid var(--hair);font:600 calc(var(--u)*1.0625)/1.3 var(--ui) !important;letter-spacing:-.005em !important}
+.desk-note{max-width:calc(var(--u)*40);margin:0 0 calc(var(--u)*0.875);font-size:calc(var(--u)*0.9968);color:var(--dim)}
+.group-h{margin:calc(var(--u)*2.25) 0 calc(var(--u)*0.125);padding-top:calc(var(--u)*1.75);border-top:1px solid var(--hair);font:600 calc(var(--u)*1.25)/1.3 var(--font) !important;letter-spacing:-.005em !important}
 .obj>.group-h:first-child,.form>.list:first-child{margin-top:0;padding-top:0;border-top:0}
 .group-h + .desk-note{margin-top:calc(var(--u)*0.3125)}
 .list + .obj > .group-h:first-child{margin-top:calc(var(--u)*2.25);padding-top:calc(var(--u)*1.75);border-top:1px solid var(--hair)}
@@ -621,18 +618,18 @@ html.in-desk main{max-width:none;padding:0}
 .card summary::-webkit-details-marker{display:none}
 .card summary:hover{background:var(--panel)}
 .card[open]>summary{background:var(--panel)}
-.card-t{display:inline-flex;align-items:center;gap:calc(var(--u)*0.625);min-width:0;font-size:calc(var(--u)*0.9688);font-weight:600}
+.card-t{display:inline-flex;align-items:center;gap:calc(var(--u)*0.625);min-width:0;font-size:calc(var(--u)*1.0657);font-weight:600}
 .card-t::before{content:"";flex:none;width:calc(var(--u)*0.375);height:calc(var(--u)*0.375);border-right:1.5px solid var(--soft);border-bottom:1.5px solid var(--soft);rotate:-45deg;transition:rotate .15s}
 .card[open]>summary .card-t::before{rotate:45deg}
 .card summary[style*="--dot"] .card-t::after{content:"";flex:none;width:calc(var(--u)*0.875);height:calc(var(--u)*0.875);border:1px solid var(--edge);border-radius:50%;background:var(--dot)}
 .card-in{padding:calc(var(--u)*0.125) calc(var(--u)*1.125) calc(var(--u)*1.375);border-top:1px solid var(--hair)}
 .card-in .cards{margin-top:calc(var(--u)*0.5)}
-.card-in .group-h{margin-top:calc(var(--u)*1.625);padding-top:0;border-top:0;font-size:calc(var(--u)*0.9688) !important}
+.card-in .group-h{margin-top:calc(var(--u)*1.625);padding-top:0;border-top:0;font-size:calc(var(--u)*1.0657) !important}
 /* Up, Down and Remove: small and quiet until you point at their row */
-.mini{display:flex;gap:calc(var(--u)*0.125);font-size:calc(var(--u)*0.8125);white-space:nowrap}
+.mini{display:flex;gap:calc(var(--u)*0.125);font-size:calc(var(--u)*0.8938);white-space:nowrap}
 .desk .mini .linkish{padding:calc(var(--u)*0.1562) calc(var(--u)*0.5) calc(var(--u)*0.1875);border-radius:calc(var(--u)*0.375);color:var(--dim);text-decoration:none}
 .desk .mini .linkish:hover{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
-.desk .add{display:inline-block;margin-top:calc(var(--u)*0.75);padding:calc(var(--u)*0.375) calc(var(--u)*0.9375) calc(var(--u)*0.4062);border:1px dashed var(--edge);border-radius:999px;color:var(--soft);font-size:calc(var(--u)*0.875);font-weight:500;text-decoration:none}
+.desk .add{display:inline-block;margin-top:calc(var(--u)*0.75);padding:calc(var(--u)*0.375) calc(var(--u)*0.9375) calc(var(--u)*0.4062);border:1px dashed var(--edge);border-radius:999px;color:var(--soft);font-size:calc(var(--u)*0.9625);font-weight:500;text-decoration:none}
 .desk .add::before{content:"+";margin-right:calc(var(--u)*0.4375)}
 .desk .add:hover{border-style:solid;border-color:var(--soft);color:var(--ink)}
 .pairs-rows{display:grid;gap:calc(var(--u)*0.5)}
@@ -643,19 +640,19 @@ html.in-desk main{max-width:none;padding:0}
 .part + .part{border-top:1px solid var(--hair)}
 .part:hover{background:var(--panel)}
 .part b{font-weight:500}
-.part label.check{margin:0;font-size:calc(var(--u)*0.875);color:var(--soft)}
-.blocks textarea.long{min-height:calc(var(--u)*16.25);max-height:70vh;overflow-y:auto;font:400 calc(var(--u)*0.875)/1.6 var(--s-mono)}
-.blocks-look{margin:calc(var(--u)*0.5) 0 0;font-size:calc(var(--u)*0.875)}
+.part label.check{margin:0;font-size:calc(var(--u)*0.9625);color:var(--soft)}
+.blocks textarea.long{min-height:calc(var(--u)*16.25);max-height:70vh;overflow-y:auto;font:400 calc(var(--u)*0.9625)/1.6 var(--s-mono)}
+.blocks-look{margin:calc(var(--u)*0.5) 0 0;font-size:calc(var(--u)*0.9625)}
 .blocks-view{margin:calc(var(--u)*0.75) 0 calc(var(--u)*0.25);padding:calc(var(--u)*1.375) calc(var(--u)*1.625) calc(var(--u)*0.5);border-radius:calc(var(--u)*0.75);background:var(--panel)}
 .blocks-view[hidden]{display:none}
 .desk .blocks-view.reader{max-width:calc(var(--u)*43.75)}
-.fmt-help{margin:calc(var(--u)*0.625) 0 calc(var(--u)*0.375);font-size:calc(var(--u)*0.875)}
+.fmt-help{margin:calc(var(--u)*0.625) 0 calc(var(--u)*0.375);font-size:calc(var(--u)*0.9625)}
 .fmt-help summary{display:inline-block;cursor:pointer;color:var(--soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--edge);list-style:none}
 .fmt-help summary::-webkit-details-marker{display:none}
 .fmt-help summary:hover{color:var(--ink)}
 .fmt-help table{width:100%;margin-top:calc(var(--u)*0.625);border-collapse:collapse}
 .fmt-help td{padding:calc(var(--u)*0.4375) calc(var(--u)*0.875) calc(var(--u)*0.4375) 0;border-top:1px solid var(--hair);vertical-align:top}
-.fmt-help pre{margin:0;font:400 calc(var(--u)*0.7812)/1.45 var(--s-mono);white-space:pre-wrap}
+.fmt-help pre{margin:0;font:400 calc(var(--u)*0.8593)/1.45 var(--s-mono);white-space:pre-wrap}
 
 /* posts: the list */
 .p-list{max-width:calc(var(--u)*54)}
@@ -669,26 +666,48 @@ html.in-desk main{max-width:none;padding:0}
 .e-list li[hidden]{display:none}
 .e-list li:hover{background:var(--panel)}
 .e-main{min-width:0}
-.e-open{display:inline;margin:0;padding:0;border:0;background:none;color:var(--ink);font:600 calc(var(--u)*0.9688)/1.35 var(--ui);text-align:left;cursor:pointer}
+.e-open{display:inline;margin:0;padding:0;border:0;background:none;color:var(--ink);font:600 calc(var(--u)*1.0657)/1.35 var(--ui);text-align:left;cursor:pointer}
 .e-open:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
-.e-teaser{display:block;margin-top:calc(var(--u)*0.125);font-size:calc(var(--u)*0.875);color:var(--dim)}
-.e-state{padding:calc(var(--u)*0.0625) calc(var(--u)*0.5625) calc(var(--u)*0.0938);border-radius:999px;background:var(--panel);font-size:calc(var(--u)*0.75);font-weight:500;white-space:nowrap;color:var(--soft)}
+.e-teaser{display:block;margin-top:calc(var(--u)*0.125);font-size:calc(var(--u)*0.9625);color:var(--dim)}
+.e-state{padding:calc(var(--u)*0.0625) calc(var(--u)*0.5625) calc(var(--u)*0.0938);border-radius:999px;background:var(--panel);font-size:calc(var(--u)*0.825);font-weight:500;white-space:nowrap;color:var(--soft)}
 .e-state.draft{background:var(--s-mark);color:var(--ink)}
-.e-list .when{font-size:calc(var(--u)*0.8438);white-space:nowrap;color:var(--dim);font-variant-numeric:tabular-nums}
-.e-do{font-size:calc(var(--u)*0.8125)}
+.e-list .when{font-size:calc(var(--u)*0.9282);white-space:nowrap;color:var(--dim);font-variant-numeric:tabular-nums}
+.e-do{font-size:calc(var(--u)*0.8938)}
 .desk .e-do .linkish{padding:calc(var(--u)*0.1562) calc(var(--u)*0.5) calc(var(--u)*0.1875);border-radius:calc(var(--u)*0.375);color:var(--dim);text-decoration:none}
 .desk .e-do .linkish:hover{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
 .p-empty{margin:0;padding:calc(var(--u)*2.25) calc(var(--u)*1.25);border:1px dashed var(--edge);border-radius:calc(var(--u)*0.75);text-align:center;color:var(--dim)}
 
 /* posts: one post being written. The sheet you write on is in the type of the site. */
-.desk[data-edit="1"][data-tab="diary"] #head-diary{display:none}
-.c-bar{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*1);margin:0 0 calc(var(--u)*1.125);font-size:calc(var(--u)*0.875)}
+.desk[data-edit="1"][data-tab="diary"] #head-diary,.desk[data-note="1"][data-tab="brain"] #head-brain{display:none}
+.n-more{margin:calc(var(--u)*1.5) 0 0;font-size:calc(var(--u)*0.9688)}
+/* writing stands apart from the rest: a line under Posts and Second brain */
+.set-group:nth-of-type(2){margin-top:calc(var(--u)*1.25);padding-top:calc(var(--u)*1.25);border-top:1px solid var(--hair)}
+.set-act{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*0.75)}
+/* the second brain: the facts over the list, what to show, and the small helps in a note */
+.n-facts{margin:0 0 calc(var(--u)*1);color:var(--dim)}
+.n-facts:empty{display:none}
+.n-pick{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*1.125);margin:0 0 calc(var(--u)*1);font-size:calc(var(--u)*0.9688);color:var(--dim)}
+.desk .n-pick input[type=search]{flex:1 1 calc(var(--u)*12);max-width:calc(var(--u)*18);padding-left:calc(var(--u)*1);border-radius:999px}
+.desk .n-pick label{display:inline-flex;align-items:center;gap:calc(var(--u)*0.5)}
+.desk .n-pick select{padding-top:calc(var(--u)*0.3125);padding-bottom:calc(var(--u)*0.3438);font-size:calc(var(--u)*0.9688)}
+#n-none{margin:calc(var(--u)*0.5) 0 0}
+#n-wanted .group-h{margin-top:calc(var(--u)*2.5)}
+.n-wanted b{font-weight:600}
+.n-row{display:flex;align-items:center;gap:calc(var(--u)*0.875)}
+.desk .n-row input{width:auto}
+.n-chips{display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.375);margin:calc(var(--u)*0.5) 0 0}
+.n-chips button{margin:0;padding:calc(var(--u)*0.125) calc(var(--u)*0.6875) calc(var(--u)*0.1875);border:1px solid var(--edge);border-radius:999px;background:none;color:var(--soft);font:400 calc(var(--u)*0.9062)/1.3 var(--ui);cursor:pointer}
+.n-chips button:hover{border-color:var(--soft);color:var(--ink)}
+.n-chips button[aria-pressed="true"]{border-color:var(--s-mark);background:var(--s-mark);color:var(--ink)}
+.n-count{margin:calc(var(--u)*0.5) 0 0;font-size:calc(var(--u)*0.9375);color:var(--dim)}
+#n-back-links .group-h{margin-top:calc(var(--u)*2.25)}
+.c-bar{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.5) calc(var(--u)*1);margin:0 0 calc(var(--u)*1.125);font-size:calc(var(--u)*0.9625)}
 .desk .c-bar .linkish{color:var(--soft);font-weight:500;text-decoration:none}
 .desk .c-bar .linkish:hover{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 .c-back::before{content:"\\2039";display:inline-block;margin-right:calc(var(--u)*0.4375);text-decoration:none}
-.c-mode{margin:0 auto 0 0;padding:calc(var(--u)*0.0625) calc(var(--u)*0.5625) calc(var(--u)*0.0938);border-radius:999px;background:var(--panel);font-size:calc(var(--u)*0.75);font-weight:500;color:var(--soft)}
+.c-mode{margin:0 auto 0 0;padding:calc(var(--u)*0.0625) calc(var(--u)*0.5625) calc(var(--u)*0.0938);border-radius:999px;background:var(--panel);font-size:calc(var(--u)*0.825);font-weight:500;color:var(--soft)}
 .c-views{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--panel)}
-.c-views button{margin:0;padding:calc(var(--u)*0.2188) calc(var(--u)*0.75) calc(var(--u)*0.25);border:0;border-radius:999px;background:none;color:var(--soft);font:500 calc(var(--u)*0.8438)/1.3 var(--ui);cursor:pointer}
+.c-views button{margin:0;padding:calc(var(--u)*0.2188) calc(var(--u)*0.75) calc(var(--u)*0.25);border:0;border-radius:999px;background:none;color:var(--soft);font:500 calc(var(--u)*0.9282)/1.3 var(--ui);cursor:pointer}
 .c-views button:hover{color:var(--ink)}
 .c-views button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--hair),0 1px 2px color-mix(in srgb,var(--ink) 8%,transparent)}
 .c-io{display:inline-flex;flex-wrap:wrap;gap:calc(var(--u)*0.25) calc(var(--u)*1)}
@@ -698,22 +717,22 @@ html.in-desk main{max-width:none;padding:0}
 .composer[data-view="write"] .sheet{max-width:calc(var(--u)*48)}
 .composer[data-view="read"] .c-preview{position:static;max-width:calc(var(--u)*46)}
 .sheet{padding:calc(var(--u)*1.625) calc(var(--u)*1.875) calc(var(--u)*1.75);border:1px solid var(--edge);border-radius:calc(var(--u)*0.875);background:var(--paper)}
-.sheet:focus-within{border-color:color-mix(in srgb,var(--ink) 38%,var(--paper))}
+.sheet:focus-within{border-color:var(--soft)}
 .desk textarea.c-title{padding:0;border:0;border-radius:0;font:400 calc(var(--u)*2)/1.15 var(--font);letter-spacing:-.02em}
 .desk textarea.c-title:focus-visible,.desk textarea.c-text:focus-visible{box-shadow:none}
-.c-row{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.25) calc(var(--u)*1.125);margin:calc(var(--u)*0.625) 0 calc(var(--u)*0.75);font-size:calc(var(--u)*0.8438);color:var(--dim)}
+.c-row{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*0.25) calc(var(--u)*1.125);margin:calc(var(--u)*0.625) 0 calc(var(--u)*0.75);font-size:calc(var(--u)*0.9282);color:var(--dim)}
 .c-row label{display:inline-flex;align-items:center;gap:calc(var(--u)*0.5)}
-.desk .c-row input[type=date],.desk .c-row select{width:auto;padding:calc(var(--u)*0.1875) calc(var(--u)*0.5625) calc(var(--u)*0.2188);font-size:calc(var(--u)*0.8438)}
+.desk .c-row input[type=date],.desk .c-row select{width:auto;padding:calc(var(--u)*0.1875) calc(var(--u)*0.5625) calc(var(--u)*0.2188);font-size:calc(var(--u)*0.9282)}
 .desk .c-row select{padding-right:calc(var(--u)*1.875)}
-.c-tools{position:sticky;top:0;z-index:4;display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.3125);margin:0 0 calc(var(--u)*0.375);padding:calc(var(--u)*0.5) 0;background:var(--paper);font-size:calc(var(--u)*0.8125)}
+.c-tools{position:sticky;top:0;z-index:4;display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.3125);margin:0 0 calc(var(--u)*0.375);padding:calc(var(--u)*0.5) 0;background:var(--paper);font-size:calc(var(--u)*0.8938)}
 .desk .c-tools .linkish{padding:calc(var(--u)*0.1875) calc(var(--u)*0.625) calc(var(--u)*0.2188);border-radius:calc(var(--u)*0.4375);background:var(--panel);color:var(--ink);font-weight:500;text-decoration:none}
 .desk .c-tools .linkish:hover{background:var(--s-mark);color:var(--ink)}
-.c-hint{margin:calc(var(--u)*0.375) 0 calc(var(--u)*0.25);font-size:calc(var(--u)*0.8438);color:var(--dim)}
-.c-hint kbd{padding:0 calc(var(--u)*0.3125) calc(var(--u)*0.0625);border:1px solid var(--edge);border-radius:calc(var(--u)*0.25);font:400 calc(var(--u)*0.7812) var(--s-mono);color:var(--ink)}
-.desk textarea.c-text{min-height:16em;margin-top:calc(var(--u)*0.875);padding:0;border:0;border-radius:0;font:400 calc(var(--u)*1.125)/1.75 var(--font)}
+.c-hint{margin:calc(var(--u)*0.375) 0 calc(var(--u)*0.25);font-size:calc(var(--u)*0.9282);color:var(--dim)}
+.c-hint kbd{padding:0 calc(var(--u)*0.3125) calc(var(--u)*0.0625);border:1px solid var(--edge);border-radius:calc(var(--u)*0.25);font:400 calc(var(--u)*0.8593) var(--s-mono);color:var(--ink)}
+.desk textarea.c-text{min-height:16em;margin-top:calc(var(--u)*0.875);padding:0;border:0;border-radius:0;font:400 calc(var(--u)*1.2375)/1.75 var(--font)}
 .sheet > .lab,.sheet label > .lab{margin-top:calc(var(--u)*1.25)}
 .c-preview{position:sticky;top:calc(var(--u)*1.5);padding:calc(var(--u)*1.5) calc(var(--u)*1.75) calc(var(--u)*1.25);border-radius:calc(var(--u)*0.875);background:var(--panel)}
-.c-label{margin:0 0 calc(var(--u)*1);font-size:calc(var(--u)*0.75);font-weight:600;color:var(--dim)}
+.c-label{margin:0 0 calc(var(--u)*1);font-size:calc(var(--u)*0.825);font-weight:600;color:var(--dim)}
 .c-preview .reader{max-width:none}
 .c-preview .reader h1{font-size:calc(var(--u)*2) !important;margin-bottom:calc(var(--u)*0.375) !important}
 .c-preview .reader > .meta{margin-bottom:calc(var(--u)*1.375) !important}
@@ -721,27 +740,27 @@ html.in-desk main{max-width:none;padding:0}
 .p-edit .c-foot{margin-top:calc(var(--u)*1.5)}
 /* the menu that opens on "/" */
 .slash{position:fixed;z-index:60;min-width:calc(var(--u)*15);max-height:calc(var(--u)*18.25);overflow:auto;padding:calc(var(--u)*0.3125);border:1px solid var(--edge);border-radius:calc(var(--u)*0.75);background:var(--paper);box-shadow:0 calc(var(--u)*0.75) calc(var(--u)*2) calc(var(--u)*-0.75) color-mix(in srgb,var(--ink) 45%,transparent)}
-.slash button{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*1.25);width:100%;padding:calc(var(--u)*0.3438) calc(var(--u)*0.625) calc(var(--u)*0.375);border:0;border-radius:calc(var(--u)*0.4375);background:none;color:var(--ink);font:400 calc(var(--u)*0.9062)/1.3 var(--ui);text-align:left;cursor:pointer}
-.slash button i{font:400 calc(var(--u)*0.75)/1.3 var(--s-mono);font-style:normal;color:var(--dim);white-space:nowrap}
+.slash button{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*1.25);width:100%;padding:calc(var(--u)*0.3438) calc(var(--u)*0.625) calc(var(--u)*0.375);border:0;border-radius:calc(var(--u)*0.4375);background:none;color:var(--ink);font:400 calc(var(--u)*0.9968)/1.3 var(--ui);text-align:left;cursor:pointer}
+.slash button i{font:400 calc(var(--u)*0.825)/1.3 var(--s-mono);font-style:normal;color:var(--dim);white-space:nowrap}
 .slash button.on,.slash button:hover{background:var(--panel)}
 /* focus: nothing on the page but the post */
 html.desk-focus .set-side,html.desk-focus .set-head,html.desk-focus #sample-note,html.desk-focus .c-views,html.desk-focus .c-io,html.desk-focus .c-mode,html.desk-focus .c-back,html.desk-focus .c-preview,html.desk-focus .fmt-help{display:none}
 html.desk-focus .desk{display:block}
-html.desk-focus .set-main{max-width:none}
+html.desk-focus .set-main{padding-top:calc(var(--u)*1)}
 html.desk-focus .composer{grid-template-columns:minmax(0,1fr)}
 html.desk-focus .composer .sheet{display:block;max-width:calc(var(--u)*45);margin:0 auto;padding:calc(var(--u)*2.5) 0 calc(var(--u)*1.25);border:0}
 html.desk-focus .c-bar{position:fixed;z-index:20;top:calc(var(--u)*0.875);right:calc(var(--u)*1.375);margin:0}
 html.desk-focus .p-edit .c-foot{max-width:calc(var(--u)*45);margin-left:auto;margin-right:auto}
-html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.25)}
+html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.375)}
 /* the photo */
 .ph-now img{display:block;width:calc(var(--u)*11.25);height:auto;margin:0 0 calc(var(--u)*0.875);border-radius:calc(var(--u)*0.75)}
 .ph-now canvas{display:block;margin:0 0 calc(var(--u)*0.875);image-rendering:pixelated}
 .pix-tools{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px;margin:0 0 calc(var(--u)*0.875);padding:2px;border-radius:999px;background:var(--panel)}
 .pix-tools[hidden],.pix-old[hidden]{display:none}
-.pix-tools button{margin:0;padding:calc(var(--u)*0.25) calc(var(--u)*0.8125) calc(var(--u)*0.2812);border:0;border-radius:999px;background:none;color:var(--soft);font:500 calc(var(--u)*0.8438)/1.3 var(--ui);cursor:pointer}
+.pix-tools button{margin:0;padding:calc(var(--u)*0.25) calc(var(--u)*0.8125) calc(var(--u)*0.2812);border:0;border-radius:999px;background:none;color:var(--soft);font:500 calc(var(--u)*0.9282)/1.3 var(--ui);cursor:pointer}
 .pix-tools button:hover{color:var(--ink)}
 .pix-tools button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--hair),0 1px 2px color-mix(in srgb,var(--ink) 8%,transparent)}
-.ph-as span{margin-right:calc(var(--u)*0.875);font-size:calc(var(--u)*0.875);color:var(--dim)}
+.ph-as span{margin-right:calc(var(--u)*0.875);font-size:calc(var(--u)*0.9625);color:var(--dim)}
 /* signing in */
 .sign{max-width:calc(var(--u)*34);padding:calc(var(--u)*1.375) calc(var(--u)*1.625) calc(var(--u)*1.5);border:1px solid var(--edge);border-radius:calc(var(--u)*0.875);background:var(--paper)}
 .sign p{margin:0 0 calc(var(--u)*0.75)}
@@ -750,25 +769,22 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
 .sign a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:.2em}
 .sign .c-actions{margin-top:calc(var(--u)*1.125)}
 .sign .c-msg{margin-top:calc(var(--u)*0.625)}
-.sign .aside{margin:calc(var(--u)*1) 0 0;font-size:calc(var(--u)*0.8438);font-style:normal;color:var(--dim)}
-.desk:has(> .set-lock){display:block;background:var(--panel)}
+.sign .aside{margin:calc(var(--u)*1) 0 0;font-size:calc(var(--u)*0.9282);color:var(--dim)}
+.desk:has(> .set-lock){display:block}
 .set-lock{width:100%;max-width:calc(var(--u)*34);margin:0 auto;padding:8vh calc(var(--u)*1.25) calc(var(--u)*3)}
 .set-lock .set-brand{padding:0}
-.set-lock h1{margin:calc(var(--u)*1.5) 0 calc(var(--u)*0.25);font:600 calc(var(--u)*1.75)/1.15 var(--ui);letter-spacing:-.022em !important}
+.set-lock h1{margin:calc(var(--u)*1.75) 0 calc(var(--u)*0.375);font:400 calc(var(--u)*2.125)/1.05 var(--font);letter-spacing:-.026em !important}
 .desk-day{margin:0 0 calc(var(--u)*1.125);color:var(--dim)}
 /* narrower screens: the two columns of a post stack, then the panel of parts becomes a row on top */
 @media (max-width:1180px){ .c-views button[data-view="both"]{display:none} .composer{grid-template-columns:minmax(0,1fr)} .c-preview{position:static;margin-top:calc(var(--u)*1.5)} }
 @media (max-width:860px){
   .desk{display:block}
-  .set-side{position:static;height:auto;padding:calc(var(--u)*1) 0 calc(var(--u)*0.75)}
-  .set-brand,.set-foot{padding-left:calc(var(--u)*1.25);padding-right:calc(var(--u)*1.25)}
+  .set-side{position:static;height:auto;padding:calc(var(--u)*1.125) 0 calc(var(--u)*0.75);border-bottom:1px solid var(--hair)}
   .set-title,.set-group{display:none}
-  .desk-tabs{flex-direction:row;gap:calc(var(--u)*0.25);margin-top:calc(var(--u)*0.75);padding:2px calc(var(--u)*1.25) calc(var(--u)*0.5);scrollbar-width:none}
-  .desk-tabs button{flex:none;width:auto;white-space:nowrap}
-  .set-foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:calc(var(--u)*0.25) calc(var(--u)*1);margin-top:calc(var(--u)*0.25);padding-top:calc(var(--u)*0.5)}
+  .desk-tabs{flex-direction:row;gap:calc(var(--u)*0.125);margin:calc(var(--u)*0.75) calc(var(--u)*-0.8125) 0;padding:0 0 calc(var(--u)*0.375)}
+  .desk-tabs button{flex:none;white-space:nowrap}
+  .set-foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:calc(var(--u)*0.25) calc(var(--u)*1);margin-top:calc(var(--u)*0.25);padding-top:calc(var(--u)*0.375)}
   .desk-status{margin:0}
-  .set-back{margin:0;padding:0;font-size:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
-  .set-back:hover{background:none}
   .set-main{padding-top:calc(var(--u)*1.5)}
   .set-head{margin-bottom:calc(var(--u)*1.25)}
   .set-head h1{font-size:calc(var(--u)*1.5)}
@@ -789,6 +805,8 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
   const NAV = [
     ["Writing", [
       ["diary", "Posts", "p-hatch", "Blog entries. A draft stays here until you publish it."],
+      ["brain", "Second brain", "", "Notes on what you learn. Each note is one file, and notes link to each other by name."]]],
+    ["Content", [
       ["research", "Research", "p-dots", "Projects and their write-ups."],
       ["books", "Reading", "p-lines", "Papers and books. The Reading page lists the papers first."],
       ["bookmarks", "Bookmarks", "p-marks", "Links you find worth keeping: websites, videos, articles, papers. Each can have a line on why."],
@@ -856,7 +874,7 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
 
     /* signing in and out */
     const status = $("#desk-status", root);
-    async function restart() { root.dataset.ready = ""; document.documentElement.classList.remove("desk-focus"); B.overlay.clear(); try { await B.reload(); } catch (e) { /* keeps what is on screen */ } B.desk(root); const link = $("#desk-link"); if (link) link.hidden = !(loadSession() || B.preview); }
+    async function restart() { root.dataset.ready = ""; document.documentElement.classList.remove("desk-focus"); B.overlay.clear(); try { await B.reload(); } catch (e) { /* keeps what is on screen */ } B.desk(root); }
     const signOut = b => twice(b, "Sign out and forget the token?", () => { keepSession(null); restart(); });
     if (!locked) {          // the Account part: the sign-in box, or a line that says where saves go
       const acc = $("#panel-account", root);
@@ -898,7 +916,7 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
       TABS.forEach(t => { const on = t[0] === name; $("#tab-" + t[0], root).setAttribute("aria-selected", on ? "true" : "false"); $("#panel-" + t[0], root).hidden = !on; $("#head-" + t[0], root).hidden = !on; });
       root.dataset.tab = name;
       const panel = $("#panel-" + name, root);
-      if (!built[name]) { built[name] = true; if (name === "diary") openDiary(panel); else if (name === "portrait") openPortrait(panel); else ready[name] = openForm(name, panel); }
+      if (!built[name]) { built[name] = true; if (name === "diary") openDiary(panel); else if (name === "brain") openBrain(panel); else if (name === "portrait") openPortrait(panel); else ready[name] = openForm(name, panel); }
       else $$("textarea", panel).forEach(t => { if (t.offsetParent) grow(t); });
     }
     $(".desk-tabs", root).addEventListener("click", e => {
@@ -1113,6 +1131,292 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
     }
 
     /* ---------- the diary ---------- */
+    /* the second brain: the notes, one note open at a time, and how the second brain shows on the site.
+       A note is a file in content/brain/notes. Its name is its title, and other notes link to it by that name. */
+    async function openBrain(panel) {
+      const K = B.brain, act = $("#act-brain", root);
+      panel.innerHTML =
+        '<div class="p-list" id="n-list"><p class="c-msg" id="n-msg" role="status"></p><p class="n-facts" id="n-facts"></p>' +
+        '<div class="n-pick"><input type="search" id="n-find" placeholder="Find a note" aria-label="Find a note" autocomplete="off">' +
+        '<label>Show <select id="n-show" aria-label="Which notes to show"></select></label><label>Topic <select id="n-topic" aria-label="Topic"></select></label><label>Order <select id="n-order" aria-label="Order"><option value="name">By name</option><option value="new">Newest first</option><option value="links">Most linked first</option><option value="words">Longest first</option></select></label></div>' +
+        '<ul class="e-list" id="n-rows"></ul><p class="c-msg" id="n-none" hidden></p>' +
+        '<div id="n-wanted"></div>' +
+        '<p class="n-more"><button class="linkish" type="button" id="n-about">The About page of the second brain</button></p></div>' +
+        '<div class="p-edit" id="n-edit" hidden><div class="c-bar"><button class="linkish c-back" type="button" id="n-back">All notes</button><p class="c-mode" id="n-mode"></p></div>' +
+        '<div class="form" id="n-form"></div><div class="form" id="n-back-links"></div>' +
+        '<div class="c-foot"><div class="c-actions"><button class="primary" type="button" id="n-save">Save</button><button class="linkish" type="button" id="n-delete" hidden>Delete</button></div><p class="c-msg" id="n-say" role="status"></p></div></div>';
+      act.innerHTML = '<button class="primary" type="button" id="n-new">New note</button><button class="linkish" type="button" id="n-options">Options</button>';
+      const list = $("#n-list", panel), rows = $("#n-rows", panel), find = $("#n-find", panel), msg = $("#n-msg", panel), edit = $("#n-edit", panel), form = $("#n-form", panel), linked = $("#n-back-links", panel);
+      const facts = $("#n-facts", panel), showSel = $("#n-show", panel), topicSel = $("#n-topic", panel), orderSel = $("#n-order", panel), none = $("#n-none", panel), wantedBox = $("#n-wanted", panel);
+      const saveBtn = $("#n-save", panel), delBtn = $("#n-delete", panel), sayAt = $("#n-say", panel), foot = $(".c-foot", edit), mode = $("#n-mode", panel), back = $("#n-back", panel);
+      const DAY = /^\d{4}-\d{2}-\d{2}$/, nameOf = path => path.split("/").pop().replace(/\.md$/i, ""), idOf = n => K.slug(nameOf(n.path));
+      const plural = (n, one, many) => n + " " + (n === 1 ? one : many);
+      // the names of the three stages are hers to set, under Options
+      const stages = () => { const s = ((B.site().brain || {}).stages) || {}; return [["", "Not said"], ["seed", s.seed || "A first thought"], ["growing", s.growing || "Still growing"], ["settled", s.settled || "Settled"]]; };
+      const label = s => (stages().find(x => x[0] === s) || ["", ""])[1];
+      let notes = [], cur = null, f = null, dirty = false, view = "note";
+
+      // what the list needs to know about a note, read from the text of its file
+      const entry = (path, text) => {
+        const p = K.front(text), m = p.meta, day = String(m.updated || m.date || "").slice(0, 10);
+        return { path: path, title: String(m.title || nameOf(path)), date: DAY.test(day) ? day : "", status: String(m.status || ""), tags: K.listOf(m.tags), draft: String(m.draft) === "true", words: words(K.plain(p.body)), links: K.linksOf(p.body) };
+      };
+      // The notes there are. Signed in, the folder on GitHub says so, and a file is only read again when its text changed.
+      // In the demo the list is the one the site was built with.
+      async function readNotes() {
+        if (!store.list) return (B.notes || []).map(n => Object.assign({ words: 0, links: [] }, n));
+        const dir = K.NOTES.replace(/\/$/, ""), files = (await store.list(dir)).filter(x => /\.md$/i.test(x.name));
+        let seen = {}; try { seen = JSON.parse(localStorage.getItem("desk-notes-2") || "{}") || {}; } catch (e) { seen = {}; }
+        const keep = {};
+        const got = await Promise.all(files.map(async x => {
+          const old = seen[x.name];
+          if (old && old.sha === x.sha && old.note) { keep[x.name] = old; return old.note; }
+          const note = entry(K.NOTES + x.name, await store.read(K.NOTES + x.name));
+          keep[x.name] = { sha: x.sha, note: note };
+          return note;
+        }));
+        try { localStorage.setItem("desk-notes-2", JSON.stringify(keep)); } catch (e) { /* storage is optional */ }
+        return got;
+      }
+
+      /* ---------- how the notes hang together: links in and out, and the names that have no note yet ---------- */
+      let web = { ins: new Map(), outs: new Map(), wanted: [] };
+      function weave() {
+        const ids = new Map(notes.map(n => [idOf(n), n])), ins = new Map(notes.map(n => [n, []])), outs = new Map(), wanted = new Map();
+        notes.forEach(n => {
+          const there = [];
+          (n.links || []).forEach(l => {
+            const to = ids.get(l.id);
+            if (to && to !== n) { there.push(to); ins.get(to).push(n); }
+            else if (!to) { const w = wanted.get(l.id) || { name: l.name, from: [] }; if (w.from.indexOf(n) < 0) w.from.push(n); wanted.set(l.id, w); }
+          });
+          outs.set(n, there);
+        });
+        web = { ins: ins, outs: outs, wanted: Array.from(wanted.values()).sort((a, b) => b.from.length - a.from.length || a.name.localeCompare(b.name)) };
+      }
+
+      /* ---------- the list ---------- */
+      function fillPickers() {
+        const keepShow = showSel.value, keepTopic = topicSel.value, topics = Array.from(new Set(notes.reduce((all, n) => all.concat(n.tags), []))).sort((a, b) => a.localeCompare(b));
+        showSel.innerHTML = [["", "All notes"]].concat(stages().slice(1), [["off", "Kept off the site"], ["loose", "With no topic"], ["alone", "With no links"]]).map(o => '<option value="' + B.attr(o[0]) + '">' + esc(o[1]) + "</option>").join("");
+        topicSel.innerHTML = '<option value="">All topics</option>' + topics.map(t => '<option value="' + B.attr(t) + '">' + esc(t) + "</option>").join("");
+        showSel.value = keepShow; if (showSel.selectedIndex < 0) showSel.selectedIndex = 0;
+        topicSel.value = keepTopic; if (topicSel.selectedIndex < 0) topicSel.selectedIndex = 0;
+      }
+      function drawList() {
+        weave(); fillPickers();
+        const n = notes.length, alone = notes.filter(x => !web.ins.get(x).length && !web.outs.get(x).length).length;
+        const links = notes.reduce((sum, x) => sum + web.outs.get(x).length, 0), topics = new Set(notes.reduce((all, x) => all.concat(x.tags), [])).size;
+        facts.textContent = n ? [plural(n, "note", "notes"), plural(links, "link between them", "links between them"), plural(topics, "topic", "topics"), web.wanted.length ? web.wanted.length + " not written yet" : "", alone ? alone + " with no links" : "", notes.filter(x => x.draft).length ? notes.filter(x => x.draft).length + " kept off the site" : ""].filter(Boolean).join(". ") + "." : "";
+        const q = find.value.trim().toLowerCase(), show = showSel.value, topic = topicSel.value, order = orderSel.value;
+        const got = notes.filter(x => {
+          if (q && (x.title + " " + x.tags.join(" ")).toLowerCase().indexOf(q) < 0) return false;
+          if (topic && x.tags.indexOf(topic) < 0) return false;
+          if (show === "off") return x.draft;
+          if (show === "loose") return !x.tags.length;
+          if (show === "alone") return !web.ins.get(x).length && !web.outs.get(x).length;
+          return !show || x.status === show;
+        }).sort((a, b) => order === "new" ? (a.date < b.date ? 1 : a.date > b.date ? -1 : 0) || a.title.localeCompare(b.title)
+          : order === "links" ? (web.ins.get(b).length + web.outs.get(b).length) - (web.ins.get(a).length + web.outs.get(a).length) || a.title.localeCompare(b.title)
+          : order === "words" ? b.words - a.words || a.title.localeCompare(b.title) : a.title.localeCompare(b.title));
+        rows.hidden = !got.length;
+        rows.innerHTML = got.map(x => {
+          const about = [x.tags.join(", "), plural(web.ins.get(x).length, "link in", "links in") + ", " + web.outs.get(x).length + " out", x.words ? plural(x.words, "word", "words") : ""].filter(Boolean).join(" · ");
+          return '<li data-path="' + B.attr(x.path) + '"><span class="e-main"><button class="e-open" type="button">' + esc(x.title) + '</button><span class="e-teaser">' + esc(about) + "</span></span>" +
+            (x.draft ? '<span class="e-state draft">Kept off the site</span>' : x.status ? '<span class="e-state">' + esc(label(x.status)) + "</span>" : "<span></span>") +
+            '<span class="when">' + (x.date ? B.niceDate(x.date) : "") + '</span><span class="e-do"><button class="linkish" type="button" data-do="delete">Delete</button></span></li>';
+        }).join("");
+        none.hidden = !!got.length;
+        if (!got.length) say(none, n ? "No note fits. Change what is shown above." : "No notes yet. New note starts the first one.");
+        // names that notes point to and that have no note yet: each can be started from here
+        wantedBox.innerHTML = web.wanted.length ? '<h3 class="group-h">Not written yet</h3><p class="desk-note">Names that notes link to and that have no note. Write it starts one under that name.</p><ul class="e-list n-wanted">' +
+          web.wanted.map(w => '<li><span class="e-main"><b>' + esc(w.name) + '</b><span class="e-teaser">from ' + esc(w.from.map(x => x.title).join(", ")) + '</span></span><span></span><span></span><span class="e-do"><button class="linkish" type="button" data-write="' + B.attr(w.name) + '">Write it</button></span></li>').join("") + "</ul>" : "";
+      }
+      [find, showSel, topicSel, orderSel].forEach(x => x.addEventListener("input", drawList));
+
+      const show = which => { list.hidden = which !== "list"; edit.hidden = which !== "edit"; act.hidden = which !== "list"; root.dataset.note = which === "edit" ? "1" : ""; window.scrollTo(0, 0); };
+      const due = () => { dirty = true; sayAt.textContent = "Not saved yet."; foot.classList.add("due"); };
+      form.addEventListener("input", due);
+      form.addEventListener("change", due);
+      const field = (text, node) => { const l = el("label"); l.appendChild(el("span", "lab", esc(text))); l.appendChild(node); form.appendChild(l); return node; };
+      const box = (type, value) => { const i = el("input"); i.type = type; i.value = value; return i; };
+      const fire = node => node.dispatchEvent(new Event("input", { bubbles: true }));
+
+      /* ---------- one note open: its name, a few lines about it, its text, and what links to it ----------
+         n is the note from the list, nothing for a new one, "about" for the About page. */
+      function openNote(n, text, title) {
+        const about = n === "about", note = about ? null : n, parsed = K.front(text || ""), m = parsed.meta;
+        view = "note"; cur = { note: note, meta: m, about: about }; f = {}; dirty = false;
+        form.innerHTML = ""; linked.innerHTML = "";
+        if (!about) {
+          f.title = field("Title. It is the name of the file, and other notes link to it by this name.", box("text", note ? note.title : title || ""));
+          // the date, and a button that sets it to today
+          const dayRow = el("span", "n-row"), todayBtn = el("button", "linkish", "Today"); f.date = box("date", note ? note.date : today()); todayBtn.type = "button";
+          todayBtn.addEventListener("click", e => { e.preventDefault(); f.date.value = today(); fire(f.date); });
+          dayRow.append(f.date, todayBtn); field("Date. The day you last worked on it.", dayRow);
+          // the topics, and the ones other notes already have, to pick from
+          f.tags = field("Topics, with commas between them", box("text", note ? note.tags.join(", ") : ""));
+          const used = Array.from(new Set(notes.reduce((all, x) => all.concat(x.tags), []))).sort((a, b) => a.localeCompare(b));
+          if (used.length) {
+            const chips = el("p", "n-chips"), paint = () => { const have = K.listOf(f.tags.value); $$("button", chips).forEach(b => b.setAttribute("aria-pressed", have.indexOf(b.textContent) >= 0 ? "true" : "false")); };
+            used.forEach(t => { const b = el("button", "", esc(t)); b.type = "button"; chips.appendChild(b); });
+            chips.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; e.preventDefault(); const have = K.listOf(f.tags.value), at = have.indexOf(b.textContent); if (at >= 0) have.splice(at, 1); else have.push(b.textContent); f.tags.value = have.join(", "); fire(f.tags); });
+            f.tags.addEventListener("input", paint); form.appendChild(chips); paint();
+          }
+          const s = el("select"); stages().forEach(o => { const op = el("option"); op.value = o[0]; op.textContent = o[1]; s.appendChild(op); });
+          s.value = note ? note.status : "seed"; if (s.selectedIndex < 0) s.selectedIndex = 0;
+          f.status = field("How far along it is", s);
+          f.summary = field("One line that shows in lists. Optional. Without it, the first words of the note are used.", box("text", String(m.summary || "")));
+        }
+        // the text, with the same writing help as a post, and a look at how it will read
+        const holder = el("div", "blocks"), t = area(parsed.body.replace(/\s+$/, "")), lookBtn = el("button", "linkish blocks-look", "Show how it will look"), lookAt = el("div", "reader blocks-view"), count = el("p", "n-count");
+        t.classList.add("long"); t.spellcheck = true; smart(t);
+        const there = id => notes.find(x => idOf(x) === id && x !== note);
+        const known = id => (there(id) ? "#" : "");          // a link to a note that is there, or to one that is not written yet
+        const paint = () => { lookAt.innerHTML = '<div class="body s-body">' + K.renderText(t.value, known).html + "</div>"; };
+        // under the text: how long it is, which notes it links to, and which names have no note yet
+        const tell = () => {
+          const out = K.linksOf(t.value), have = out.filter(l => there(l.id)).map(l => there(l.id).title), miss = out.filter(l => !there(l.id)).map(l => l.name);
+          count.textContent = [plural(words(K.plain(t.value)), "word", "words"), have.length ? "Links to " + have.join(", ") : "No links to other notes yet", miss.length ? "Not written yet: " + miss.join(", ") : ""].filter(Boolean).join(". ") + ".";
+        };
+        lookBtn.type = "button"; lookAt.hidden = true;
+        lookBtn.addEventListener("click", e => { e.preventDefault(); lookAt.hidden = !lookAt.hidden; lookBtn.textContent = lookAt.hidden ? "Show how it will look" : "Hide it"; if (!lookAt.hidden) paint(); });
+        t.addEventListener("input", () => { tell(); if (!lookAt.hidden) paint(); });
+        lookAt.addEventListener("click", e => e.preventDefault());          // inside a label, a click on the look must not jump to the text box, and its links lead nowhere here
+        holder.append(t, count, lookBtn, lookAt, fmtHelp());
+        field(about ? "The About page. Links to notes work in it." : "The note. Link to another note with [[its name]]. A name that has no note yet is allowed.", holder);
+        f.text = t; tell();
+        if (!about) { const c = el("label", "check"); f.draft = box("checkbox", ""); f.draft.checked = String(m.draft) === "true"; c.append(f.draft, el("span", "", "Keep it off the site for now")); form.appendChild(c); }
+        // the notes that link to this one: each can be opened from here
+        if (note && web.ins.get(note) && web.ins.get(note).length) {
+          linked.innerHTML = '<h3 class="group-h">Linked from</h3><p class="desk-note">The notes that link to this one. A new title would break these links.</p><ul class="e-list">' +
+            web.ins.get(note).map(x => '<li><span class="e-main"><button class="e-open" type="button" data-go="' + B.attr(x.path) + '">' + esc(x.title) + "</button></span><span></span><span></span><span></span></li>").join("") + "</ul>";
+        }
+        mode.textContent = about ? "About" : note ? "Note" : "New note";
+        delBtn.hidden = !note; saveBtn.hidden = false;
+        sayAt.textContent = ""; foot.classList.remove("due");
+        show("edit");
+        requestAnimationFrame(() => { $$("textarea", form).forEach(grow); (f.title && !note ? (title ? t : f.title) : t).focus(); });
+      }
+      async function openFile(n) {
+        const path = n === "about" ? K.ABOUT : n.path;
+        say(msg, "Opening.");
+        let text = "";
+        try { text = await store.read(path); } catch (e) { if (!(n === "about" && e && e.status === 404)) { say(msg, why(e)); return; } }
+        msg.textContent = "";
+        openNote(n, text);
+      }
+
+      async function saveNote() {
+        const about = cur.about, body = f.text.value;
+        const meta = Object.assign({}, cur.meta), changes = [];
+        let path = K.ABOUT, title = "";
+        if (!about) {
+          title = f.title.value.replace(/\s+/g, " ").trim();
+          const name = K.fileName(title);
+          if (!name) { say(sayAt, "The note needs a title."); f.title.focus(); return; }
+          const clash = notes.find(x => x !== cur.note && idOf(x) === K.slug(name));
+          if (clash) { say(sayAt, "Another note already has this name: " + clash.title + "."); f.title.focus(); return; }
+          path = cur.note && K.fileName(cur.note.title) === name ? cur.note.path : K.NOTES + name + ".md";
+          delete meta.updated;                                       // the date below is the one that counts
+          if (name === title) delete meta.title; else meta.title = title;          // the name of the file is the title. A title with signs a file name cannot hold is written into the file as well.
+          meta.date = DAY.test(f.date.value) ? f.date.value : today();
+          meta.tags = K.listOf(f.tags.value);
+          meta.status = f.status.value;
+          meta.summary = f.summary.value.replace(/\s+/g, " ").trim();
+          if (f.draft.checked) meta.draft = true; else delete meta.draft;
+          if (cur.note && cur.note.path !== path) changes.push({ path: cur.note.path, content: null });          // a new name: the file with the old one goes
+        }
+        const text = K.joinNote(meta, body), renamed = changes.length > 0;
+        changes.unshift({ path: path, content: text });
+        saveBtn.disabled = true; say(sayAt, "Saving.");
+        try {
+          await store.commit(about ? "Update the About page of the second brain" : (cur.note ? "Update note: " : "Add note: ") + title, changes);
+          if (!about) {
+            const fresh = entry(path, text);
+            if (cur.note) notes[notes.indexOf(cur.note)] = fresh; else notes.push(fresh);
+            cur.note = fresh; delBtn.hidden = false; mode.textContent = "Note"; weave();
+          }
+          cur.meta = K.front(text).meta; dirty = false; foot.classList.remove("due");
+          say(sayAt, (store.demo ? "Saved in the demo. Reload the page and it is gone." : "Saved. The site shows it in a minute or two.") + (renamed ? " Links that used the old name now lead to a note that is not written." : "") + (!about && K.fileName(title) !== title ? " Other notes link to it as [[" + K.fileName(title) + "]]." : ""), true);
+        } catch (e) { say(sayAt, why(e)); }
+        saveBtn.disabled = false;
+      }
+
+      /* ---------- options: how the second brain shows on the site. They are kept in site.json. ---------- */
+      let opts = null;
+      async function openOptions() {
+        say(msg, "Opening.");
+        let site, aboutIntro = "";
+        try { site = JSON.parse(await store.read("content/site.json")); } catch (e) { say(msg, why(e)); return; }
+        try { aboutIntro = String(K.front(await store.read(K.ABOUT)).meta.intro || ""); } catch (e) { /* no About page yet */ }
+        msg.textContent = "";
+        const o = site.brain || {}, st = o.stages || {};
+        const data = { name: (site.words || {}).brain || B.defaults.words.brain || "Second brain", intro: o.intro != null ? o.intro : aboutIntro, map: o.map !== false, latest: Number(o.latest) > 0 ? Number(o.latest) : 8, edit: o.edit !== false,
+          stages: { seed: st.seed || "A first thought", growing: st.growing || "Still growing", settled: st.settled || "Settled" } };
+        opts = build({ type: "object", fields: [
+          H("On the site"),
+          T("name", "Its name, in the links beside the pages and as the title of its overview"),
+          T("intro", "The line under the title of the overview", { type: "area" }),
+          T("latest", "How many notes the overview lists under Changed last"),
+          T("map", "Show the map of notes on the overview", { type: "check", on: true }),
+          T("edit", "Under a note, show the link that opens its file on GitHub", { type: "check", on: true }),
+          H("The stages of a note"), N("A note says how far along it is. These are the names of the three stages, on the site and here."),
+          T("stages", "", { type: "object", fields: [T("seed", "The first stage. Its mark is a ring."), T("growing", "The second. Its mark is half a dot."), T("settled", "The third. Its mark is a full dot.")] })] }, data);
+        view = "options"; cur = null; dirty = false;
+        form.innerHTML = ""; linked.innerHTML = ""; form.appendChild(opts.node);
+        mode.textContent = "Options"; delBtn.hidden = true; saveBtn.hidden = false;
+        sayAt.textContent = ""; foot.classList.remove("due");
+        show("edit");
+        requestAnimationFrame(() => $$("textarea", form).forEach(grow));
+      }
+      async function saveOptions() {
+        const out = opts.get(), latest = Math.max(1, Math.min(50, parseInt(out.latest, 10) || 8));
+        saveBtn.disabled = true; say(sayAt, "Saving.");
+        try {
+          const fresh = JSON.parse(await store.read("content/site.json"));       // other parts may have changed the same file: take it fresh
+          fresh.brain = { intro: String(out.intro || "").replace(/\s+/g, " ").trim(), map: !!out.map, latest: latest, edit: !!out.edit, stages: { seed: String(out.stages.seed || "").trim() || "A first thought", growing: String(out.stages.growing || "").trim() || "Still growing", settled: String(out.stages.settled || "").trim() || "Settled" } };
+          fresh.words = Object.assign({}, fresh.words, { brain: String(out.name || "").trim() || "Second brain" });
+          await store.commit("Update the second brain options", [{ path: "content/site.json", content: JSON.stringify(fresh, null, 2) + "\n" }]);
+          try { await B.reload(); } catch (e) { /* the page keeps what it shows */ }
+          dirty = false; foot.classList.remove("due");
+          say(sayAt, store.demo ? "Saved in the demo. Reload the page and it is gone." : "Saved. The site shows it in a minute or two.", true);
+        } catch (e) { say(sayAt, why(e)); }
+        saveBtn.disabled = false;
+      }
+
+      const remove = (n, button, after) => twice(button, "Really delete?", async () => {
+        try {
+          await store.commit("Delete note: " + n.title, [{ path: n.path, content: null }]);
+          notes.splice(notes.indexOf(n), 1);
+          drawList(); if (after) after();
+          say(msg, store.demo ? "Deleted in the demo. Reload the page and it is back." : "Deleted. The site shows it in a minute or two.", true);
+        } catch (e) { say(after ? sayAt : msg, why(e)); }
+      });
+      const leave = () => { drawList(); msg.textContent = ""; show("list"); };
+      // leaving a note or the options with something unsaved asks once more
+      const sure = (button, then) => { if (dirty) twice(button, "Leave without saving?", then); else then(); };
+
+      saveBtn.addEventListener("click", () => (view === "options" ? saveOptions() : saveNote()));
+      delBtn.addEventListener("click", () => { if (cur && cur.note) remove(cur.note, delBtn, () => show("list")); });
+      back.addEventListener("click", () => sure(back, leave));
+      $("#n-new", act).addEventListener("click", () => { msg.textContent = ""; openNote(null, ""); });
+      $("#n-options", act).addEventListener("click", openOptions);
+      $("#n-about", panel).addEventListener("click", () => openFile("about"));
+      rows.addEventListener("click", e => {
+        const li = e.target.closest("li"); if (!li) return;
+        const n = notes.find(x => x.path === li.dataset.path); if (!n) return;
+        if (e.target.closest('[data-do="delete"]')) remove(n, e.target.closest("button"));
+        else if (e.target.closest(".e-open")) openFile(n);
+      });
+      wantedBox.addEventListener("click", e => { const b = e.target.closest("[data-write]"); if (b) { msg.textContent = ""; openNote(null, "", b.dataset.write); } });
+      linked.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (!b) return; const n = notes.find(x => x.path === b.dataset.go); if (n) sure(b, () => { show("list"); openFile(n); }); });
+
+      say(msg, "Loading.");
+      try { notes = await readNotes(); msg.textContent = ""; drawList(); }
+      catch (e) { say(msg, why(e)); }
+    }
+
     function openDiary(panel) {
       panel.innerHTML =
         '<div class="garden" id="garden" hidden></div><p class="garden-says" id="garden-says" hidden></p>' +

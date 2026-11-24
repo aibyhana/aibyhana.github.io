@@ -7,6 +7,7 @@ import { px, PX, pathOf } from "../lib/pixel.js";
 import { setup, md, splitPost, joinPost } from "../lib/markdown.js";
 import { makeSite, readPost, imgSrc, link } from "../lib/model.js";
 import { rootStyle, fontHref } from "../lib/head.js";
+import { front, joinNote, listOf, slug, fileName, renderText, plain as plainNote, linksOf, NOTES, ABOUT } from "../lib/brain-core.js";
 import { useSite, readInk, applyInk, photoIs, dotPhoto } from "./ink.js";
 import { install } from "./settings-app.js";
 
@@ -79,6 +80,8 @@ export async function start(data, preview) {
       $: $, $$: $$, esc: esc, attr: attr, plain: plain, md: md, splitPost: splitPost, joinPost: joinPost, readPost: readPost, px: px, PX: PX, pathOf: pathOf,
       readFile: readFile, overlay: overlay, niceDate: niceDate, MONTH_NAMES: MONTH_NAMES, DAYS: DAYS, REDUCED: REDUCED,
       site: () => SITE, preview: false, desk: null, fonts: FONTS,
+      // the second brain: the helpers that read and write a note, and the list of notes the site was built with
+      brain: { front: front, joinNote: joinNote, listOf: listOf, slug: slug, fileName: fileName, renderText: renderText, plain: plainNote, linksOf: linksOf, NOTES: NOTES, ABOUT: ABOUT }, notes: [],
       defaults: { words: WORDS, clock: CLOCK, look: LOOK, home: HOME },
       resetInk: () => {},          // the look is read again with every reload
       inkPhoto: () => { photoIs(SITE.photo ? picture(SITE.photo) : ""); dotPhoto(); },
@@ -89,6 +92,7 @@ export async function start(data, preview) {
     install(B);
   }
   B.preview = !!preview;
+  B.notes = Array.isArray((data || {}).brain) ? data.brain : [];
   try { await loadSite(); }
   catch (e) { root.innerHTML = '<p class="set-fail">' + esc(e.broken ? e.message + ". Open that file on GitHub and mend it, then come back." : "The content could not be read. Reload the page to try again.") + "</p>"; return; }
   applyLook();

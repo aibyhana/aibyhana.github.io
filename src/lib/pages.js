@@ -13,7 +13,7 @@ const rich = s => esc(s).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, words, href) 
 const linkHtml = l => '<a href="' + attr(link(l.href)) + '">' + esc(l.label) + "</a>";
 const shown = (SITE, k) => SITE.home.some(h => h.key === k && h.show !== false);
 const of = (SITE, k) => SITE.postings.filter(p => p.kind === k);
-const PATH = { research: "/research/", books: "/reading/", blog: "/blog/", brain: "/brain/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
+const PATH = { research: "/research/", books: "/reading/", blog: "/blog/", brain: "/brain/", garden: "/garden/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
 
 // the formatter needs to know where pictures and links lead, and the word on the copy button
 export function prepare(SITE) { setup({ img: imgSrc, link: link, copy: SITE.words.copy || "Copy" }); }
@@ -41,7 +41,7 @@ const chips = (SITE, kinds) => '<p class="b-kinds">' + [""].concat(kinds).map((k
 // sub is what a part of the site adds under the links while you are in it. The second brain puts its search box and its topics there.
 export function navHtml(SITE, section, sub) {
   const W = SITE.words;
-  const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "brain", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
+  const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "brain", "garden", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
   const one = (key, href, label, small) => "<a" + (small || key === section ? ' class="' + [small ? "s2" : "", key === section ? "on" : ""].filter(Boolean).join(" ") + '"' : "") + ' href="' + href + '" data-z="' + key + '"' + (key === section ? ' aria-current="page"' : "") + ">" + esc(label || "") + "</a>";
   // her work first, then the pages about her. The small line between the two only stands when there is something on both sides.
   const work = pages.filter(h => ["about", "cv"].indexOf(h.key) < 0).map(h => one(h.key, PATH[h.key], W[h.key])).join("");
@@ -54,7 +54,6 @@ export function footHtml(SITE, year) {
   return '<div class="perch" id="sill" aria-hidden="true"></div>' +
     '<button class="bot" id="bot" type="button" title="This one lets you switch it off" aria-label="A small robot. Click it to switch it off or on."><span class="bot-says" id="bot-says" aria-hidden="true"></span><span id="bot-body"></span></button>' +
     '<p id="colophon">' + esc(String(W.copyright || "").replace("{year}", year).replace("{name}", SITE.name)) + "</p>" +
-    '<p id="desk-link" hidden><a href="/settings/">' + esc(W.write || "Settings") + "</a></p>" +
     '<div class="inks" id="inks" role="group" aria-label="Ink colour"></div>' +
     '<div id="z-foot">' + (SITE.look.inkPicker === false ? "" : (SITE.inks.length > 1 ? "<label>" + esc(W.colour || "Colour") + ' <select id="z-ink">' + SITE.inks.map((k, i) => '<option value="' + i + '">' + esc(k.name) + "</option>").join("") + "</select></label>" : "") + '<button type="button" data-zdo="flip">' + esc(W.flip || "Flip") + "</button>") + "</div>";
 }

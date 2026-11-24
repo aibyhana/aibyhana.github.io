@@ -34,7 +34,7 @@ const foot = page.desk ? "" : footHtml(SITE, new Date().getFullYear());
       <Fragment set:html={beside} />
       <footer set:html={foot}></footer>
     </main>
-    <script is:inline type="application/json" id="site-data" set:html={pageData(SITE, page)}></script>
+    <script is:inline type="application/json" id="site-data" set:html={pageData(SITE, page, page.data)}></script>
     <script>
       import "../scripts/site.js";
     </script>

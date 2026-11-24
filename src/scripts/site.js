@@ -194,8 +194,6 @@ function page() {
   const pic = $("canvas[data-photo] + img"), L = SITE.look || {};
   const photoSrc = pic && !(L.photoAs ? L.photoAs === "plain" : L.photoDots === false) ? pic.getAttribute("src") : "";
   photoIs(photoSrc);
-  const link = $("#desk-link");
-  if (link) { let signed = false; try { signed = !!localStorage.getItem("desk"); } catch (e) { /* storage is optional */ } link.hidden = !(signed || preview); }          // the Settings link shows only to her, or in a preview
   applyInk(false);
   if (photoSrc) dotPhoto();
   tick();
@@ -206,6 +204,8 @@ function page() {
   if (desk && !desk.dataset.ready) import("./settings-host.js").then(m => m.start(SITE, preview));
   // the second brain: its map, its search and its list of topics are fetched only on its pages
   if (document.querySelector("[data-brain]")) import("./brain.js").then(m => m.start());
+  // the garden and its robot
+  if (document.querySelector("[data-garden]")) import("./garden.js").then(m => m.start());
 }
 if (SITE) {
   useSite(SITE); readInk();

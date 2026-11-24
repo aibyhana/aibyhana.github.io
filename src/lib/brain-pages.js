@@ -5,9 +5,17 @@ import { esc, attr, niceDate } from "./html.js";
 import { renderNote, renderText, graphOf, slug } from "./brain.js";
 
 const HOME = "/brain/";
-const STAGE = { seed: ["", "a first thought"], growing: [" reading", "still growing"], settled: [" read", "settled"] };
+// How the second brain shows is hers to set, in Settings under Second brain, Options. It is kept in site.json under "brain".
+// Every page asks for the options first. The names of the three stages of a note are among them.
+let OPT = null;
+function options(SITE) {
+  const o = SITE.brain || {}, s = o.stages || {};
+  return (OPT = { intro: o.intro, map: o.map !== false, latest: Number(o.latest) > 0 ? Number(o.latest) : 8, edit: o.edit !== false,
+    stages: { seed: s.seed || "A first thought", growing: s.growing || "Still growing", settled: s.settled || "Settled" } });
+}
+const MARK = { seed: "", growing: " reading", settled: " read" };
 // how far along a note is: a ring, half a dot, a full dot. The same marks the reading list uses.
-const stage = n => (STAGE[n.status] ? '<i class="s-dot' + STAGE[n.status][0] + '" title="' + attr(STAGE[n.status][1]) + '"></i>' : "");
+const stage = n => (n.status in MARK ? '<i class="s-dot' + MARK[n.status] + '" title="' + attr(OPT.stages[n.status]) + '"></i>' : "");
 const nameOf = SITE => SITE.words.brain || "Second brain";
 const data = o => JSON.stringify(o).replace(/</g, "\\u003c");
 
@@ -44,19 +52,21 @@ const lede = t => (t ? '<p class="z-lede">' + esc(t) + "</p>" : "");
 /* ---------- the pages ---------- */
 // the overview: what this is, the map, what changed last, the topics
 export function brainHome(SITE, B) {
-  const name = nameOf(SITE);
+  options(SITE);
+  const name = nameOf(SITE), intro = OPT.intro != null ? OPT.intro : B.intro;
   return page(B, { page: "home" }, HOME, name,
-    '<h1 tabindex="-1">' + esc(name) + "</h1>" + lede(B.intro) +
-    (B.notes.length > 1 ? graph(B, "wide", "A map of how the notes link to each other") : "") +
+    '<h1 tabindex="-1">' + esc(name) + "</h1>" + lede(intro) +
+    (OPT.map && B.notes.length > 1 ? graph(B, "wide", "A map of how the notes link to each other") : "") +
     '<section class="s-sec">' + head("Changed last", B.notes.length ? "All " + B.notes.length + " notes" : "", HOME + "notes/") +
-    (B.notes.length ? rows(B.byDate.slice(0, 8)) : "<p>No notes yet. Put a Markdown file in the folder brain/notes.</p>") + "</section>" +
+    (B.notes.length ? rows(B.byDate.slice(0, OPT.latest)) : "<p>No notes yet.</p>") + "</section>" +
     (B.topics.length ? '<section class="s-sec">' + head("Topics", "See all", HOME + "topics/") + '<p class="sb-topics">' +
       B.topics.map(t => '<a href="' + attr(t.href) + '">' + esc(t.name) + "<span>" + t.notes.length + "</span></a>").join("") + "</p></section>" : ""),
-    { description: B.intro });
+    { description: intro });
 }
 
 // every note from A to Z, like the index at the back of a book. Under it, what is mentioned but not written yet.
 export function brainNotes(SITE, B) {
+  options(SITE);
   const letters = new Map();
   for (const n of B.byName) {
     const first = (n.title.trim()[0] || "#").toUpperCase(), key = /\p{L}/u.test(first) ? first : "#";
@@ -67,15 +77,16 @@ export function brainNotes(SITE, B) {
     '<h1 tabindex="-1">All notes</h1>' + lede(B.notes.length + " notes, from A to Z.") +
     '<div class="sb-index">' + [...letters].map(([letter, list]) => "<section><h2>" + esc(letter) + "</h2><ul>" +
       list.map(n => '<li><a href="' + attr(n.href) + '">' + stage(n) + esc(n.title) + "</a></li>").join("") + "</ul></section>").join("") + "</div>" +
-    '<p class="sb-key"><span><i class="s-dot"></i>A first thought</span><span><i class="s-dot reading"></i>Still growing</span><span><i class="s-dot read"></i>Settled</span></p>' +
+    '<p class="sb-key"><span><i class="s-dot"></i>' + esc(OPT.stages.seed) + '</span><span><i class="s-dot reading"></i>' + esc(OPT.stages.growing) + '</span><span><i class="s-dot read"></i>' + esc(OPT.stages.settled) + "</span></p>" +
     (B.wanted.length ? '<section class="s-sec">' + head("Not written yet") + '<p class="sb-note-line">Notes that others point to. A good place to start when there is time to write.</p><ul class="sb-wanted">' +
       B.wanted.map(w => '<li><span class="sb-missing">' + esc(w.name) + '</span><span>from ' + w.from.map(n => '<a href="' + attr(n.href) + '">' + esc(n.title) + "</a>").join(", ") + "</span></li>").join("") + "</ul></section>" : ""));
 }
 
 // one note. Beside it: its headings, the notes that link here with the words around the link, the notes it links to, and a small map.
 export function brainNote(SITE, B, n) {
+  options(SITE);
   const { html, headings } = renderNote(n, B), linked = n.back.length + n.out.length > 0;
-  const edit = SITE.repo && n.path ? "https://github.com/" + SITE.repo + "/edit/main/" + n.path.split("/").map(encodeURIComponent).join("/") : "";
+  const edit = OPT.edit && SITE.repo && n.path ? "https://github.com/" + SITE.repo + "/edit/main/public/" + n.path.split("/").map(encodeURIComponent).join("/") : "";
   const side = (headings.length > 1 ? '<details class="s-toc" open><summary>' + esc(SITE.words.contents || "Contents") + "</summary><ol>" +
       headings.map(h => "<li" + (h.depth === 3 ? ' class="s-sub"' : "") + '><button type="button" data-zdo="jump" data-id="' + attr(h.id) + '">' + h.text + "</button></li>").join("") + "</ol></details>" : "") +
     (n.back.length ? "<section><h2>Linked from</h2><ul>" + n.back.map(b => '<li><a href="' + attr(b.note.href) + '">' + esc(b.note.title) + "</a><span>" + esc(b.words) + "</span></li>").join("") + "</ul></section>" : "") +
@@ -83,7 +94,7 @@ export function brainNote(SITE, B, n) {
     (linked ? graph(B, "local", "A map of the notes around " + n.title, n) : "");
   return page(B, { page: "note", note: n.id }, n.href, n.title,
     '<article class="z-art sb-art"><h1 tabindex="-1">' + esc(n.title) + '</h1><p class="z-meta"><span><time datetime="' + attr(n.date) + '">' + niceDate(n.date) + "</time></span>" +
-    (STAGE[n.status] ? "<span>" + stage(n) + esc(STAGE[n.status][1]) + "</span>" : "") +
+    (n.status in MARK ? "<span>" + stage(n) + esc(OPT.stages[n.status]) + "</span>" : "") +
     n.tags.map(t => '<span><a href="' + HOME + "topics/" + attr(slug(t)) + '/">#' + esc(t) + "</a></span>").join("") + "</p>" +
     '<div class="s-body">' + html + "</div>" +
     (edit ? '<p class="sb-end"><a href="' + attr(edit) + '">Edit this note on GitHub</a></p>' : "") +
@@ -93,6 +104,7 @@ export function brainNote(SITE, B, n) {
 
 // every topic with the notes under it
 export function brainTopics(SITE, B) {
+  options(SITE);
   const row = (name, href, list) => "<div><dt>" + (href ? '<a href="' + attr(href) + '">' + esc(name) + "</a>" : esc(name)) + "<span>" + list.length + "</span></dt><dd>" + commas(list) + "</dd></div>";
   return page(B, { page: "topics" }, HOME + "topics/", "Topics",
     '<h1 tabindex="-1">Topics</h1>' + lede(B.topics.length + " topics. A note can stand under more than one.") +
@@ -101,6 +113,7 @@ export function brainTopics(SITE, B) {
 
 // the notes of one topic
 export function brainTopic(SITE, B, t) {
+  options(SITE);
   const list = [...t.notes].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   return page(B, { page: "topics", topic: t.id }, t.href, t.name,
     '<p class="z-crumb sb-up"><a href="' + HOME + 'topics/">Topics</a></p><h1 tabindex="-1">' + esc(t.name) + "</h1>" +
@@ -109,6 +122,7 @@ export function brainTopic(SITE, B, t) {
 
 // the whole map
 export function brainGraph(SITE, B) {
+  options(SITE);
   const alone = B.byName.filter(n => n.out.length + n.back.length === 0);
   return page(B, { page: "graph" }, HOME + "graph/", "Graph",
     '<h1 tabindex="-1">Graph</h1>' + lede("Each dot is a note. A line means one of the two links to the other, and a bigger dot has more links. Point at a dot to see its neighbours, click it to open the note.") +
@@ -118,6 +132,7 @@ export function brainGraph(SITE, B) {
 
 // search: the list of notes is fetched once, then every key press looks through it in the browser
 export function brainSearch(SITE, B) {
+  options(SITE);
   return page(B, { page: "search" }, HOME + "search/", "Search",
     '<h1 tabindex="-1">Search</h1><form class="sb-search" role="search" onsubmit="return false"><label class="s-sr" for="sb-big">Search the notes</label>' +
     '<input id="sb-big" type="search" autocomplete="off" spellcheck="false" placeholder="A word or two" data-src="' + HOME + 'search.json"></form>' +
@@ -127,10 +142,11 @@ export function brainSearch(SITE, B) {
 // what search looks through: the title, the topics and the words of every note
 export const searchList = B => B.byName.map(n => ({ t: n.title, u: n.href, g: n.tags, d: niceDate(n.date), x: n.text }));
 
-// about the second brain: a page of its own, written in brain/about.md. Links to notes work in it.
+// about the second brain: a page of its own, written in content/brain/about.md. Links to notes work in it.
 export function brainAbout(SITE, B) {
+  options(SITE);
   let title = "About", text = B.about.replace(/^\s*#\s+(.+)\n/, (m, h) => { title = h.trim(); return ""; });
   return page(B, { page: "about" }, HOME + "about/", title,
     '<article class="z-art sb-art"><h1 tabindex="-1">' + esc(title) + "</h1>" +
-    (text.trim() ? '<div class="s-body">' + renderText(text, B).html + "</div>" : "<p>Nothing here yet. Write this page in the file brain/about.md.</p>") + "</article>");
+    (text.trim() ? '<div class="s-body">' + renderText(text, B).html + "</div>" : "<p>Nothing here yet.</p>") + "</article>");
 }

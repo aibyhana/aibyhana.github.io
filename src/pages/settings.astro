@@ -4,9 +4,12 @@
 import Layout from "../layouts/Layout.astro";
 import { loadSite } from "../lib/load.js";
 import { prepare, settingsPage } from "../lib/pages.js";
+import { listNotes } from "../lib/brain.js";
 
 const SITE = loadSite();
 prepare(SITE);
 const page = settingsPage(SITE);
+// the notes of the second brain the site was built with: the demo of Settings starts from this list
+page.data = { brain: listNotes() };
 ---
 <Layout page={page} />

@@ -1411,3 +1411,35 @@ html.reading main{padding-top:0}
   .sb-by div{grid-template-columns:minmax(0,1fr)}
   .sb-graph.wide{height:calc(var(--u)*14)}
 }
+
+/* ================= the garden: every note, post and project as a plant in a pot, at /garden/ =================
+   The plants stand on shelves on the gradient of the site. Under them is the floor the robot walks on.
+   Everything is drawn in the dark colour, because the gradient is light on any page. */
+.gd-scene{--ink:var(--a);margin:0 0 calc(var(--u)*0.875);padding:calc(var(--u)*2.25) calc(var(--u)*2) calc(var(--u)*1.5);border-radius:var(--r);background:var(--glow);color:var(--a)}
+/* a shelf is the line under a row of pots. The last one runs on to the edge. */
+.gd-shelf{display:flex;flex-wrap:wrap;align-items:flex-end;row-gap:calc(var(--u)*1.75);list-style:none;margin:0;padding:0}
+.gd-shelf li{flex:1 0 calc(var(--u)*4.25);display:flex;justify-content:center;align-items:flex-end;min-height:calc(var(--u)*4);border-bottom:2px solid currentColor}
+.gd-shelf::after{content:"";flex:1000 0 0;align-self:flex-end;border-bottom:2px solid currentColor}
+.gd-shelf a{display:block;padding:0 calc(var(--u)*0.375);color:inherit;line-height:0;text-decoration:none}
+.gd-shelf a svg{transition:translate .15s}
+.gd-shelf a:hover svg,.gd-shelf a:focus-visible svg{translate:0 -4px}
+.gd-shelf li.glad svg{animation:hop .5s ease-out}
+/* the floor, and the robot on it */
+.gd-floor{position:relative;height:calc(var(--u)*4.5);margin-top:calc(var(--u)*0.5);border-bottom:2px solid currentColor;cursor:pointer}
+.gd-bot{position:absolute;left:calc(var(--u)*1.5);bottom:0;margin:0;padding:0;border:0;background:none;color:inherit;line-height:0;cursor:pointer;transition:left linear}
+.gd-bot.left #gd-body svg{transform:scaleX(-1)}
+.gd-bot:not(.walk) .ani .f1{animation:none;visibility:visible}
+.gd-bot:not(.walk) .ani .f2{animation:none;visibility:hidden}
+.gd-says{position:absolute;left:50%;bottom:calc(100% + 9px);translate:-50% 0;padding:calc(var(--u)*0.1875) calc(var(--u)*0.75) calc(var(--u)*0.3125);border-radius:999px;background:var(--b);color:var(--a);font:400 calc(var(--u)*0.9375)/1.3 var(--font);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.gd-says.on{opacity:1}
+.gd-says.from-left{left:0;translate:0 0}
+.gd-says.from-right{left:auto;right:0;translate:0 0}
+.gd-line{min-height:1.5em;margin:0;font-size:calc(var(--u)*1.0625);color:var(--dim)}
+.gd-key{display:flex;flex-wrap:wrap;gap:calc(var(--u)*0.5) calc(var(--u)*1.75);list-style:none;margin:calc(var(--u)*1.5) 0 0;padding:calc(var(--u)*1) 0 0;border-top:1px solid var(--hair);font-size:calc(var(--u)*0.9688);color:var(--dim)}
+.gd-key li{display:flex;align-items:flex-end;gap:calc(var(--u)*0.5625);line-height:1.2}
+.gd-key svg{color:var(--ink)}
+@media (max-width:620px){
+  .gd-scene{padding:calc(var(--u)*1.5) calc(var(--u)*1) calc(var(--u)*1.25)}
+  .gd-shelf li{flex-basis:calc(var(--u)*3.5)}
+}
+@media (prefers-reduced-motion:reduce){ .gd-shelf a svg{transition:none} .gd-shelf li.glad svg{animation:none} }

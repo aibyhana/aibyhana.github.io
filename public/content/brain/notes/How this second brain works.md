@@ -5,17 +5,21 @@ status: settled
 summary: How to add a note, link it to others, and publish.
 ---
 
-Every note in the second brain is one Markdown file in the folder `brain/notes`. The name of the file is the title of the note.
+Every note in the second brain is one Markdown file in the folder `public/content/brain/notes`. The name of the file is the title of the note.
 
 The other notes here are examples. Delete them once you have your own.
 
 ## Adding a note
 
-1. Make a new file in `brain/notes`, for example `Bayes theorem.md`.
+In Settings, open Second brain and press New note. Fill in the title and the text, and save.
+
+Or make the file yourself:
+
+1. Make a new file in `public/content/brain/notes`, for example `Bayes theorem.md`.
 2. Write. Plain text is fine.
 3. Save, and push the site like any other change.
 
-A few lines at the top of the file are optional:
+A few lines at the top of the file are optional. Settings writes them for you:
 
 ```yaml
 ---
@@ -29,7 +33,7 @@ summary: One line that shows in lists.
 `status` says how far along the note is: `seed` for a first thought, `growing` for one you are still working on, `settled` for one you trust.
 
 > [!tip]
-> You can open the folder `brain/notes` as a vault in Obsidian and write there. Links, tags and boxes like this one are written the same way.
+> You can open the folder `public/content/brain/notes` as a vault in Obsidian and write there. Links, tags and boxes like this one are written the same way.
 
 ## Linking notes
 

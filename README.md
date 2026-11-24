@@ -3,11 +3,16 @@
 
 Settings is a page of its own. The bar and the footer of the site are not on it. "Back to the site" in the column on the left leads home.
 
-The column on the left lists the parts, in three groups.
+The column on the left lists the parts, in four groups. Writing stands apart from the rest, on top.
 
-- Writing: Posts, Research, Reading, Bookmarks, Programs, CV, Now.
+- Writing: Posts, Second brain.
+- Content: Research, Reading, Bookmarks, Programs, CV, Now.
 - Site: Profile, Photo, Pages, Appearance, Labels.
 - Account: signing in and out.
+
+There is no link to Settings on the site. Its address is the address of the site followed by `/settings/`.
+
+Second brain opens as a list of the notes. A line on top says how many notes, links and topics there are. The list can be searched, narrowed to one stage or one topic, and put in another order. Each note shows its topics, how many notes link to it and from it, and how long it is. Under the list stand the names that notes link to and that have no note yet. "Write it" starts one. A note opens on a page of its own: title, date, topics to tick, stage, one line for lists, the text, and under it the notes that link to it. Options holds how the second brain shows on the site: its name, the line under its title, how many notes the overview lists, the map, the link to GitHub under a note, and the names of the three stages.
 
 Posts opens as a list, drafts first. "New post" opens a page of its own for the post. "All posts" leads back, and a post that is not saved yet is kept. Publish, Save as draft and Delete stay in a bar at the bottom.
 
@@ -88,14 +93,23 @@ A new post starts with "New post" in Posts. A new project, book or program group
 
 ## The second brain
 
-The part of the site at `/brain/` is for notes on what you learn. It is not written in Settings. Every note is a Markdown file in the folder `brain/notes`, and the name of the file is the title of the note. You can open that folder as a vault in Obsidian.
+The part of the site at `/brain/` is for notes on what you learn. Each note is one Markdown file in the folder `public/content/brain/notes`, and the name of the file is the title of the note.
 
-- A few lines at the top of a file are optional, between two rows of `---`: `date`, `tags` (the topics), `status` (`seed`, `growing` or `settled`), `summary` (the line in lists), `draft: true` (keeps the note off the site).
-- `[[Spaced repetition]]` links to the note with that name. `[[Spaced repetition|other words]]` shows other words. `[[Spaced repetition#In practice]]` leads to a heading. `![[plot.png]]` shows the picture `public/brain/attachments/plot.png`.
+There are two ways to write one:
+
+- In Settings, under Second brain. New note opens an empty one. A note has a title, a date, topics, how far along it is, one line for lists, and its text. Save writes the file.
+- As a file. Put a Markdown file into `public/content/brain/notes`, or open that folder as a vault in Obsidian. A few lines at the top are optional, between two rows of `---`: `date`, `tags` (the topics), `status` (`seed`, `growing` or `settled`), `summary` (the line in lists), `draft: true` (keeps the note off the site).
+
+What a note can hold:
+
+- `[[Spaced repetition]]` links to the note with that name. `[[Spaced repetition|other words]]` shows other words. `[[Spaced repetition#In practice]]` leads to a heading. `![[plot.png]]` shows the picture `public/content/brain/attachments/plot.png`.
 - A link to a note that does not exist yet is allowed. It shows with a dashed line, and the page with all notes lists what is waiting to be written.
 - Every note shows the notes that link to it, the notes it links to, and a small map of both. The rest is the same Markdown as in a post: boxes, tables, code, footnotes.
-- `brain/about.md` is the About page of the second brain. The line `intro:` at its top is the line under the title of the overview.
-- The link "Second brain" beside the pages can be switched off in Settings, under Pages.
+- A new title is a new file name. Links that used the old name then lead to a note that is not written, until they are changed too.
+
+The About page of the second brain is `public/content/brain/about.md`. Settings opens it from the foot of the list of notes. The line `intro:` at its top is the line under the title of the overview.
+
+The link "Second brain" beside the pages can be switched off in Settings, under Pages. The garden at `/garden/` draws every note, post and project as a plant. Its link can be switched off under Pages too.
 
 ## The contact form
 

@@ -1,0 +1,13 @@
+---
+// The garden: every note, post and project as a plant, and the robot that looks after them.
+import Layout from "../layouts/Layout.astro";
+import { loadSite } from "../lib/load.js";
+import { prepare } from "../lib/pages.js";
+import { loadBrain } from "../lib/brain.js";
+import { gardenPage } from "../lib/garden.js";
+
+const SITE = loadSite();
+prepare(SITE);
+const page = gardenPage(SITE, loadBrain());
+---
+<Layout page={page} />
