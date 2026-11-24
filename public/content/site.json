@@ -119,7 +119,7 @@
   },
   "look": {
     "paper": "#ffffff",
-    "font": "dmsans",
+    "font": "lora",
     "flipped": false,
     "nav": true,
     "side": "none",
