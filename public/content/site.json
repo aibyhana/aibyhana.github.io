@@ -18,12 +18,8 @@
   "hello": "Sunt dolor non laboris qui varius ad magna aute sunt incididunt. Eget diam et sint quis laborum irure ullamco.",
   "links": [
     {
-      "label": "Lorem",
+      "label": "LinkedIn",
       "href": "https://example.com/"
-    },
-    {
-      "label": "Ipsum",
-      "href": "https://example.org/"
     }
   ],
   "sections": {
