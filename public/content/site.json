@@ -109,12 +109,17 @@
     "allKinds": "All",
     "videoKind": "Video",
     "play": "Play here",
-    "flip": "Flip",
+    "brain": "Second brain",
+    "garden": "Garden",
+    "flip": "Switch",
     "write": "Settings",
     "skip": "Skip to the page",
     "copyright": "© {year} {name}.",
     "portrait": "A pixel portrait of {name}",
-    "photo": "A photo of {name}"
+    "photo": "A photo of {name}",
+    "kindBook": "",
+    "kindPaper": "",
+    "readPaper": ""
   },
   "look": {
     "paper": "#ffffff",
