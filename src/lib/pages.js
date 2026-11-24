@@ -5,6 +5,7 @@ import { FIG } from "./figures.js";
 import { PX, px } from "./pixel.js";
 import { md, setup } from "./markdown.js";
 import { link, imgSrc } from "./model.js";
+import { tagPills } from "./brain-core.js";
 
 const MAILTO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const nice = t => String(t || "").replace(/'/g, "’");
@@ -64,9 +65,8 @@ export function homePage(SITE, brain) {
   let left = "", right = "";
   if (shown(SITE, "blog")) left = '<section class="s-sec">' + head("blog", PATH.blog) + (of(SITE, "blog").length ? sLog(of(SITE, "blog").slice(0, 4)) : "<p>" + esc(W.nothingYet) + "</p>") + "</section>";
   // the notes she changed last: the day, the mark that says how far along the note is, its title, its topics
-  if (shown(SITE, "brain") && brain && brain.notes.length) right = '<section class="s-sec sb">' + head("brain", PATH.brain) + '<ol class="s-index s-log">' + brain.byDate.slice(0, 5).map(n =>
-    '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + (n.date ? niceDate(n.date) : "") + '</time></span><span><b class="s-t">' + (n.status in MARK ? '<i class="s-dot' + MARK[n.status] + '"></i>' : "") + "<span>" + esc(n.title) + "</span></b>" +
-    (n.tags.length ? '<span class="s-l">' + esc(n.tags.join(", ")) + "</span>" : "") + "</span></a></li>").join("") + "</ol></section>";
+  if (shown(SITE, "brain") && brain && brain.notes.length) right = '<section class="s-sec sb">' + head("brain", PATH.brain) + '<ol class="s-index s-log sb-rows sb-stack">' + brain.byDate.slice(0, 5).map(n =>
+    '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + (n.date ? niceDate(n.date) : "") + '</time></span><span><b class="s-t">' + (n.status in MARK ? '<i class="s-dot' + MARK[n.status] + '"></i>' : "") + "<span>" + esc(n.title) + "</span></b></span></a>" + tagPills(n) + "</li>").join("") + "</ol></section>";
   if (left && right) html += '<div class="s-two"><div>' + left + "</div><div>" + right + "</div></div>"; else html += left + right;
   return { path: "/", title: SITE.title || SITE.name, section: "", home: true, html: '<section id="z-home">' + html + "</section>" };
 }

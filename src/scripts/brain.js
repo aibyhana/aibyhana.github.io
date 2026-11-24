@@ -147,8 +147,9 @@ function searchPage() {
     if (!words.length) { out.innerHTML = ""; count.textContent = ""; return; }
     const found = find(notes, words);
     count.textContent = found.length === 0 ? "Nothing found." : found.length === 1 ? "1 note." : found.length + " notes.";
-    out.innerHTML = found.map(n => '<li><a href="' + esc(n.u) + '"><span class="s-when"><time>' + esc(n.d) + "</time>" + (n.g.length ? '<span class="s-k">' + esc(n.g.join(", ")) + "</span>" : "") +
-      '</span><span><b class="s-t"><span>' + esc(n.t) + '</span></b><span class="s-l">' + around(n, words, 190) + "</span></span></a></li>").join("");
+    out.innerHTML = found.map(n => '<li><a href="' + esc(n.u) + '"><span class="s-when"><time>' + esc(n.d) + "</time>" +
+      '</span><span><b class="s-t"><span>' + esc(n.t) + '</span></b><span class="s-l">' + around(n, words, 190) + "</span></span></a>" +
+      (n.g.length ? '<p class="sb-tags">' + n.g.map((g, i) => '<a href="' + esc((n.h || [])[i] || "#") + '">' + esc(g) + "</a>").join("") + "</p>" : "") + "</li>").join("");
     const url = new URL(location.href);
     url.searchParams.set("q", box.value);
     history.replaceState(null, "", url);

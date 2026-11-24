@@ -1341,6 +1341,22 @@ html.reading main{padding-top:0}
 .sb-topics a{display:inline-flex;align-items:baseline;gap:calc(var(--u)*0.5);padding:calc(var(--u)*0.25) calc(var(--u)*0.9375) calc(var(--u)*0.3438);border:1px solid var(--hair);border-radius:999px;font-size:calc(var(--u)*1.0625);text-decoration:none}
 .sb-topics a span,.sb-by dt span{font:400 calc(var(--u)*0.75)/1 var(--s-mono);color:var(--dim)}
 .sb-topics a:hover{background:var(--hov);border-color:var(--hov);text-decoration:none}
+/* the topics of a note, in a row of notes: small pills like the ones above, each a link to its topic.
+   On a wide page they stand at the end of the row. On a narrow one, and on the home page, under the note. */
+.sb-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+.sb-tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:calc(var(--u)*0.3125);max-width:calc(var(--u)*17);margin:0;padding:calc(var(--u)*0.875) 0 0 calc(var(--u)*1.25)}
+.sb-rows li:first-child .sb-tags{padding-top:calc(var(--u)*0.0625)}
+.sb-rows li .sb-tags a,.sb-tags a{display:block;padding:calc(var(--u)*0.0625) calc(var(--u)*0.625) calc(var(--u)*0.125);border:1px solid var(--hair);border-radius:999px;font-size:calc(var(--u)*0.8125);line-height:1.4;color:var(--dim);text-decoration:none;white-space:nowrap}
+.sb-rows li .sb-tags a:hover,.sb-tags a:hover{background:var(--hov);border-color:var(--hov);color:var(--ink);text-decoration:none}
+.sb-stack li{display:block}
+.sb-stack li:has(> .sb-tags) > a{padding-bottom:calc(var(--u)*0.4375)}
+.sb-stack .sb-tags,.sb-stack li:first-child .sb-tags{justify-content:flex-start;max-width:none;padding:0 0 calc(var(--u)*1) calc(var(--u)*7.25)}
+@media (max-width:900px){
+  .sb-rows li{display:block}
+  .sb-rows li:has(> .sb-tags) > a{padding-bottom:calc(var(--u)*0.4375)}
+  .sb-rows .sb-tags,.sb-rows li:first-child .sb-tags{justify-content:flex-start;max-width:none;padding:0 0 calc(var(--u)*1) calc(var(--u)*7.25)}
+}
+@media (max-width:760px){ .sb-rows .sb-tags,.sb-rows li:first-child .sb-tags,.sb-stack .sb-tags,.sb-stack li:first-child .sb-tags{padding-left:calc(var(--u)*6.625)} }
 .sb-by{max-width:calc(var(--u)*56.25);margin:0;border-top:1px solid var(--hair)}
 .sb-by div{display:grid;grid-template-columns:calc(var(--u)*12.5) minmax(0,1fr);gap:calc(var(--u)*0.2) calc(var(--u)*1.5);padding:calc(var(--u)*0.8125) 0 calc(var(--u)*0.875);border-bottom:1px solid var(--hair)}
 .sb-by dt{font-size:calc(var(--u)*1.2188)}

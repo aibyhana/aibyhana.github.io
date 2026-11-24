@@ -2,8 +2,11 @@
 // Which note links to which, which notes link back, which topics there are, and which notes are mentioned but not written yet.
 // It runs when the site is built (brain.js reads the files and hands them over) and in the browser, for Settings.
 import { md } from "./markdown.js";
+import { esc, attr } from "./html.js";
 
 export const HOME = "/brain/";
+// the topics of a note as small pills, each a link to its topic. They stand in the rows of notes, on the home page too.
+export const tagPills = n => (n.topics && n.topics.length ? '<p class="sb-tags">' + n.topics.map(t => '<a href="' + attr(t.href) + '">' + esc(t.name) + "</a>").join("") + "</p>" : "");
 // where the notes sit, written as the site serves them. In the repo they are one folder deeper, under public.
 export const NOTES = "content/brain/notes/";
 export const ABOUT = "content/brain/about.md";
@@ -130,6 +133,7 @@ export function makeBrain(files, about) {
   for (const n of notes) for (const t of n.tags) {
     const id = slug(t), topic = topics.get(id) || { id, name: t, href: HOME + "topics/" + id + "/", notes: [] };
     topic.notes.push(n);
+    (n.topics || (n.topics = [])).push({ name: t, href: topic.href });
     topics.set(id, topic);
   }
   const byName = [...notes].sort((a, b) => a.title.localeCompare(b.title));

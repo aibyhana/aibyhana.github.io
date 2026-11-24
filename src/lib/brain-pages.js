@@ -2,7 +2,7 @@
 // so a note looks like a post and a list of notes like the list of posts.
 // Every function takes the site object and the brain from brain.js, and returns a page for the layout.
 import { esc, attr, niceDate } from "./html.js";
-import { renderNote, renderText, graphOf, slug } from "./brain.js";
+import { renderNote, renderText, graphOf, slug, tagPills } from "./brain.js";
 
 const HOME = "/brain/";
 // How the second brain shows is hers to set, in Settings under Second brain, Options. It is kept in site.json under "brain".
@@ -21,9 +21,9 @@ const data = o => JSON.stringify(o).replace(/</g, "\\u003c");
 
 /* ---------- pieces ---------- */
 // a list of notes, set like the list of posts: the date with the topics under it, the title, a line about it
-const rows = list => '<ol class="s-index s-log">' + list.map(n =>
-  '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + niceDate(n.date) + "</time>" + (n.tags.length ? '<span class="s-k">' + esc(n.tags.join(", ")) + "</span>" : "") +
-  '</span><span><b class="s-t">' + stage(n) + "<span>" + esc(n.title) + "</span></b>" + (n.summary ? '<span class="s-l">' + esc(n.summary) + "</span>" : "") + "</span></a></li>").join("") + "</ol>";
+const rows = list => '<ol class="s-index s-log sb-rows">' + list.map(n =>
+  '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + niceDate(n.date) + "</time>" +
+  '</span><span><b class="s-t">' + stage(n) + "<span>" + esc(n.title) + "</span></b>" + (n.summary ? '<span class="s-l">' + esc(n.summary) + "</span>" : "") + "</span></a>" + tagPills(n) + "</li>").join("") + "</ol>";
 // the map of notes. The drawing is made in the browser from the list given here.
 const graph = (B, size, label, around) => '<figure class="sb-graph ' + size + '" data-graph aria-label="' + attr(label) + '"><script type="application/json">' + data(graphOf(B, around)) + "</script></figure>";
 const head = (title, more, href) => '<div class="s-head"><h2>' + esc(title) + "</h2>" + (more ? '<a href="' + attr(href) + '">' + esc(more) + "</a>" : "") + "</div>";
@@ -136,11 +136,11 @@ export function brainSearch(SITE, B) {
   return page(B, { page: "search" }, HOME + "search/", "Search",
     '<h1 tabindex="-1">Search</h1><form class="sb-search" role="search" onsubmit="return false"><label class="s-sr" for="sb-big">Search the notes</label>' +
     '<input id="sb-big" type="search" autocomplete="off" spellcheck="false" placeholder="A word or two" data-src="' + HOME + 'search.json"></form>' +
-    '<p class="sb-note-line" id="sb-count" aria-live="polite"></p><ol class="s-index s-log" id="sb-results"></ol>' +
+    '<p class="sb-note-line" id="sb-count" aria-live="polite"></p><ol class="s-index s-log sb-rows" id="sb-results"></ol>' +
     '<noscript><p class="sb-note-line">Search needs JavaScript. The <a href="' + HOME + 'notes/">list of all notes</a> works without it.</p></noscript>');
 }
 // what search looks through: the title, the topics and the words of every note
-export const searchList = B => B.byName.map(n => ({ t: n.title, u: n.href, g: n.tags, d: niceDate(n.date), x: n.text }));
+export const searchList = B => B.byName.map(n => ({ t: n.title, u: n.href, g: n.tags, h: (n.topics || []).map(t => t.href), d: niceDate(n.date), x: n.text }));
 
 // about the second brain: a page of its own, written in content/brain/about.md. Links to notes work in it.
 export function brainAbout(SITE, B) {
