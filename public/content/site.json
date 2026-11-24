@@ -28,7 +28,6 @@
   ],
   "sections": {
     "research": "",
-    "books": "",
     "programs": "",
     "blog": ""
   },
@@ -51,30 +50,21 @@
     "research": "Research",
     "programs": "Programs",
     "now": "Now",
-    "books": "Reading",
     "blog": "Blog",
     "cv": "CV",
     "hello": "Contact me",
     "researchTitle": "Research",
-    "booksTitle": "Reading",
     "programsTitle": "Courses and programs",
     "blogTitle": "Blog",
     "cvTitle": "CV",
-    "papers": "Papers",
     "rightNow": "Right now",
     "updated": "Updated {month}.",
     "fig": "Fig.",
     "project": "Project:",
-    "read": "Read.",
-    "reading": "Reading now.",
-    "next": "Up next.",
     "latest": "Latest",
     "kindBlog": "Blog",
     "kindResearch": "Research",
-    "kindBook": "Book",
-    "kindPaper": "Paper",
     "backTo": "Back to {kind}",
-    "readPaper": "Read the paper",
     "prevPost": "Previous:",
     "nextPost": "Next:",
     "attn": "attention",
@@ -114,7 +104,6 @@
     "about": "About",
     "aboutTitle": "About me",
     "contactTitle": "Contact me",
-    "booksHead": "Books",
     "bookmarks": "Bookmarks",
     "bookmarksTitle": "Bookmarks",
     "allKinds": "All",
@@ -150,11 +139,6 @@
     {
       "key": "research",
       "col": "left",
-      "show": true
-    },
-    {
-      "key": "books",
-      "col": "right",
       "show": true
     },
     {

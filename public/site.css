@@ -718,7 +718,7 @@ main h1,main h2,main h3{font-family:var(--font);font-weight:400;letter-spacing:-
 .s-head::after{content:"";order:1;flex:1}
 .s-head a{order:2;padding:calc(var(--u)*0.125) calc(var(--u)*0.5) calc(var(--u)*0.25);margin-right:calc(var(--u)*-0.5);font-size:calc(var(--u)*1.0938);font-style:italic;text-decoration:none;white-space:nowrap}
 .s-head a:hover{background:var(--hov);color:var(--ink) !important;text-decoration:none}
-.s-grid,.s-log,.s-read,.s-progs,.s-papers,.z-drafts{list-style:none;margin:0;padding:0}
+.s-grid,.s-log,.s-progs,.z-drafts{list-style:none;margin:0;padding:0}
 .s-t{font-weight:400}
 /* a title is underlined when you point at its row */
 a:hover .s-t span{text-decoration:underline;text-decoration-color:var(--uline);text-decoration-thickness:2px;text-underline-offset:.22em}
@@ -736,20 +736,18 @@ a:hover .s-t span{text-decoration:underline;text-decoration-color:var(--uline);t
 .s-grid.m1 .s-more{display:block;grid-column:span 2}
 /* the blog on the left, reading and programs on the right */
 .s-two{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:0 calc(var(--u)*5.75)}
-.s-log li + li,.s-read li + li,.s-progs li + li,.s-papers li + li,.z-drafts li + li{border-top:1px dotted var(--ink)}
+.s-log li + li,.s-progs li + li,.z-drafts li + li{border-top:1px dotted var(--ink)}
 .s-log a{display:grid;grid-template-columns:calc(var(--u)*7.375) minmax(0,1fr);gap:0 calc(var(--u)*0.75);align-items:baseline;padding:calc(var(--u)*1.0625) 0 calc(var(--u)*1.125);text-decoration:none}
-.s-log li:first-child a,.s-read li:first-child a,.s-papers li:first-child a,.s-progs li:first-child{padding-top:0}
-.s-log a:hover,.s-read a:hover,.s-papers a:hover{text-decoration:none}
+.s-log li:first-child a,.s-progs li:first-child{padding-top:0}
+.s-log a:hover{text-decoration:none}
 .s-log time{font-size:calc(var(--u)*1.0312);font-style:italic}
 .s-log .s-t{display:block;font-size:calc(var(--u)*1.5);line-height:1.22;letter-spacing:-.01em}
 .s-log .s-l{display:block;margin-top:calc(var(--u)*0.25);font-size:calc(var(--u)*1.0938);line-height:1.45}
-.s-read a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 calc(var(--u)*0.875);align-items:baseline;padding:calc(var(--u)*0.75) 0 calc(var(--u)*0.8125);text-decoration:none}
 .s-dot{width:calc(var(--u)*0.6875);height:calc(var(--u)*0.6875);border:1px solid var(--ink);border-radius:50%}
 .s-dot.read{background:var(--ink)}
 .s-dot.reading{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
-.s-read .s-t,.s-progs .s-t{display:block;font-size:calc(var(--u)*1.3438);line-height:1.25}
-.s-read .s-l,.s-progs .s-l{display:block;margin-top:calc(var(--u)*0.0625);font-size:calc(var(--u)*1.0312);font-style:italic;line-height:1.4}
-.s-read .s-m{font-size:calc(var(--u)*1.0312);font-style:italic;white-space:nowrap}
+.s-progs .s-t{display:block;font-size:calc(var(--u)*1.3438);line-height:1.25}
+.s-progs .s-l{display:block;margin-top:calc(var(--u)*0.0625);font-size:calc(var(--u)*1.0312);font-style:italic;line-height:1.4}
 .s-progs li{padding:calc(var(--u)*0.75) 0 calc(var(--u)*0.8125)}
 /* say hi */
 .s-hi p{margin:0;max-width:21em;font-size:clamp(calc(var(--u)*1.75),3.2vw,calc(var(--u)*2.625));line-height:1.16;letter-spacing:-.018em}
@@ -762,13 +760,7 @@ a:hover .s-t span{text-decoration:underline;text-decoration-color:var(--uline);t
 #z-list > h1{margin:0 0 calc(var(--u)*0.875);font:400 clamp(calc(var(--u)*2.75),5.4vw,calc(var(--u)*4.5))/1.03 var(--font);letter-spacing:-.026em !important}
 .z-lede{margin:0 0 calc(var(--u)*3.25);max-width:30em;font-size:calc(var(--u)*1.375);font-style:italic;line-height:1.45}
 #z-list > h2{margin:calc(var(--u)*5.25) 0 calc(var(--u)*1.875);font:400 calc(var(--u)*2.25)/1.1 var(--font)}
-#z-list > .s-log,#z-list > .s-read,#z-list > .s-papers,.z-drafts{max-width:calc(var(--u)*56.25)}
-#z-list > .s-read .s-t{font-size:calc(var(--u)*1.5)}
-#z-list > .s-read a{padding:calc(var(--u)*0.9375) 0 calc(var(--u)*1)}
-.s-papers a{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0 calc(var(--u)*2.5);align-items:baseline;padding:calc(var(--u)*1) 0 calc(var(--u)*1.0625);text-decoration:none}
-.s-papers .s-t{display:block;font-size:calc(var(--u)*1.4062);line-height:1.25;letter-spacing:-.008em}
-.s-papers .s-l{display:block;margin-top:calc(var(--u)*0.1875);font-size:calc(var(--u)*1.0312);font-style:italic;line-height:1.4}
-.s-papers .s-m{font-size:calc(var(--u)*1.0938);font-style:italic;line-height:1.45}
+#z-list > .s-log,.z-drafts{max-width:calc(var(--u)*56.25)}
 .z-drafts li{padding:calc(var(--u)*0.8125) 0;font-size:calc(var(--u)*1.125)}
 .z-drafts li:first-child{padding-top:0}
 .z-drafts strong{font-weight:400;font-size:calc(var(--u)*1.3438)}
@@ -835,7 +827,6 @@ footer a{text-decoration:underline;text-decoration-thickness:1px;text-underline-
   .s-head h2{font-size:calc(var(--u)*2)}
   .s-two{grid-template-columns:minmax(0,1fr)}
   .s-log a{grid-template-columns:minmax(0,1fr);gap:calc(var(--u)*0.125)}
-  .s-papers a{grid-template-columns:minmax(0,1fr);gap:calc(var(--u)*0.375)}
   .z-next{grid-template-columns:minmax(0,1fr)}
   .z-facts div{grid-template-columns:minmax(0,1fr);gap:0}
   footer{margin-top:calc(var(--u)*7)}
@@ -969,6 +960,7 @@ p.s-math.b{margin:calc(var(--u)*1.25) 0 calc(var(--u)*1.5);font-size:calc(var(--
 /* ================= ink, paper and a highlighter. Boxes are soft, grey and have no line around them. =================
    The highlighter (--s-mark, from her Highlighter colour) marks where you are and what you point at. A note in a post is a pale slate blue.
    --glow is the one gradient of the site: slate blue on top, sage green and sand below. Quiet colours, like a book cloth. Only what comes first stands on it.
+   On the dark page it is dark, in colours that are neighbours of one another: teal, sea green, sage and a steel blue. What is drawn on it is in the ink of the page.
    --link is the colour of a link, --uline the line under it, --dim the small grey text, --hair a thin grey line,
    --panel a box, --hov the same box when you point at it, --r how round a box is.
    The patterns are not used on the pages any more. Settings still draws with them. */
@@ -982,6 +974,7 @@ p.s-math.b{margin:calc(var(--u)*1.25) 0 calc(var(--u)*1.5);font-size:calc(var(--
   --link:var(--ink);--uline:color-mix(in srgb,var(--pc) 42%,transparent);--dim:color-mix(in srgb,var(--ink) 66%,var(--paper));--hair:color-mix(in srgb,var(--ink) 16%,transparent);
   --panel:color-mix(in srgb,var(--ink) 5.5%,var(--paper));--hov:var(--s-mark);--note:color-mix(in srgb,#b4c1d6 34%,var(--paper));--r:14px;
   --glow:radial-gradient(85% 75% at 12% 0%,#b2c0d8 0%,rgba(178,192,216,0) 70%),radial-gradient(75% 70% at 0% 100%,#b9cdb4 0%,rgba(185,205,180,0) 68%),radial-gradient(80% 75% at 100% 100%,#eadcb6 0%,rgba(234,220,182,0) 70%),#eef0ee}
+html.neg{--glow:radial-gradient(90% 85% at 4% 0%,#25505a 0%,rgba(37,80,90,0) 70%),radial-gradient(85% 85% at 0% 100%,#2d5140 0%,rgba(45,81,64,0) 68%),radial-gradient(90% 90% at 100% 100%,#30465c 0%,rgba(48,70,92,0) 70%),radial-gradient(65% 60% at 88% 0%,#3d4f3c 0%,rgba(61,79,60,0) 70%),color-mix(in srgb,var(--ink) 9%,var(--paper))}
 html.neg{--kp:46%;--kq:62%}
 @media (max-width:860px){:root{--u:calc(1rem/.98/var(--fs,1))}}
 /* the bar on top */
@@ -994,10 +987,9 @@ html.neg{--kp:46%;--kq:62%}
 .s-card .s-l,.s-log .s-l{color:var(--dim)}
 .s-more{color:var(--link)}
 /* lists: lighter lines, and the small parts in grey */
-.s-log li + li,.s-read li + li,.s-progs li + li,.s-papers li + li,.z-drafts li + li{border-top:1px solid var(--hair)}
+.s-log li + li,.s-progs li + li,.z-drafts li + li{border-top:1px solid var(--hair)}
 .s-log time{color:var(--dim);font-variant-numeric:tabular-nums}
-.s-read .s-l,.s-progs .s-l,.s-papers .s-l,.s-papers .s-m{color:var(--dim)}
-.s-read .s-m{color:var(--dim)}
+.s-progs .s-l{color:var(--dim)}
 /* buttons and links */
 #z .s-links a{border-color:var(--hair);border-radius:999px;color:var(--ink)}
 #z .s-links a:hover{background:var(--hov);border-color:var(--hov);color:var(--ink)}
@@ -1164,10 +1156,8 @@ html.in-desk main{max-width:calc(var(--u)*90)}
 .s-log time{font-size:calc(var(--u)*0.9375);font-style:normal}
 .s-log .s-t{font-size:calc(var(--u)*1.2812)}
 .s-log .s-l{font-size:calc(var(--u)*1)}
-.s-read a{padding:calc(var(--u)*0.625) 0 calc(var(--u)*0.6875)}
-.s-read .s-t,.s-progs .s-t{font-size:calc(var(--u)*1.2188)}
-.s-read .s-l,.s-progs .s-l{font-size:calc(var(--u)*0.9688);font-style:normal}
-.s-read .s-m{font-size:calc(var(--u)*0.9375);font-style:normal}
+.s-progs .s-t{font-size:calc(var(--u)*1.2188)}
+.s-progs .s-l{font-size:calc(var(--u)*0.9688);font-style:normal}
 .s-progs li{padding:calc(var(--u)*0.625) 0 calc(var(--u)*0.6875)}
 .s-hi p{font-size:calc(var(--u)*1.1562)}
 .s-form label span{font-style:normal}
@@ -1180,12 +1170,6 @@ footer{margin-top:calc(var(--u)*6)}
 .z-lede,.lede{max-width:36em;font-size:calc(var(--u)*1.1562);font-style:normal}
 .z-lede{margin-bottom:calc(var(--u)*2.125)}
 #z-list > h2{margin:calc(var(--u)*3.5) 0 calc(var(--u)*1.375);font-size:calc(var(--u)*1.75)}
-#z-list > .s-read .s-t{font-size:calc(var(--u)*1.2812)}
-#z-list > .s-read a{padding:calc(var(--u)*0.75) 0 calc(var(--u)*0.8125)}
-#z-list > .s-read li:first-child a{padding-top:0}
-.s-papers a{padding:calc(var(--u)*0.75) 0 calc(var(--u)*0.8125)}
-.s-papers .s-t{font-size:calc(var(--u)*1.25)}
-.s-papers .s-l,.s-papers .s-m{font-size:calc(var(--u)*0.9688);font-style:normal}
 #view-blog .meta,#view-programs .meta,#view-cv .meta,#view-programs .when,#view-cv .when{font-style:normal !important}
 /* a post: the small lines under the title are plain */
 .z-meta{font-size:calc(var(--u)*1.0312);font-style:normal}
@@ -1229,9 +1213,9 @@ footer{margin-top:calc(var(--u)*6)}
 }
 
 /* ================= a drawing stands on the soft box. The first one, the newest work, stands on the gradient.
-   The gradient is light on a light page and on a dark one, so the drawing on it is always in the dark colour (--a). ================= */
+   The gradient is light on the light page and dark on the dark one, and the drawing on it is in the ink of the page. ================= */
 .s-fig,.z-fig{--paper:var(--panel)}
-.s-grid li:first-child .s-fig,.z-art > .z-fig{--ink:var(--a);--paper:var(--b);background:var(--glow)}
+.s-grid li:first-child .s-fig,.z-art > .z-fig{--ink:var(--x-ink);--paper:var(--x-paper);background:var(--glow)}
 .z-art > .z-fig figcaption{color:color-mix(in srgb,var(--ink) 72%,var(--paper))}
 
 /* ================= calm: reading without the links, smaller subheadings, covers, topics ================= */
@@ -1263,18 +1247,7 @@ html.reading main{padding-top:0}
 @media (max-width:760px){ .s-head h2{font-size:calc(var(--u)*1.375)} .s-body h2,.reader .body h2{font-size:calc(var(--u)*1.1875*var(--rs,1)) !important} }
 /* the home page: the blog on the left, three books on the right, each a small cover with its title on it */
 .s-two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-.s-shelf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--u)*1.125)}
-.s-shelf a{display:block;text-decoration:none}
-.s-shelf a:hover{text-decoration:none}
-.s-cover{display:flex;flex-direction:column;justify-content:space-between;gap:calc(var(--u)*0.625);aspect-ratio:5/7;padding:calc(var(--u)*0.875) calc(var(--u)*0.8125) calc(var(--u)*0.75);border-radius:var(--r);background:var(--panel);overflow:hidden}
-.s-cover b{font:600 calc(var(--u)*0.8438)/1.24 var(--font);-webkit-hyphens:auto;hyphens:auto;overflow-wrap:anywhere}
-.s-cover i{font:400 calc(var(--u)*0.75)/1.3 var(--font);color:var(--dim);overflow-wrap:anywhere}
-.s-shelf .s-m{display:block;margin-top:calc(var(--u)*0.5);font-size:calc(var(--u)*0.9062);color:var(--dim)}
 /* the book she is reading now stands on the gradient too */
-.s-cover.reading{background:var(--glow);color:var(--a)}
-.s-cover.reading i{color:color-mix(in srgb,var(--a) 70%,transparent)}
-.s-shelf a:hover .s-cover{background:var(--hov)}
-.s-shelf a:hover .s-cover.reading{background:var(--glow)}
 /* a post in a list: its topic stands under its date */
 .s-when{display:block}
 .s-when .s-k{display:block;margin-top:calc(var(--u)*0.125);font-size:calc(var(--u)*0.8438);line-height:1.3;color:var(--dim)}
@@ -1290,7 +1263,7 @@ html.reading main{padding-top:0}
 @media (max-width:760px){ .z-lede,.a-role,.z-art .s-lede{font-size:calc(var(--u)*1.1562)} }
 /* the CV: a line of text under a program */
 .cv-sec .job .led{margin:calc(var(--u)*0.125) 0 0}
-@media (max-width:1279px){ .s-two{grid-template-columns:minmax(0,1fr)} .s-shelf{max-width:calc(var(--u)*30)} }
+@media (max-width:1279px){ .s-two{grid-template-columns:minmax(0,1fr)} }
 
 /* ================= the second brain: notes that link to each other, at /brain/ =================
    Its pages use the frame, the lists and the text styles of the rest of the site. Only what is its own is set here:
@@ -1339,14 +1312,15 @@ html.reading main{padding-top:0}
 /* the pages */
 #z-list.sb:has(> .z-art){padding-top:calc(var(--u)*1.875)}
 .sb .s-dot{display:inline-block;margin-right:calc(var(--u)*0.5);vertical-align:.02em}
+.sb .s-log .s-t:has(> .s-dot),.sb-index li a:has(> .s-dot){display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline}
 .sb .s-l mark{padding:0 .1em;background:var(--s-mark);color:inherit}
 .sb-note-line{max-width:36em;margin:0 0 calc(var(--u)*1);font-size:calc(var(--u)*1.0625);line-height:1.5;color:var(--dim)}
 .sb-note-line a{text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--uline)}
 .sb-missing{color:var(--dim);border-bottom:1px dashed var(--dim);cursor:help}
 .sb-up a::before{content:"\2039";display:inline-block;margin-right:calc(var(--u)*0.4375);text-decoration:none}
-/* the map of notes. A dot is a note, a line a link. The large ones stand on the gradient of the site, which is light on any page. */
+/* the map of notes. A dot is a note, a line a link. The large ones stand on the gradient of the site. */
 .sb-graph{position:relative;margin:0;border-radius:var(--r);background:var(--panel);overflow:hidden}
-.sb-graph.wide,.sb-graph.full{--ink:var(--a);background:var(--glow)}
+.sb-graph.wide,.sb-graph.full{background:var(--glow)}
 .sb-graph.wide{height:calc(var(--u)*18)}
 .sb-graph.full{height:min(calc(var(--u)*36),68vh);margin-bottom:calc(var(--u)*1.25)}
 .sb-graph.local{height:calc(var(--u)*13)}
@@ -1414,8 +1388,8 @@ html.reading main{padding-top:0}
 
 /* ================= the garden: every note, post and project as a plant in a pot, at /garden/ =================
    The plants stand on shelves on the gradient of the site. Under them is the floor the robot walks on.
-   Everything is drawn in the dark colour, because the gradient is light on any page. */
-.gd-scene{--ink:var(--a);margin:0 0 calc(var(--u)*0.875);padding:calc(var(--u)*2.25) calc(var(--u)*2) calc(var(--u)*1.5);border-radius:var(--r);background:var(--glow);color:var(--a)}
+   Everything is drawn in the ink of the page: dark on the light gradient, light on the dark one. */
+.gd-scene{margin:0 0 calc(var(--u)*0.875);padding:calc(var(--u)*2.25) calc(var(--u)*2) calc(var(--u)*1.5);border-radius:var(--r);background:var(--glow);color:var(--ink)}
 /* a shelf is the line under a row of pots. The last one runs on to the edge. */
 .gd-shelf{display:flex;flex-wrap:wrap;align-items:flex-end;row-gap:calc(var(--u)*1.75);list-style:none;margin:0;padding:0}
 .gd-shelf li{flex:1 0 calc(var(--u)*4.25);display:flex;justify-content:center;align-items:flex-end;min-height:calc(var(--u)*4);border-bottom:2px solid currentColor}
@@ -1430,7 +1404,7 @@ html.reading main{padding-top:0}
 .gd-bot.left #gd-body svg{transform:scaleX(-1)}
 .gd-bot:not(.walk) .ani .f1{animation:none;visibility:visible}
 .gd-bot:not(.walk) .ani .f2{animation:none;visibility:hidden}
-.gd-says{position:absolute;left:50%;bottom:calc(100% + 9px);translate:-50% 0;padding:calc(var(--u)*0.1875) calc(var(--u)*0.75) calc(var(--u)*0.3125);border-radius:999px;background:var(--b);color:var(--a);font:400 calc(var(--u)*0.9375)/1.3 var(--font);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.gd-says{position:absolute;left:50%;bottom:calc(100% + 9px);translate:-50% 0;padding:calc(var(--u)*0.1875) calc(var(--u)*0.75) calc(var(--u)*0.3125);border-radius:999px;background:var(--paper);color:var(--ink);font:400 calc(var(--u)*0.9375)/1.3 var(--font);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
 .gd-says.on{opacity:1}
 .gd-says.from-left{left:0;translate:0 0}
 .gd-says.from-right{left:auto;right:0;translate:0 0}
@@ -1443,3 +1417,9 @@ html.reading main{padding-top:0}
   .gd-shelf li{flex-basis:calc(var(--u)*3.5)}
 }
 @media (prefers-reduced-motion:reduce){ .gd-shelf a svg{transition:none} .gd-shelf li.glad svg{animation:none} }
+/* ================= the home page: one line on who she is, then the work =================
+   The line stands where the first heading stood, level with the name beside it. */
+.h-what{max-width:24em;margin:0;padding-top:calc(var(--u)*2.25);font-size:calc(var(--u)*1.5);line-height:1.3;letter-spacing:-.012em;text-wrap:balance}
+#z-home > .h-what + .s-sec{padding-top:calc(var(--u)*2.75)}
+@media (min-width:1100px){ .h-what{padding-top:calc(var(--u)*1.5)} }
+@media (max-width:760px){ .h-what{padding-top:calc(var(--u)*1.75);font-size:calc(var(--u)*1.3125)} #z-home > .h-what + .s-sec{padding-top:calc(var(--u)*2.25)} }

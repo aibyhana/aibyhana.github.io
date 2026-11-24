@@ -6,7 +6,7 @@ Settings is a page of its own. The bar and the footer of the site are not on it.
 The column on the left lists the parts, in four groups. Writing stands apart from the rest, on top.
 
 - Writing: Posts, Second brain.
-- Content: Research, Reading, Bookmarks, Programs, CV, Now.
+- Content: Research, Bookmarks, Programs, CV, Now.
 - Site: Profile, Photo, Pages, Appearance, Labels.
 - Account: signing in and out.
 
@@ -16,7 +16,7 @@ Second brain opens as a list of the notes. A line on top says how many notes, li
 
 Posts opens as a list, drafts first. "New post" opens a page of its own for the post. "All posts" leads back, and a post that is not saved yet is kept. Publish, Save as draft and Delete stay in a bar at the bottom.
 
-Every other part is a form. Its Save button stays in a bar at the bottom of the screen, and the bar says "Not saved yet." after a change. Research, Reading and Programs have a button beside the title that adds a new one.
+Every other part is a form. Its Save button stays in a bar at the bottom of the screen, and the bar says "Not saved yet." after a change. Research and Programs have a button beside the title that adds a new one.
 
 ### Writing a post
 
@@ -106,6 +106,8 @@ What a note can hold:
 - A link to a note that does not exist yet is allowed. It shows with a dashed line, and the page with all notes lists what is waiting to be written.
 - Every note shows the notes that link to it, the notes it links to, and a small map of both. The rest is the same Markdown as in a post: boxes, tables, code, footnotes.
 - A new title is a new file name. Links that used the old name then lead to a note that is not written, until they are changed too.
+
+Papers and books are notes too. There is no Reading page any more: a paper or a book is a note with the topic `papers` or `books`, its stage says how far along you are (a first thought, growing, settled), and the old address `/reading/` leads to the second brain.
 
 The About page of the second brain is `public/content/brain/about.md`. Settings opens it from the foot of the list of notes. The line `intro:` at its top is the line under the title of the overview.
 

@@ -1,14 +1,13 @@
 // Turns the content files into one object the pages are built from.
 // It has no access to files itself: load.js reads them when the site is built, Settings reads them in the browser.
 import { WORDS, CLOCK, LOOK, HOME } from "./defaults.js";
-import { slugOf, stop } from "./html.js";
 import { splitPost } from "./markdown.js";
 
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 const countWords = t => (String(t || "").match(/\S+/g) || []).length;
 
 // where a link of the old kind (#work-x, #blog) leads now. Any other link is left as it is.
-const PLACES = { home: "/", research: "/research/", reading: "/reading/", books: "/reading/", papers: "/reading/", blog: "/blog/", bookmarks: "/bookmarks/", videos: "/bookmarks/",
+const PLACES = { home: "/", research: "/research/", reading: "/brain/", books: "/brain/", papers: "/brain/", blog: "/blog/", bookmarks: "/bookmarks/", videos: "/bookmarks/",
   about: "/about/", now: "/about/#now", cv: "/cv/", programs: "/cv/#programs", hackathons: "/cv/#programs", contact: "/contact/", settings: "/settings/", write: "/settings/" };
 export function link(href) {
   const h = String(href || "");
@@ -16,7 +15,7 @@ export function link(href) {
   const k = h.slice(1);
   if (k.indexOf("work-") === 0) return "/research/" + k.slice(5) + "/";
   if (k.indexOf("post-") === 0) return "/blog/" + k.slice(5) + "/";
-  if (k.indexOf("book-") === 0 || k.indexOf("paper-") === 0) return "/reading/" + k.slice(k.indexOf("-") + 1) + "/";
+  if (k.indexOf("book-") === 0 || k.indexOf("paper-") === 0) return "/brain/";          // books and papers are notes of the second brain now
   return PLACES[k] || h;
 }
 // a picture kept with the content is served from /content/img
@@ -29,12 +28,12 @@ export function readPost(id, text) {
     teaser: String(m.teaser || m.description || m.summary || ""), topic: String(m.topic || "").trim(), words: countWords(s.body), body: s.body };
 }
 
-// raw: { site, now, research, books, programs, cv, bookmarks, posts: [{ id, text }] }
+// raw: { site, now, research, programs, cv, bookmarks, posts: [{ id, text }] }
 // Settings has no post texts at hand, so it may pass postsIndex (the list in posts.json) in place of posts.
 export function makeSite(raw) {
   const d = raw || {}, site = d.site || {};
   const SITE = Object.assign({}, site, d.now || {}, {
-    research: Array.isArray(d.research) ? d.research : [], books: (d.books || {}).books || [], papers: (d.books || {}).papers || [],
+    research: Array.isArray(d.research) ? d.research : [],
     programs: Array.isArray(d.programs) ? d.programs : [], cv: d.cv || {}
   });
   SITE.name = SITE.name || "Lorem Ipsum";
@@ -60,13 +59,9 @@ export function makeSite(raw) {
   SITE.published = SITE.posts.filter(p => !p.draft && p.date).sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
   SITE.drafts = SITE.posts.filter(p => p.draft && p.teaser);
 
-  // postings: every post, project, book and paper is one. Those with a date come first, newest on top.
-  const W = SITE.words, STATUS = { read: W.read, reading: W.reading, next: W.next }, taken = {};
-  const place = slug => { let s = slug, n = 2; while (taken[s]) s = slug + "-" + n++; taken[s] = true; return s; };          // a book and a paper never share an address
-  let postings = SITE.published.map(p => ({ kind: "blog", id: p.id, href: "/blog/" + p.id + "/", title: p.title, date: p.date, line: p.teaser || "", meta: "", topic: p.topic || "", item: p }))
-    .concat(SITE.research.map(p => ({ kind: "research", id: p.id, href: "/research/" + p.id + "/", title: p.title, date: p.date || "", line: p.short || "", meta: p.where || "", item: p })))
-    .concat(SITE.books.map(b => { const id = place(slugOf(b.title)); return { kind: "books", id: id, href: "/reading/" + id + "/", title: b.title, date: b.date || "", line: b.author + ", " + b.year + ".", meta: STATUS[b.status] || b.status || "", item: b }; }))
-    .concat(SITE.papers.map(p => { const id = place(slugOf(p.title)); return { kind: "papers", id: id, href: "/reading/" + id + "/", title: p.title, date: p.date || "", line: stop(p.by || "") + " " + (p.year || "") + ".", meta: p.why || "", item: p }; }));
+  // postings: every post and every project is one. Those with a date come first, newest on top.
+  const postings = SITE.published.map(p => ({ kind: "blog", id: p.id, href: "/blog/" + p.id + "/", title: p.title, date: p.date, line: p.teaser || "", meta: "", topic: p.topic || "", item: p }))
+    .concat(SITE.research.map(p => ({ kind: "research", id: p.id, href: "/research/" + p.id + "/", title: p.title, date: p.date || "", line: p.short || "", meta: p.where || "", item: p })));
   SITE.postings = postings.filter(p => p.date).sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0).concat(postings.filter(p => !p.date));
   return SITE;
 }

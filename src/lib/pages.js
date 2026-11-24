@@ -13,7 +13,7 @@ const rich = s => esc(s).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, words, href) 
 const linkHtml = l => '<a href="' + attr(link(l.href)) + '">' + esc(l.label) + "</a>";
 const shown = (SITE, k) => SITE.home.some(h => h.key === k && h.show !== false);
 const of = (SITE, k) => SITE.postings.filter(p => p.kind === k);
-const PATH = { research: "/research/", books: "/reading/", blog: "/blog/", brain: "/brain/", garden: "/garden/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
+const PATH = { research: "/research/", blog: "/blog/", brain: "/brain/", garden: "/garden/", bookmarks: "/bookmarks/", about: "/about/", cv: "/cv/", contact: "/contact/" };
 
 // the formatter needs to know where pictures and links lead, and the word on the copy button
 export function prepare(SITE) { setup({ img: imgSrc, link: link, copy: SITE.words.copy || "Copy" }); }
@@ -26,11 +26,6 @@ const plateArt = p => { const it = p.item || {}; return FIG[it.fig] ? FIG[it.fig
 const sCards = list => { const n = list.length; return '<ol class="s-index s-grid m' + n % 3 + (n % 2 ? " odd" : "") + '">' + list.map(p => '<li><a class="s-card" href="' + attr(p.href) + '"><span class="s-fig fig">' + plateArt(p) + "</span>" + sTitle(p.title) + (p.line ? '<span class="s-l">' + esc(p.line) + "</span>" : "") + (p.meta ? '<span class="s-m">' + esc(p.meta) + "</span>" : "") + "</a></li>").join("") + "</ol>"; };
 // a post in a list: the date, with the topic under it
 const sLog = list => '<ol class="s-index s-log">' + list.map(p => '<li data-kind="' + attr(p.topic || "") + '"><a href="' + attr(p.href) + '"><span class="s-when"><time>' + (p.date ? niceDate(p.date) : "") + "</time>" + (p.topic ? '<span class="s-k">' + esc(p.topic) + "</span>" : "") + "</span><span>" + sTitle(p.title) + (p.line ? '<span class="s-l">' + esc(p.line) + "</span>" : "") + "</span></a></li>").join("") + "</ol>";
-// books as text: a square for the status, the title, the author and year
-const sRead = list => '<ul class="s-index s-read">' + list.map(p => { const b = p.item || {}; return '<li><a href="' + attr(p.href) + '"><i class="s-dot ' + attr(b.status || "") + '"></i><span>' + sTitle(p.title) + '<span class="s-l">' + esc(String(p.line || "").replace(/\.$/, "")) + '</span></span><span class="s-m">' + esc(String(p.meta || "").replace(/\.$/, "")) + "</span></a></li>"; }).join("") + "</ul>";
-const sPapers = list => '<ul class="s-index s-papers">' + list.map(p => '<li><a href="' + attr(p.href) + '"><span>' + sTitle(p.title) + (p.line ? '<span class="s-l">' + esc(String(p.line).replace(/\.$/, "")) + "</span>" : "") + '</span><span class="s-m">' + esc(p.meta || "") + "</span></a></li>").join("") + "</ul>";
-// the home page: a book is a small cover with its title on it
-const sShelf = list => '<ul class="s-index s-shelf">' + list.map(p => { const b = p.item || {}; return '<li><a href="' + attr(p.href) + '"><span class="s-cover' + (b.status === "reading" ? " reading" : "") + '"><b>' + esc(p.title) + "</b>" + (b.author ? "<i>" + esc(b.author) + "</i>" : "") + "</span>" + (p.meta ? '<span class="s-m">' + esc(String(p.meta).replace(/\.$/, "")) + "</span>" : "") + "</a></li>"; }).join("") + "</ul>";
 // the line that stays on top of a text: back to its list on the left, home on the right
 const backStrip = (SITE, to, text) => '<p class="z-crumb back-to"><a href="' + attr(to) + '">' + esc(text) + '</a><a class="s-home" href="/">' + esc(SITE.words.brand || SITE.name) + "</a></p>";
 const lede = (SITE, key) => SITE.sections[key] ? '<p class="z-lede">' + esc(nice(SITE.sections[key])) + "</p>" : "";
@@ -41,7 +36,7 @@ const chips = (SITE, kinds) => '<p class="b-kinds">' + [""].concat(kinds).map((k
 // sub is what a part of the site adds under the links while you are in it. The second brain puts its search box and its topics there.
 export function navHtml(SITE, section, sub) {
   const W = SITE.words;
-  const pages = SITE.home.filter(h => h.show !== false && ["research", "books", "blog", "brain", "garden", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
+  const pages = SITE.home.filter(h => h.show !== false && ["research", "blog", "brain", "garden", "bookmarks", "about", "cv"].indexOf(h.key) >= 0 && (h.key !== "bookmarks" || SITE.bookmarks.length > 0));
   const one = (key, href, label, small) => "<a" + (small || key === section ? ' class="' + [small ? "s2" : "", key === section ? "on" : ""].filter(Boolean).join(" ") + '"' : "") + ' href="' + href + '" data-z="' + key + '"' + (key === section ? ' aria-current="page"' : "") + ">" + esc(label || "") + "</a>";
   // her work first, then the pages about her. The small line between the two only stands when there is something on both sides.
   const work = pages.filter(h => ["about", "cv"].indexOf(h.key) < 0).map(h => one(h.key, PATH[h.key], W[h.key])).join("");
@@ -58,25 +53,29 @@ export function footHtml(SITE, year) {
     '<div id="z-foot">' + (SITE.look.inkPicker === false ? "" : (SITE.inks.length > 1 ? "<label>" + esc(W.colour || "Colour") + ' <select id="z-ink">' + SITE.inks.map((k, i) => '<option value="' + i + '">' + esc(k.name) + "</option>").join("") + "</select></label>" : "") + '<button type="button" data-zdo="flip">' + esc(W.flip || "Flip") + "</button>") + "</div>";
 }
 /* ---------- the pages ---------- */
-// the home page: the latest three projects, the latest three posts, the latest three books. Nothing else.
-export function homePage(SITE) {
+// The home page: one line on who she is, her latest projects, then her latest posts beside the notes she last worked on.
+// brain is the second brain, as brain.js reads it. Without it, in a preview, that part is left out.
+export function homePage(SITE, brain) {
   const W = SITE.words;
-  const head = (k, all) => '<div class="s-head k-' + k + '"><h2>' + esc(W[k] || "") + "</h2>" + (all ? '<a href="' + PATH[k] + '">' + esc(W.all || "See all") + '<span class="s-sr"> ' + esc(W[k] || "") + "</span></a>" : "") + "</div>";
-  let html = '<h1 class="s-sr">' + esc(SITE.name) + "</h1>";
-  if (shown(SITE, "research") && of(SITE, "research").length) html += '<section class="s-sec">' + head("research", true) + sCards(of(SITE, "research").slice(0, 3)) + "</section>";
+  const head = (k, href) => '<div class="s-head k-' + k + '"><h2>' + esc(W[k] || "") + '</h2><a href="' + href + '">' + esc(W.all || "See all") + '<span class="s-sr"> ' + esc(W[k] || "") + "</span></a></div>";
+  const MARK = { seed: "", growing: " reading", settled: " read" };
+  let html = '<h1 class="s-sr">' + esc(SITE.name) + "</h1>" + (SITE.what ? '<p class="h-what">' + esc(nice(SITE.what)) + "</p>" : "");
+  if (shown(SITE, "research") && of(SITE, "research").length) html += '<section class="s-sec">' + head("research", PATH.research) + sCards(of(SITE, "research").slice(0, 3)) + "</section>";
   let left = "", right = "";
-  if (shown(SITE, "blog")) left += '<section class="s-sec">' + head("blog", true) + (of(SITE, "blog").length ? sLog(of(SITE, "blog").slice(0, 3)) : "<p>" + esc(W.nothingYet) + "</p>") + "</section>";
-  if (shown(SITE, "books") && of(SITE, "books").length) right += '<section class="s-sec">' + head("books", true) + sShelf(of(SITE, "books").slice(0, 3)) + "</section>";
+  if (shown(SITE, "blog")) left = '<section class="s-sec">' + head("blog", PATH.blog) + (of(SITE, "blog").length ? sLog(of(SITE, "blog").slice(0, 4)) : "<p>" + esc(W.nothingYet) + "</p>") + "</section>";
+  // the notes she changed last: the day, the mark that says how far along the note is, its title, its topics
+  if (shown(SITE, "brain") && brain && brain.notes.length) right = '<section class="s-sec sb">' + head("brain", PATH.brain) + '<ol class="s-index s-log">' + brain.byDate.slice(0, 5).map(n =>
+    '<li><a href="' + attr(n.href) + '"><span class="s-when"><time datetime="' + attr(n.date) + '">' + (n.date ? niceDate(n.date) : "") + '</time></span><span><b class="s-t">' + (n.status in MARK ? '<i class="s-dot' + MARK[n.status] + '"></i>' : "") + "<span>" + esc(n.title) + "</span></b>" +
+    (n.tags.length ? '<span class="s-l">' + esc(n.tags.join(", ")) + "</span>" : "") + "</span></a></li>").join("") + "</ol></section>";
   if (left && right) html += '<div class="s-two"><div>' + left + "</div><div>" + right + "</div></div>"; else html += left + right;
   return { path: "/", title: SITE.title || SITE.name, section: "", home: true, html: '<section id="z-home">' + html + "</section>" };
 }
 
-// a page that lists things: Research, Reading, Blog
+// a page that lists things: Research, Blog
 export function listPage(SITE, kind) {
   const W = SITE.words, list = of(SITE, kind), none = "<p>" + esc(W.nothingYet) + "</p>";
   let body;
   if (kind === "research") body = list.length ? sCards(list) : none;
-  else if (kind === "books") body = "<h2>" + esc(W.papers) + "</h2>" + (of(SITE, "papers").length ? sPapers(of(SITE, "papers")) : none) + "<h2>" + esc(W.booksHead || "Books") + "</h2>" + (list.length ? sRead(list) : none);
   else {
     // the topics that have a post, hers first and in her order
     const have = [], pub = SITE.published;
@@ -89,18 +88,15 @@ export function listPage(SITE, kind) {
     html: '<section id="z-list"><h1 tabindex="-1">' + esc(W[kind + "Title"]) + "</h1>" + lede(SITE, kind) + body + "</section>" };
 }
 
-// one project, book or paper, alone on its page
+// one project, alone on its page
 export function postingPage(SITE, it) {
-  const W = SITE.words, kind = it.kind, p = it.item || {}, home = kind === "papers" ? "books" : kind;
+  const W = SITE.words, kind = it.kind, p = it.item || {};
   const same = of(SITE, kind), i = same.indexOf(it), a = same[i - 1], b = same[i + 1];
-  let body = "";
-  if (kind === "research") body = (FIG[p.fig] ? '<figure class="z-fig fig">' + FIG[p.fig]() + (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>" : "") + '<div class="s-body">' + md((p.text || []).join("\n\n")) + "</div>" +
+  const body = (FIG[p.fig] ? '<figure class="z-fig fig">' + FIG[p.fig]() + (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>" : "") + '<div class="s-body">' + md((p.text || []).join("\n\n")) + "</div>" +
     ((p.facts || []).length ? '<dl class="z-facts">' + p.facts.map(f => "<div><dt>" + esc(f[0]) + "</dt><dd>" + rich(f[1]) + "</dd></div>").join("") + "</dl>" : "");
-  else if (kind === "books") body = [p.about, p.aside, p.note].filter(Boolean).map(t => "<p>" + esc(t) + "</p>").join("");
-  else body = (p.why ? "<p>" + esc(p.why) + "</p>" : "") + (p.href ? '<p><a class="z-btn" href="' + attr(safeUrl(p.href)) + '">' + esc(W.readPaper) + "</a></p>" : "");
-  const meta = [kind === "research" ? it.meta : it.line + " " + (kind === "books" ? it.meta : ""), it.date ? niceDate(it.date) : ""].filter(x => x && String(x).trim()).map(x => "<span>" + esc(String(x).trim()) + "</span>").join("");
-  return { path: it.href, title: it.title, section: home, reading: true, description: kind === "research" ? it.line : "",
-    html: '<section id="z-list">' + backStrip(SITE, PATH[home], W[home]) + '<article class="z-art"><h1 tabindex="-1">' + esc(it.title) + "</h1>" + (kind === "research" && it.line ? '<p class="s-lede">' + esc(it.line) + "</p>" : "") + '<p class="z-meta">' + meta + "</p>" + body + "</article>" +
+  const meta = [it.meta, it.date ? niceDate(it.date) : ""].filter(x => x && String(x).trim()).map(x => "<span>" + esc(String(x).trim()) + "</span>").join("");
+  return { path: it.href, title: it.title, section: kind, reading: true, description: it.line,
+    html: '<section id="z-list">' + backStrip(SITE, PATH[kind], W[kind]) + '<article class="z-art"><h1 tabindex="-1">' + esc(it.title) + "</h1>" + (it.line ? '<p class="s-lede">' + esc(it.line) + "</p>" : "") + '<p class="z-meta">' + meta + "</p>" + body + "</article>" +
       (a || b ? '<nav class="z-next">' + (a ? '<a href="' + attr(a.href) + '"><em>' + esc(W.prevPost) + "</em>" + esc(a.title) + "</a>" : "<span></span>") + (b ? '<a href="' + attr(b.href) + '"><em>' + esc(W.nextPost) + "</em>" + esc(b.title) + "</a>" : "") + "</nav>" : "") + "</section>" };
 }
 
@@ -194,8 +190,8 @@ export function settingsPage(SITE) {
 export function allPages(SITE, preview) {
   prepare(SITE);
   const pages = [homePage(SITE)];
-  ["research", "books", "blog"].forEach(k => { if (shown(SITE, k)) pages.push(listPage(SITE, k)); });
-  SITE.postings.filter(p => p.kind !== "blog" && shown(SITE, p.kind === "papers" ? "books" : p.kind)).forEach(p => pages.push(postingPage(SITE, p)));
+  ["research", "blog"].forEach(k => { if (shown(SITE, k)) pages.push(listPage(SITE, k)); });
+  if (shown(SITE, "research")) SITE.postings.filter(p => p.kind === "research").forEach(p => pages.push(postingPage(SITE, p)));
   if (shown(SITE, "blog")) SITE.published.forEach(p => pages.push(postPage(SITE, p)));
   if (shown(SITE, "bookmarks") && SITE.bookmarks.length) pages.push(bookmarksPage(SITE));
   if (shown(SITE, "about")) pages.push(aboutPage(SITE));

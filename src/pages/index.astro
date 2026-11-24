@@ -1,11 +1,12 @@
 ---
-// The home page: the latest three projects, posts and books.
+// The home page: one line on who she is, the latest projects, then the latest posts beside the notes she last worked on.
 import Layout from "../layouts/Layout.astro";
 import { loadSite } from "../lib/load.js";
 import { prepare, homePage } from "../lib/pages.js";
+import { loadBrain } from "../lib/brain.js";
 
 const SITE = loadSite();
 prepare(SITE);
-const page = homePage(SITE);
+const page = homePage(SITE, loadBrain());
 ---
 <Layout page={page} />

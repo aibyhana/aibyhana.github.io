@@ -15,6 +15,6 @@ const json = (name, fallback) => {
 export function loadSite() {
   const dir = path.join(ROOT, "posts");
   const posts = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => /\.md$/.test(f)).sort().map(f => ({ id: f.replace(/\.md$/, ""), text: fs.readFileSync(path.join(dir, f), "utf8") })) : [];
-  return makeSite({ site: json("site.json"), now: json("now.json", {}), research: json("research.json", []), books: json("books.json", {}), programs: json("programs.json", []),
+  return makeSite({ site: json("site.json"), now: json("now.json", {}), research: json("research.json", []), programs: json("programs.json", []),
     cv: json("cv.json", {}), bookmarks: json("bookmarks.json", {}), posts: posts });
 }

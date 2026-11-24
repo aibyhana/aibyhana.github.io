@@ -42,8 +42,8 @@ async function loadSite() {
     try { text = await readFile("content/" + name); } catch (e) { if (or !== undefined && e.status === 404) return or; throw e; }
     try { return JSON.parse(text); } catch (e) { throw Object.assign(new Error("content/" + name + " is not valid JSON"), { file: "content/" + name, broken: true }); }
   };
-  const got = await Promise.all([json("site.json"), json("now.json", {}), json("research.json", []), json("books.json", {}), json("programs.json", []), json("cv.json", {}), json("bookmarks.json", {})]);
-  SITE = makeSite({ site: got[0], now: got[1], research: got[2], books: got[3], programs: got[4], cv: got[5], bookmarks: got[6], postsIndex: built });
+  const got = await Promise.all([json("site.json"), json("now.json", {}), json("research.json", []), json("programs.json", []), json("cv.json", {}), json("bookmarks.json", {})]);
+  SITE = makeSite({ site: got[0], now: got[1], research: got[2], programs: got[3], cv: got[4], bookmarks: got[5], postsIndex: built });
   // a preview that is one single file builds its pages again from what was saved in the demo
   if (window.hanaChanged) window.hanaChanged(overlay);
   setup({ img: picture, link: link, copy: SITE.words.copy || "Copy" });

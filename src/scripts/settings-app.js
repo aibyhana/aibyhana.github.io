@@ -292,7 +292,7 @@ export function install(B) {
   }
   /* ---------- forms for everything that is not the diary ---------- */
   const SIMPLE = { text: 1, area: 1, paras: 1, blocks: 1, lines: 1, select: 1, project: 1, color: 1, date: 1 };
-  const PARTS = { research: "Research", books: "Reading", blog: "Blog", brain: "Second brain", garden: "Garden", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
+  const PARTS = { research: "Research", blog: "Blog", brain: "Second brain", garden: "Garden", bookmarks: "Bookmarks", about: "About me", now: "Now", cv: "CV", programs: "Programs", hello: "Contact" };
   function area(value) { const t = el("textarea"); t.rows = 1; t.value = value || ""; t.addEventListener("input", () => grow(t)); return t; }
   function mini(labels, handler) {
     const box = el("span", "mini");
@@ -418,16 +418,6 @@ export function install(B) {
     now: { label: "Now", file: "content/now.json", note: "The short list on the About me page. The month under it is set when you save.",
       before: d => { const n = new Date(); d.updated = B.MONTH_NAMES[n.getMonth()] + " " + n.getFullYear(); },
       schema: { type: "object", fields: [T("now", "", { type: "pairs", a: "Label", b: "What" })] } },
-    books: { label: "Books", file: "content/books.json", note: "", add: "Add a book",
-      schema: { type: "object", fields: [
-        T("books", "Books", { type: "list", name: "book", title: b => b.title, of: [
-          T("title", "Title"), T("author", "Author"), T("year", "Year"), T("date", "Date. Postings with a date are listed newest first.", { type: "date", opt: true }),
-          T("status", "Status", { type: "select", options: [["read", "Read"], ["reading", "Reading now"], ["next", "Up next"]] }),
-          T("about", "What it argues", { type: "area" }),
-          T("aside", "A second paragraph. Optional.", { type: "area", opt: true }),
-          T("note", "Your own take. Optional. It shows in italics.", { type: "area", opt: true })] }),
-        T("papers", "Papers on my desk", { type: "list", name: "paper", title: p => p.title, of: [
-          T("title", "Title"), T("by", "Authors"), T("year", "Year"), T("date", "Date. Postings with a date are listed newest first.", { type: "date", opt: true }), T("href", "Link"), T("why", "Why it is here")] })] } },
     research: { label: "Research", file: "content/research.json", note: "", add: "Add a project",
       before: list => { list.forEach(p => { if (!p.id) { const base = slug(p.title); let id = base, n = 2; while (list.some(q => q !== p && q.id === id)) id = base + "-" + n++; p.id = id; } }); },
       schema: { type: "list", name: "project", title: p => p.title, of: [
@@ -464,7 +454,7 @@ export function install(B) {
         H("You"),
         T("name", "Your name. It stands in the footer."),
         T("title", "The title in the browser tab"),
-        T("what", "One line about you. It stands on top of the About me page, and search engines and the feed use it."),
+        T("what", "One line about you. It stands on top of the home page and of the About me page, and search engines and the feed use it."),
         T("intro", "About you. It is the text of the About me page. Leave an empty line between paragraphs. A {blue} in the text is not shown.", { type: "paras" }),
         H("Contact"),
         T("hello", "Your line next to the contact form", { type: "area" }),
@@ -476,10 +466,10 @@ export function install(B) {
     pages: { label: "Pages", file: "content/site.json", note: "",
       fill: d => { if (!(d.home && d.home.length)) d.home = B.defaults.home; },
       schema: { type: "object", fields: [
-        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest three of Research, Blog and Reading. Second brain is the part with your notes. They are written under Second brain, on the left. Garden draws every note, post and project as a plant. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
+        H("The pages"), N("Tick what the site has. Each one is a link beside the page, in this order. The home page shows the latest of Research, the Blog and the Second brain. Second brain is the part with your notes. They are written under Second brain, on the left. Garden draws every note, post and project as a plant. Bookmarks shows once the list holds one. Now and Programs have no link: Now is a part of About me, Programs a part of the CV."),
         T("home", "", { type: "home" }),
         H("The line under each page title"),
-        T("sections", "", { type: "object", fields: [T("research", "Research"), T("books", "Reading"), T("blog", "Blog"), T("bookmarks", "Bookmarks", { opt: true }), T("about", "About me", { opt: true }), T("contact", "Contact", { opt: true })] }),
+        T("sections", "", { type: "object", fields: [T("research", "Research"), T("blog", "Blog"), T("bookmarks", "Bookmarks", { opt: true }), T("about", "About me", { opt: true }), T("contact", "Contact", { opt: true })] }),
         H("The topics of your blog"), N("One per line. A post picks one of them in its Topic box. A topic shows on the Blog page once a post has it."),
         T("topics", "", { type: "lines" }),
         H("AI crawlers"), N("This goes into robots.txt, the file crawlers read before they read your site. It is a request. The large AI companies follow it for the crawlers they name, and nothing forces a crawler to. Search engines stay welcome. So do assistants that open one page because a person asked for it."),
@@ -493,10 +483,10 @@ export function install(B) {
       fill: d => { d.words = Object.assign({}, B.defaults.words, d.words); d.clock = Object.assign({}, B.defaults.clock, d.clock); },
       schema: { type: "object", fields: [
         T("words", "", { type: "object", fields: [
-          H("Names of the pages, in the links and on the home page"), T("research", "Research"), T("books", "Reading"), T("blog", "Blog"), T("cv", "CV"), T("now", "Now, on the About me page"),
-          H("Page titles"), T("researchTitle", "Research page"), T("booksTitle", "Reading page"), T("blogTitle", "Blog page"), T("cvTitle", "CV page"), T("contactTitle", "Contact page"),
-          H("Small labels"), T("papers", "Reading page: heading over the papers"), T("booksHead", "Reading page: heading over the books"), T("rightNow", "Label of the clock line. Leave it empty to hide the clock."), T("updated", "Line under Now. {month} is filled in."),
-          T("fig", "Before the number of a drawing"), T("project", "Before a project link under a program, on the CV page"), T("read", "Book status: read"), T("reading", "Book status: reading"), T("next", "Book status: next"),
+          H("Names of the pages, in the links and on the home page"), T("research", "Research"), T("blog", "Blog"), T("cv", "CV"), T("now", "Now, on the About me page"),
+          H("Page titles"), T("researchTitle", "Research page"), T("blogTitle", "Blog page"), T("cvTitle", "CV page"), T("contactTitle", "Contact page"),
+          H("Small labels"), T("rightNow", "Label of the clock line. Leave it empty to hide the clock."), T("updated", "Line under Now. {month} is filled in."),
+          T("fig", "Before the number of a drawing"), T("project", "Before a project link under a program, on the CV page"),
           H("Posts"), T("latest", "The small flag on the newest post"), T("attn", "The word that shows when you point at the first paragraph"), T("abstract", "The word in front of your first paragraph"),
           T("kindBlog", "Kind of posting: a blog entry"), T("kindResearch", "Kind of posting: a research project"), T("kindBook", "Kind of posting: a book"), T("kindPaper", "Kind of posting: a paper"),
           T("backTo", "Link back from a project, book or paper. {kind} is the page it belongs to."), T("readPaper", "Link to a paper"), T("prevPost", "Before the previous posting"), T("nextPost", "Before the next posting"),
@@ -808,7 +798,6 @@ html.desk-focus .desk textarea.c-text{min-height:60vh;font-size:calc(var(--u)*1.
       ["brain", "Second brain", "", "Notes on what you learn. Each note is one file, and notes link to each other by name."]]],
     ["Content", [
       ["research", "Research", "p-dots", "Projects and their write-ups."],
-      ["books", "Reading", "p-lines", "Papers and books. The Reading page lists the papers first."],
       ["bookmarks", "Bookmarks", "p-marks", "Links you find worth keeping: websites, videos, articles, papers. Each can have a line on why."],
       ["programs", "Programs", "p-grid", "Courses, programs and events."],
       ["cv", "CV", "p-cross", "Everything on the CV page."],
