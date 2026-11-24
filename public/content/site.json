@@ -144,12 +144,12 @@
     {
       "key": "blog",
       "col": "right",
-      "show": true
+      "show": false
     },
     {
       "key": "brain",
       "col": "right",
-      "show": true
+      "show": false
     },
     {
       "key": "garden",
